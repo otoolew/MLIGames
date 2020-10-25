@@ -1455,7 +1455,7 @@ Transform:
   m_GameObject: {fileID: 54095041}
   m_LocalRotation: {x: -0.50000036, y: 0.49999964, z: 0.49999964, w: 0.50000036}
   m_LocalPosition: {x: -0.0000000015575574, y: 1.2235097, z: -0.035632763}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 54314309}
   - {fileID: 54320139}
@@ -4229,7 +4229,7 @@ MonoBehaviour:
     root: {fileID: 254742368}
     target: {fileID: 1501834879}
     tolerance: 0
-    maxIterations: 4
+    maxIterations: 2
     useRotationLimits: 1
     XY: 0
     bones:
