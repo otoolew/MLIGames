@@ -1,238 +1,659 @@
 fileFormatVersion: 2
 guid: 60e3152f06c30ab4b97fa503f8639b68
-timeCreated: 1488499433
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: Bip001
-    100002: Bip001 Head
-    100004: Bip001 L Calf
-    100006: Bip001 L Clavicle
-    100008: Bip001 L Foot
-    100010: Bip001 L Forearm
-    100012: Bip001 L Hand
-    100014: Bip001 L Thigh
-    100016: Bip001 L Toe0
-    100018: Bip001 L UpperArm
-    100020: Bip001 Neck
-    100022: Bip001 Pelvis
-    100024: Bip001 R Calf
-    100026: Bip001 R Clavicle
-    100028: Bip001 R Foot
-    100030: Bip001 R Forearm
-    100032: Bip001 R Hand
-    100034: Bip001 R Thigh
-    100036: Bip001 R Toe0
-    100038: Bip001 R UpperArm
-    100040: Bip001 Spine
-    100042: body_A005
-    100044: head_1_basic006
-    100046: legs_A
-    100048: //RootNode
-    100050: WeaponContainer
-    100052: Body_A
-    100054: Head_A
-    100056: Legs_B
-    100058: Body_C
-    100060: extra_backpack
-    100062: extra_equip_A
-    100064: extra_scarf_A
-    100066: extra_scarf_B
-    100068: Legs_C
-    100070: weapon_stg44
-    100072: Body_B
-    100074: Body_D
-    100076: Body_E
-    100078: Body_F
-    100080: Body_G
-    100082: Legs_A
-    100084: Legs_D
-    100086: extra_equip_B
-    100088: extra_equip_C
-    100090: extra_equip_D
-    100092: head_B
-    100094: head_C
-    100096: head_D
-    100098: head_E
-    100100: head_F
-    100102: head_G
-    100104: head_H
-    100106: head_I
-    100108: head_J
-    100110: head_K
-    100112: head_L
-    100114: head_M
-    100116: head_N
-    100118: head_O
-    100120: Bip001 Footsteps
-    100122: Bip001 HeadNub
-    100124: Bip001 L Toe0Nub
-    100126: Bip001 R Toe0Nub
-    100128: Backpack_container
-    100130: WeaponContainer_L
-    400000: Bip001
-    400002: Bip001 Head
-    400004: Bip001 L Calf
-    400006: Bip001 L Clavicle
-    400008: Bip001 L Foot
-    400010: Bip001 L Forearm
-    400012: Bip001 L Hand
-    400014: Bip001 L Thigh
-    400016: Bip001 L Toe0
-    400018: Bip001 L UpperArm
-    400020: Bip001 Neck
-    400022: Bip001 Pelvis
-    400024: Bip001 R Calf
-    400026: Bip001 R Clavicle
-    400028: Bip001 R Foot
-    400030: Bip001 R Forearm
-    400032: Bip001 R Hand
-    400034: Bip001 R Thigh
-    400036: Bip001 R Toe0
-    400038: Bip001 R UpperArm
-    400040: Bip001 Spine
-    400042: body_A005
-    400044: head_1_basic006
-    400046: legs_A
-    400048: //RootNode
-    400050: WeaponContainer
-    400052: Body_A
-    400054: Head_A
-    400056: Legs_B
-    400058: Body_C
-    400060: extra_backpack
-    400062: extra_equip_A
-    400064: extra_scarf_A
-    400066: extra_scarf_B
-    400068: Legs_C
-    400070: weapon_stg44
-    400072: Body_B
-    400074: Body_D
-    400076: Body_E
-    400078: Body_F
-    400080: Body_G
-    400082: Legs_A
-    400084: Legs_D
-    400086: extra_equip_B
-    400088: extra_equip_C
-    400090: extra_equip_D
-    400092: head_B
-    400094: head_C
-    400096: head_D
-    400098: head_E
-    400100: head_F
-    400102: head_G
-    400104: head_H
-    400106: head_I
-    400108: head_J
-    400110: head_K
-    400112: head_L
-    400114: head_M
-    400116: head_N
-    400118: head_O
-    400120: Bip001 Footsteps
-    400122: Bip001 HeadNub
-    400124: Bip001 L Toe0Nub
-    400126: Bip001 R Toe0Nub
-    400128: Backpack_container
-    400130: WeaponContainer_L
-    2300000: weapon_stg44
-    3300000: weapon_stg44
-    4300000: legs_A
-    4300002: body_A005
-    4300004: head_1_basic006
-    4300006: Body_A
-    4300008: Head_A
-    4300010: Legs_B
-    4300012: Body_C
-    4300014: extra_scarf_B
-    4300016: extra_scarf_A
-    4300018: extra_equip_A
-    4300020: weapon_stg44
-    4300022: Legs_C
-    4300024: extra_backpack
-    4300026: Body_E
-    4300028: Legs_A
-    4300030: Body_B
-    4300032: Legs_D
-    4300034: Body_D
-    4300036: Body_F
-    4300038: Body_G
-    4300040: extra_equip_B
-    4300042: extra_equip_D
-    4300044: extra_equip_C
-    4300046: head_B
-    4300048: head_I
-    4300050: head_D
-    4300052: head_N
-    4300054: head_M
-    4300056: head_K
-    4300058: head_L
-    4300060: head_J
-    4300062: head_H
-    4300064: head_F
-    4300066: head_C
-    4300068: head_E
-    4300070: head_G
-    4300072: head_O
-    9500000: //RootNode
-    13700000: body_A005
-    13700002: head_1_basic006
-    13700004: legs_A
-    13700006: Body_A
-    13700008: Head_A
-    13700010: Legs_B
-    13700012: Body_C
-    13700014: extra_backpack
-    13700016: extra_equip_A
-    13700018: extra_scarf_A
-    13700020: extra_scarf_B
-    13700022: Legs_C
-    13700024: Body_B
-    13700026: Body_D
-    13700028: Body_E
-    13700030: Body_F
-    13700032: Body_G
-    13700034: Legs_A
-    13700036: Legs_D
-    13700038: extra_equip_B
-    13700040: extra_equip_C
-    13700042: extra_equip_D
-    13700044: head_B
-    13700046: head_C
-    13700048: head_D
-    13700050: head_E
-    13700052: head_F
-    13700054: head_G
-    13700056: head_H
-    13700058: head_I
-    13700060: head_J
-    13700062: head_K
-    13700064: head_L
-    13700066: head_M
-    13700068: head_N
-    13700070: head_O
+  serializedVersion: 20101
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Bip001
+  - first:
+      1: 100002
+    second: Bip001 Head
+  - first:
+      1: 100004
+    second: Bip001 L Calf
+  - first:
+      1: 100006
+    second: Bip001 L Clavicle
+  - first:
+      1: 100008
+    second: Bip001 L Foot
+  - first:
+      1: 100010
+    second: Bip001 L Forearm
+  - first:
+      1: 100012
+    second: Bip001 L Hand
+  - first:
+      1: 100014
+    second: Bip001 L Thigh
+  - first:
+      1: 100016
+    second: Bip001 L Toe0
+  - first:
+      1: 100018
+    second: Bip001 L UpperArm
+  - first:
+      1: 100020
+    second: Bip001 Neck
+  - first:
+      1: 100022
+    second: Bip001 Pelvis
+  - first:
+      1: 100024
+    second: Bip001 R Calf
+  - first:
+      1: 100026
+    second: Bip001 R Clavicle
+  - first:
+      1: 100028
+    second: Bip001 R Foot
+  - first:
+      1: 100030
+    second: Bip001 R Forearm
+  - first:
+      1: 100032
+    second: Bip001 R Hand
+  - first:
+      1: 100034
+    second: Bip001 R Thigh
+  - first:
+      1: 100036
+    second: Bip001 R Toe0
+  - first:
+      1: 100038
+    second: Bip001 R UpperArm
+  - first:
+      1: 100040
+    second: Bip001 Spine
+  - first:
+      1: 100042
+    second: body_A005
+  - first:
+      1: 100044
+    second: head_1_basic006
+  - first:
+      1: 100046
+    second: legs_A
+  - first:
+      1: 100048
+    second: //RootNode
+  - first:
+      1: 100050
+    second: WeaponContainer
+  - first:
+      1: 100052
+    second: Body_A
+  - first:
+      1: 100054
+    second: Head_A
+  - first:
+      1: 100056
+    second: Legs_B
+  - first:
+      1: 100058
+    second: Body_C
+  - first:
+      1: 100060
+    second: extra_backpack
+  - first:
+      1: 100062
+    second: extra_equip_A
+  - first:
+      1: 100064
+    second: extra_scarf_A
+  - first:
+      1: 100066
+    second: extra_scarf_B
+  - first:
+      1: 100068
+    second: Legs_C
+  - first:
+      1: 100070
+    second: weapon_stg44
+  - first:
+      1: 100072
+    second: Body_B
+  - first:
+      1: 100074
+    second: Body_D
+  - first:
+      1: 100076
+    second: Body_E
+  - first:
+      1: 100078
+    second: Body_F
+  - first:
+      1: 100080
+    second: Body_G
+  - first:
+      1: 100082
+    second: Legs_A
+  - first:
+      1: 100084
+    second: Legs_D
+  - first:
+      1: 100086
+    second: extra_equip_B
+  - first:
+      1: 100088
+    second: extra_equip_C
+  - first:
+      1: 100090
+    second: extra_equip_D
+  - first:
+      1: 100092
+    second: head_B
+  - first:
+      1: 100094
+    second: head_C
+  - first:
+      1: 100096
+    second: head_D
+  - first:
+      1: 100098
+    second: head_E
+  - first:
+      1: 100100
+    second: head_F
+  - first:
+      1: 100102
+    second: head_G
+  - first:
+      1: 100104
+    second: head_H
+  - first:
+      1: 100106
+    second: head_I
+  - first:
+      1: 100108
+    second: head_J
+  - first:
+      1: 100110
+    second: head_K
+  - first:
+      1: 100112
+    second: head_L
+  - first:
+      1: 100114
+    second: head_M
+  - first:
+      1: 100116
+    second: head_N
+  - first:
+      1: 100118
+    second: head_O
+  - first:
+      1: 100120
+    second: Bip001 Footsteps
+  - first:
+      1: 100122
+    second: Bip001 HeadNub
+  - first:
+      1: 100124
+    second: Bip001 L Toe0Nub
+  - first:
+      1: 100126
+    second: Bip001 R Toe0Nub
+  - first:
+      1: 100128
+    second: Backpack_container
+  - first:
+      1: 100130
+    second: WeaponContainer_L
+  - first:
+      4: 400000
+    second: Bip001
+  - first:
+      4: 400002
+    second: Bip001 Head
+  - first:
+      4: 400004
+    second: Bip001 L Calf
+  - first:
+      4: 400006
+    second: Bip001 L Clavicle
+  - first:
+      4: 400008
+    second: Bip001 L Foot
+  - first:
+      4: 400010
+    second: Bip001 L Forearm
+  - first:
+      4: 400012
+    second: Bip001 L Hand
+  - first:
+      4: 400014
+    second: Bip001 L Thigh
+  - first:
+      4: 400016
+    second: Bip001 L Toe0
+  - first:
+      4: 400018
+    second: Bip001 L UpperArm
+  - first:
+      4: 400020
+    second: Bip001 Neck
+  - first:
+      4: 400022
+    second: Bip001 Pelvis
+  - first:
+      4: 400024
+    second: Bip001 R Calf
+  - first:
+      4: 400026
+    second: Bip001 R Clavicle
+  - first:
+      4: 400028
+    second: Bip001 R Foot
+  - first:
+      4: 400030
+    second: Bip001 R Forearm
+  - first:
+      4: 400032
+    second: Bip001 R Hand
+  - first:
+      4: 400034
+    second: Bip001 R Thigh
+  - first:
+      4: 400036
+    second: Bip001 R Toe0
+  - first:
+      4: 400038
+    second: Bip001 R UpperArm
+  - first:
+      4: 400040
+    second: Bip001 Spine
+  - first:
+      4: 400042
+    second: body_A005
+  - first:
+      4: 400044
+    second: head_1_basic006
+  - first:
+      4: 400046
+    second: legs_A
+  - first:
+      4: 400048
+    second: //RootNode
+  - first:
+      4: 400050
+    second: WeaponContainer
+  - first:
+      4: 400052
+    second: Body_A
+  - first:
+      4: 400054
+    second: Head_A
+  - first:
+      4: 400056
+    second: Legs_B
+  - first:
+      4: 400058
+    second: Body_C
+  - first:
+      4: 400060
+    second: extra_backpack
+  - first:
+      4: 400062
+    second: extra_equip_A
+  - first:
+      4: 400064
+    second: extra_scarf_A
+  - first:
+      4: 400066
+    second: extra_scarf_B
+  - first:
+      4: 400068
+    second: Legs_C
+  - first:
+      4: 400070
+    second: weapon_stg44
+  - first:
+      4: 400072
+    second: Body_B
+  - first:
+      4: 400074
+    second: Body_D
+  - first:
+      4: 400076
+    second: Body_E
+  - first:
+      4: 400078
+    second: Body_F
+  - first:
+      4: 400080
+    second: Body_G
+  - first:
+      4: 400082
+    second: Legs_A
+  - first:
+      4: 400084
+    second: Legs_D
+  - first:
+      4: 400086
+    second: extra_equip_B
+  - first:
+      4: 400088
+    second: extra_equip_C
+  - first:
+      4: 400090
+    second: extra_equip_D
+  - first:
+      4: 400092
+    second: head_B
+  - first:
+      4: 400094
+    second: head_C
+  - first:
+      4: 400096
+    second: head_D
+  - first:
+      4: 400098
+    second: head_E
+  - first:
+      4: 400100
+    second: head_F
+  - first:
+      4: 400102
+    second: head_G
+  - first:
+      4: 400104
+    second: head_H
+  - first:
+      4: 400106
+    second: head_I
+  - first:
+      4: 400108
+    second: head_J
+  - first:
+      4: 400110
+    second: head_K
+  - first:
+      4: 400112
+    second: head_L
+  - first:
+      4: 400114
+    second: head_M
+  - first:
+      4: 400116
+    second: head_N
+  - first:
+      4: 400118
+    second: head_O
+  - first:
+      4: 400120
+    second: Bip001 Footsteps
+  - first:
+      4: 400122
+    second: Bip001 HeadNub
+  - first:
+      4: 400124
+    second: Bip001 L Toe0Nub
+  - first:
+      4: 400126
+    second: Bip001 R Toe0Nub
+  - first:
+      4: 400128
+    second: Backpack_container
+  - first:
+      4: 400130
+    second: WeaponContainer_L
+  - first:
+      23: 2300000
+    second: weapon_stg44
+  - first:
+      33: 3300000
+    second: weapon_stg44
+  - first:
+      43: 4300000
+    second: legs_A
+  - first:
+      43: 4300002
+    second: body_A005
+  - first:
+      43: 4300004
+    second: head_1_basic006
+  - first:
+      43: 4300006
+    second: Body_A
+  - first:
+      43: 4300008
+    second: Head_A
+  - first:
+      43: 4300010
+    second: Legs_B
+  - first:
+      43: 4300012
+    second: Body_C
+  - first:
+      43: 4300014
+    second: extra_scarf_B
+  - first:
+      43: 4300016
+    second: extra_scarf_A
+  - first:
+      43: 4300018
+    second: extra_equip_A
+  - first:
+      43: 4300020
+    second: weapon_stg44
+  - first:
+      43: 4300022
+    second: Legs_C
+  - first:
+      43: 4300024
+    second: extra_backpack
+  - first:
+      43: 4300026
+    second: Body_E
+  - first:
+      43: 4300028
+    second: Legs_A
+  - first:
+      43: 4300030
+    second: Body_B
+  - first:
+      43: 4300032
+    second: Legs_D
+  - first:
+      43: 4300034
+    second: Body_D
+  - first:
+      43: 4300036
+    second: Body_F
+  - first:
+      43: 4300038
+    second: Body_G
+  - first:
+      43: 4300040
+    second: extra_equip_B
+  - first:
+      43: 4300042
+    second: extra_equip_D
+  - first:
+      43: 4300044
+    second: extra_equip_C
+  - first:
+      43: 4300046
+    second: head_B
+  - first:
+      43: 4300048
+    second: head_I
+  - first:
+      43: 4300050
+    second: head_D
+  - first:
+      43: 4300052
+    second: head_N
+  - first:
+      43: 4300054
+    second: head_M
+  - first:
+      43: 4300056
+    second: head_K
+  - first:
+      43: 4300058
+    second: head_L
+  - first:
+      43: 4300060
+    second: head_J
+  - first:
+      43: 4300062
+    second: head_H
+  - first:
+      43: 4300064
+    second: head_F
+  - first:
+      43: 4300066
+    second: head_C
+  - first:
+      43: 4300068
+    second: head_E
+  - first:
+      43: 4300070
+    second: head_G
+  - first:
+      43: 4300072
+    second: head_O
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: body_A005
+  - first:
+      137: 13700002
+    second: head_1_basic006
+  - first:
+      137: 13700004
+    second: legs_A
+  - first:
+      137: 13700006
+    second: Body_A
+  - first:
+      137: 13700008
+    second: Head_A
+  - first:
+      137: 13700010
+    second: Legs_B
+  - first:
+      137: 13700012
+    second: Body_C
+  - first:
+      137: 13700014
+    second: extra_backpack
+  - first:
+      137: 13700016
+    second: extra_equip_A
+  - first:
+      137: 13700018
+    second: extra_scarf_A
+  - first:
+      137: 13700020
+    second: extra_scarf_B
+  - first:
+      137: 13700022
+    second: Legs_C
+  - first:
+      137: 13700024
+    second: Body_B
+  - first:
+      137: 13700026
+    second: Body_D
+  - first:
+      137: 13700028
+    second: Body_E
+  - first:
+      137: 13700030
+    second: Body_F
+  - first:
+      137: 13700032
+    second: Body_G
+  - first:
+      137: 13700034
+    second: Legs_A
+  - first:
+      137: 13700036
+    second: Legs_D
+  - first:
+      137: 13700038
+    second: extra_equip_B
+  - first:
+      137: 13700040
+    second: extra_equip_C
+  - first:
+      137: 13700042
+    second: extra_equip_D
+  - first:
+      137: 13700044
+    second: head_B
+  - first:
+      137: 13700046
+    second: head_C
+  - first:
+      137: 13700048
+    second: head_D
+  - first:
+      137: 13700050
+    second: head_E
+  - first:
+      137: 13700052
+    second: head_F
+  - first:
+      137: 13700054
+    second: head_G
+  - first:
+      137: 13700056
+    second: head_H
+  - first:
+      137: 13700058
+    second: head_I
+  - first:
+      137: 13700060
+    second: head_J
+  - first:
+      137: 13700062
+    second: head_K
+  - first:
+      137: 13700064
+    second: head_L
+  - first:
+      137: 13700066
+    second: head_M
+  - first:
+      137: 13700068
+    second: head_N
+  - first:
+      137: 13700070
+    second: head_O
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 1
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -240,25 +661,45 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human:
     - boneName: Bip001 Pelvis
       humanName: Hips
@@ -421,136 +862,316 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: ToonSoldiers_Militia_test(Clone)
+    - name: ToonSoldiers_Militias(Clone)
+      parentName: 
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
+      rotation: {x: 0, y: 0.00000060264404, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Bip001
+      parentName: ToonSoldiers_Militias(Clone)
       position: {x: -0.0000000015575574, y: 1.2235097, z: -0.035632763}
       rotation: {x: -0.50000036, y: 0.49999964, z: 0.49999964, w: 0.50000036}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-      transformModified: 1
+    - name: Bip001 Footsteps
+      parentName: Bip001
+      position: {x: -0, y: 0, z: -1.2285202}
+      rotation: {x: 0, y: 0, z: -0.7071063, w: 0.70710725}
+      scale: {x: 1, y: 1, z: 1}
     - name: Bip001 Pelvis
+      parentName: Bip001
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: -0.5, y: 0.5, z: 0.4999993, w: 0.5000007}
+      rotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: Bip001 L Thigh
+      parentName: Bip001 Pelvis
       position: {x: 0.00000029067994, y: 0.00000031793118, z: 0.18964642}
-      rotation: {x: -0.018307237, y: 0.9997613, z: -0.00059398776, w: 0.0119095305}
+      rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
       scale: {x: 1, y: 0.99999994, z: 1.0000001}
-      transformModified: 1
     - name: Bip001 L Calf
+      parentName: Bip001 L Thigh
       position: {x: -0.6094277, y: 0, z: 0}
-      rotation: {x: -4.8417294e-11, y: 9.3006314e-10, z: 0.051987674, w: 0.99864775}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: Bip001 L Foot
+      parentName: Bip001 L Calf
       position: {x: -0.42799026, y: 0, z: 0.000000024223327}
-      rotation: {x: 0.000026681035, y: 0.011924975, z: -0.03369277, w: 0.9993611}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: Bip001 L Toe0
+      parentName: Bip001 L Foot
       position: {x: -0.18122193, y: 0.27282667, z: 0}
-      rotation: {x: 0.00000001545435, y: -0.000000015454269, z: -0.70710677, w: 0.7071068}
+      rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
       scale: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
+    - name: Bip001 L Toe0Nub
+      parentName: Bip001 L Toe0
+      position: {x: -0.14850947, y: -7.56979e-10, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: -1, y: -0.99999994, z: -0.99999994}
     - name: Bip001 R Thigh
+      parentName: Bip001 Pelvis
       position: {x: -0.00000029067994, y: -0.0000002089262, z: -0.18964642}
-      rotation: {x: -0.01830722, y: 0.9997613, z: 0.00059262826, w: -0.011911031}
+      rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: Bip001 R Calf
+      parentName: Bip001 R Thigh
       position: {x: -0.6094277, y: 0, z: 0}
-      rotation: {x: 1.5496353e-10, y: -0.0000000018571001, z: 0.051987678, w: 0.99864775}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: Bip001 R Foot
+      parentName: Bip001 R Calf
       position: {x: -0.42799026, y: 0, z: 0.000000024223327}
-      rotation: {x: -0.000026684054, y: -0.011925061, z: -0.033692773, w: 0.9993611}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: Bip001 R Toe0
+      parentName: Bip001 R Foot
       position: {x: -0.18122193, y: 0.27282667, z: 0}
-      rotation: {x: -0.00000001545431, y: 0.00000001545431, z: -0.7071068, w: 0.7071068}
+      rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
       scale: {x: 0.99999994, y: 1, z: 0.99999994}
-      transformModified: 1
+    - name: Bip001 R Toe0Nub
+      parentName: Bip001 R Toe0
+      position: {x: -0.14850944, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
     - name: Bip001 Spine
+      parentName: Bip001 Pelvis
       position: {x: -0.16117437, y: -0.00047135568, z: 0.0000002241702}
-      rotation: {x: -0.0000020895977, y: 0.00000070293, z: -0.013839594, w: 0.9999043}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
-      transformModified: 1
+    - name: Backpack_container
+      parentName: Bip001 Spine
+      position: {x: -0.4589093, y: -0.27111876, z: -0.0000003996849}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
     - name: Bip001 L Clavicle
+      parentName: Bip001 Spine
       position: {x: -0.5700798, y: 0.00061332254, z: 0.12735398}
-      rotation: {x: -0.66463333, y: -0.04131264, z: 0.7451422, w: 0.036317952}
+      rotation: {x: 0.7071068, y: -0.000000030908623, z: -0.7071068, w: 0.000000030908623}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Bip001 L UpperArm
+      parentName: Bip001 L Clavicle
       position: {x: -0.24968553, y: 0.000000006055832, z: 0}
-      rotation: {x: 0.041812375, y: 0.019144958, z: 0.044521507, w: 0.9979495}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: Bip001 L Forearm
+      parentName: Bip001 L UpperArm
       position: {x: -0.4044886, y: 0, z: -0.00000019378662}
-      rotation: {x: -0.0010096824, y: 0.01638323, z: 0.03916908, w: 0.9990978}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000002, y: 1, z: 1}
-      transformModified: 1
     - name: Bip001 L Hand
+      parentName: Bip001 L Forearm
       position: {x: -0.34167933, y: 0, z: 0}
-      rotation: {x: -0.7068252, y: -0.0000000013165645, z: 0.0000000013176134, w: 0.7073883}
+      rotation: {x: 0.707074, y: -0.006809205, z: -0.006809144, w: -0.707074}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
+    - name: WeaponContainer_L
+      parentName: Bip001 L Hand
+      position: {x: -0.17860441, y: 0.033346802, z: -0.15248813}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.99999994}
     - name: Bip001 Neck
+      parentName: Bip001 Spine
       position: {x: -0.6330967, y: 0.005227297, z: 0.00000000565356}
-      rotation: {x: -3.106611e-14, y: 0.0000003401339, z: -0.12263263, w: 0.99245214}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: Bip001 Head
+      parentName: Bip001 Neck
       position: {x: -0.12508887, y: 0.000000048446655, z: 0}
-      rotation: {x: -3.0140248e-13, y: -0.00000037819706, z: 0.13635667, w: 0.99065983}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
-      transformModified: 1
-    - name: Bip001 R Clavicle
-      position: {x: -0.5700798, y: 0.00061403104, z: -0.12735397}
-      rotation: {x: 0.66463345, y: 0.04131058, z: 0.74514234, w: 0.03631609}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
-    - name: Bip001 R UpperArm
-      position: {x: -0.24968551, y: 0, z: 0}
-      rotation: {x: -0.04181252, y: -0.019143585, z: 0.044521302, w: 0.9979495}
-      scale: {x: 1, y: 0.99999994, z: 1.0000002}
-      transformModified: 1
-    - name: Bip001 R Forearm
-      position: {x: -0.4044885, y: 0, z: 0.00000019378662}
-      rotation: {x: 0.0010096725, y: -0.016382787, z: 0.039169364, w: 0.99909776}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
-    - name: Bip001 R Hand
-      position: {x: -0.34167925, y: 0, z: -0.00000019378662}
-      rotation: {x: 0.7068194, y: -0.0031646665, z: 0.002605795, w: 0.7073822}
-      scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
-      transformModified: 1
-    - name: WeaponContainer
-      position: {x: -0.22053517, y: 0.024589777, z: 0.14772433}
-      rotation: {x: -0.079513475, y: 0.663656, z: 0.74313986, w: -0.031328555}
+    - name: Bip001 HeadNub
+      parentName: Bip001 Head
+      position: {x: -0.36115566, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
-    - name: body_A005
-      position: {x: 0, y: 0, z: 0}
+    - name: Bip001 R Clavicle
+      parentName: Bip001 Spine
+      position: {x: -0.5700798, y: 0.00061403104, z: -0.12735397}
+      rotation: {x: 0.7071068, y: -0.000000030908623, z: 0.7071068, w: -0.000000030908623}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Bip001 R UpperArm
+      parentName: Bip001 R Clavicle
+      position: {x: -0.24968551, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1.0000002}
+    - name: Bip001 R Forearm
+      parentName: Bip001 R UpperArm
+      position: {x: -0.4044885, y: 0, z: 0.00000019378662}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Bip001 R Hand
+      parentName: Bip001 R Forearm
+      position: {x: -0.34167925, y: 0, z: -0.00000019378662}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
+    - name: WeaponContainer
+      parentName: Bip001 R Hand
+      position: {x: -0.22053517, y: 0.024589777, z: 0.14772433}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Body_A
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: head_1_basic006
-      position: {x: 0, y: 0, z: 0}
+    - name: Body_B
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: legs_A
-      position: {x: 0, y: 0, z: 0}
+    - name: Body_C
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
+    - name: Body_D
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body_E
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body_F
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body_G
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_backpack
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_equip_A
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_equip_B
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_equip_C
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_equip_D
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_scarf_A
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: extra_scarf_B
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_A
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_B
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_C
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_D
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_E
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_F
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_G
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_H
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_I
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_J
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: 5.7367618e-24, y: 2.1829474, z: 0.12012817}
+      rotation: {x: 0.000000015454312, y: 0.7071067, z: -0.000000015454308, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_K
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: 5.7367618e-24, y: 2.1829474, z: 0.12012817}
+      rotation: {x: 0.000000015454312, y: 0.7071067, z: -0.000000015454308, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_L
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_M
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1.081761, y: 1, z: 1}
+    - name: head_N
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_O
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1.081761, y: 1, z: 1}
+    - name: Legs_A
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Legs_B
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0.04121197}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1.6772499, y: 1.6772499, z: 1.6772499}
+    - name: Legs_C
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Legs_D
+      parentName: ToonSoldiers_Militias(Clone)
+      position: {x: -0, y: 0, z: 0.04121197}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1.6772499, y: 1.6772499, z: 1.6772499}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -558,11 +1179,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 1
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

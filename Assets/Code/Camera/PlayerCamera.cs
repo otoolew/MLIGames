@@ -10,6 +10,9 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private Vector3 rotationOffset;
     public Vector3 RotationOffset { get => rotationOffset; set => rotationOffset = value; }
 
+    [SerializeField] private float followSpeed;
+    public float FollowSpeed { get => followSpeed; set => followSpeed = value; }
+
     [SerializeField] private Transform cameraTransform;
     public Transform CameraTransform { get => cameraTransform; set => cameraTransform = value; }
 
@@ -35,7 +38,7 @@ public class PlayerCamera : MonoBehaviour
     {
         if (followTarget == null) return;
 
-        transform.position = followTarget.position;
+        transform.position = Vector3.Lerp(transform.position, followTarget.position, Time.deltaTime * followSpeed);
     }
     #endregion
 

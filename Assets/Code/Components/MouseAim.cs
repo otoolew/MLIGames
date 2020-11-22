@@ -25,9 +25,9 @@ public class MouseAim : MonoBehaviour
     {
         
     }
-    public void AimTransformToPoint()
+    public void AimTransformToPoint(Vector2 vector)
     {
-        aimTransform.position = MouseToWorldPoint();
+        aimTransform.position = MouseToWorldPoint(vector);
     }
 
     public void AimTransformToPoint(Vector3 location)
@@ -35,16 +35,12 @@ public class MouseAim : MonoBehaviour
         aimTransform.localPosition = location;
     }
 
-    private Vector3 MouseToWorldPoint()
+    private Vector3 MouseToWorldPoint(Vector2 mouseScreen)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(mouseScreen);
         if (Physics.Raycast(ray, out RaycastHit rayHit, 100.0f, PhysicalHitLayer))
         {
             return rayHit.point;
-            //Vector3 hitPoint = rayHit.point;
-            //Vector3 targetDir = hitPoint - transform.position;
-            ////Vector3 newDir = Vector3.RotateTowards(equippedAttack.transform.forward, targetDir, 10f, 0.0f);
-            //currentAttack.transform.rotation = Quaternion.LookRotation(targetDir);
         }
         return transform.position;
     }
