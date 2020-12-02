@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6701902682770722855}
   - component: {fileID: 6701902682770722854}
   - component: {fileID: 6701902682770722853}
-  - component: {fileID: 6958223652977168935}
+  - component: {fileID: 741540160396537642}
   m_Layer: 0
-  m_Name: PopUpTextFeedback
+  m_Name: PopUpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_maskType: 0
   _SortingLayerID: 0
   _SortingOrder: 0
---- !u!114 &6958223652977168935
+--- !u!114 &741540160396537642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,10 +179,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6701902682770722852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9b30d667ad01e42b22a1fd215f9e9d, type: 3}
+  m_Script: {fileID: 11500000, guid: a1e3c82affaca6442bde824df7c5ea41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedPool: {fileID: 0}
   textComp: {fileID: 6701902682770722853}
   playDuration: 1
   timer:

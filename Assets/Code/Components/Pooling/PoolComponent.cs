@@ -2,46 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolComponent : MonoBehaviour
+public abstract class PoolComponent<T> : MonoBehaviour where T : IPoolable
 {
-    [SerializeField] private PooledObject poolablePrefab;
-    public PooledObject PoolablePrefab { get => poolablePrefab; set => poolablePrefab = value; }
+    public static Stack<T> PoolStack { get; protected set; }
+    public abstract T PoolablePrefab { get; set; }
 
-    public Stack<PooledObject> PoolStack { get; protected set; }
-
-    private void Awake()
+    protected virtual void Awake()
     {
-        PoolStack = new Stack<PooledObject>();
+        PoolStack = new Stack<T>();
     }
 
-    public void FetchFromPool()
+    public T FetchFromPool()
     {
-        Debug.Log("Pool Count:" + PoolStack.Count);
-        if (PoolStack.Count > 0)
-        {
-            PooledObject pooledObject = PoolStack.Pop();
-            pooledObject.transform.position = transform.position;
-            pooledObject.gameObject.SetActive(true);
-        }
+        if (PoolStack.Count > 0)      
+            return PoolStack.Pop();  
         else
-        {
-            CreatePooledObject();
-        }
+            return CreatePooledObject();
     }
 
-    public void ReturnToPool(PooledObject pooledObject)
+    public void ReturnToPool(T pooledObject)
     {
-        Debug.Log("Return To Pool");
-
-        pooledObject.gameObject.SetActive(false);
+        pooledObject.GameObject.gameObject.transform.SetParent(transform);
+        pooledObject.GameObject.gameObject.SetActive(false);
         PoolStack.Push(pooledObject);
     }
 
-    private PooledObject CreatePooledObject()
-    {
-        PooledObject pooledObject = Instantiate(PoolablePrefab);
-        pooledObject.transform.position = transform.position;
-        pooledObject.AssignedPool = this;
-        return pooledObject;
-    }
+    public abstract T CreatePooledObject();
 }

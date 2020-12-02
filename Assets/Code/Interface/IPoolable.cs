@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IPoolable
 {
-    PoolComponent AssignedPool { get; set; }
+    GameObject GameObject { get; }
     void Repool();
 }

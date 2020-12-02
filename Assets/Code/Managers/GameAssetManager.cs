@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class GameAssetManager : Singleton<GameAssetManager>
 {
+    [SerializeField] private PoolComponent<PopUpText> popUpPool;
+    public PoolComponent<PopUpText> PopUpPool { get => popUpPool; set => popUpPool = value; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private PoolComponent<Projectile> projectilePool;
+    public PoolComponent<Projectile> ProjectilePool { get => projectilePool; set => projectilePool = value; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -43,9 +43,13 @@ public class CharacterMovement : MonoBehaviour
     {
         Vector3 playerToMouse = MouseToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(playerToMouse);
-        lookRotation.x = 0f;
-        lookRotation.z = 0f;
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
+        if(lookRotation.eulerAngles != Vector3.zero)
+        {
+            lookRotation.x = 0f;
+            lookRotation.z = 0f;
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
+        }
+
     }
 
     private Vector3 MouseToWorldPoint(Vector2 mouseScreen)

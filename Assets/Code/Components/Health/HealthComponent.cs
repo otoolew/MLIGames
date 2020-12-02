@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-
     #region Components
 
     #endregion
