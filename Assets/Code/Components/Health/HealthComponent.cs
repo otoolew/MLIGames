@@ -9,6 +9,9 @@ public class HealthComponent : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private float maxHealth;
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+
     [SerializeField] private float currentHealth;
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
@@ -41,5 +44,10 @@ public class HealthComponent : MonoBehaviour
             isDead = true;
             DeathAction?.Invoke();
         }
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = MaxHealth;
     }
 }

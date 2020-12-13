@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerCharacter playerCharacter;
     public PlayerCharacter PlayerCharacter { get => playerCharacter; set => playerCharacter = value; }
 
-
+    [SerializeField] private PlayerHUD playerHUD;
+    public PlayerHUD PlayerHUD { get => playerHUD; set => playerHUD = value; }
 
     #region Monobehaviour 
     private void Awake()

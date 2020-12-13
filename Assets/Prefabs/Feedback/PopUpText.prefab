@@ -187,4 +187,5 @@ MonoBehaviour:
   timer:
     startCount: 0
     currentCount: 0
-  moveSpeed: 10
+    isFinished: 0
+  moveSpeed: 15

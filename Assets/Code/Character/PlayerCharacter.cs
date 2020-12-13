@@ -1,5 +1,4 @@
-﻿using RootMotion.FinalIK;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +13,13 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private CharacterMovement movementComp;
     public CharacterMovement MovementComp { get => movementComp; set => movementComp = value; }
 
-    [SerializeField] private AbilityController abilityController;
-    public AbilityController AbilityController { get => abilityController; set => abilityController = value; }
+    [SerializeField] private AbilityController leftAbilityController;
+    public AbilityController LeftAbilityController { get => leftAbilityController; set => leftAbilityController = value; }
+
+    [SerializeField] private AbilityController rightAbilityController;
+    public AbilityController RightAbilityController { get => rightAbilityController; set => rightAbilityController = value; }
 
     public UnityEvent onUseInteractable;
-
-    [SerializeField] private Transform abilityFirePoint;
-    public Transform AbilityFirePoint { get => abilityFirePoint; set => abilityFirePoint = value; }
 
     //public UnityAction WeaponActionTrigger;
 
@@ -55,9 +54,12 @@ public class PlayerCharacter : MonoBehaviour
     {
         Debug.Log(playerController.name + " Possessed Character " + gameObject.name);
         PlayerController = playerController;
-        playerController.InputActions.Character.Enable();
-        playerController.InputActions.Character.PullTrigger.started += OnPullTrigger;
-        playerController.InputActions.Character.PullTrigger.canceled += OnPullTrigger;
+
+        SetUpPlayerInput(playerController);
+        GameAssetManager.Instance.WeaponFactory.EquipToAbilityController(RightAbilityController);
+
+        SetUpPlayerHUD(playerController);
+       
     }
 
     public void ReleaseCharacter(PlayerController playerController)
@@ -67,6 +69,26 @@ public class PlayerCharacter : MonoBehaviour
         PlayerController = null;
     }
 
+    private void SetUpPlayerInput(PlayerController playerController)
+    {
+        playerController.InputActions.Character.Enable();
+
+        playerController.InputActions.Character.Left_PullTrigger.started += OnLeftPullTrigger;
+        playerController.InputActions.Character.Left_PullTrigger.canceled += OnLeftPullTrigger;
+
+        playerController.InputActions.Character.Right_PullTrigger.started += OnRightPullTrigger;
+        playerController.InputActions.Character.Right_PullTrigger.canceled += OnRightPullTrigger;
+
+        playerController.InputActions.Character.Left_Reload.started += OnLeftReload;
+        playerController.InputActions.Character.Right_Reload.started += OnRightReload;
+
+    }
+    private void SetUpPlayerHUD(PlayerController playerController)
+    {
+        playerController.PlayerHUD.gameObject.SetActive(true);
+
+        playerController.PlayerHUD.AssignRightAbility(rightAbilityController.CurrentAbility);
+    }
     public void Move()
     {
         if (playerController)
@@ -88,23 +110,57 @@ public class PlayerCharacter : MonoBehaviour
         Vector2 inputVector = callbackContext.ReadValue<Vector2>();
         movementComp.Move(new Vector3(inputVector.x, 0.0f, inputVector.y));
     }
+
     /// <summary>
-    /// Called when [PullTrigger].
+    /// Called when [Left_PullTrigger].
     /// </summary>
-    public void OnPullTrigger(InputAction.CallbackContext callbackContext)
+    public void OnLeftPullTrigger(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
         {
-            if(abilityController)
-                abilityController.PullTrigger();
+            if (leftAbilityController)
+                leftAbilityController.PullTrigger();
         }
 
         if (callbackContext.canceled)
         {
-            if(abilityController)
-                abilityController.ReleaseTrigger();
+            if (leftAbilityController)
+                leftAbilityController.ReleaseTrigger();
         }       
     }
+    public void OnLeftReload(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.started)
+        {
+            if (leftAbilityController)
+                leftAbilityController.Reload();
+        }
+    }
+    /// <summary>
+    /// Called when [Right_PullTrigger].
+    /// </summary>
+    public void OnRightPullTrigger(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.started)
+        {
+            if (rightAbilityController)
+                rightAbilityController.PullTrigger();
+        }
 
+        if (callbackContext.canceled)
+        {
+            if (rightAbilityController)
+                rightAbilityController.ReleaseTrigger();
+        }
+    }
+    public void OnRightReload(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.started)
+        {
+            if (rightAbilityController)
+                rightAbilityController.Reload();
+        }
+
+    }
     #endregion
 }

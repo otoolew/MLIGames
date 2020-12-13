@@ -525,9 +525,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""61faabe6-26ff-4d03-8ae8-2da4cdcced92"",
             ""actions"": [
                 {
-                    ""name"": ""PullTrigger"",
+                    ""name"": ""Left_PullTrigger"",
                     ""type"": ""Button"",
                     ""id"": ""b9e1b5a1-6be5-4e76-8b7a-11fbd6222a3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Right_PullTrigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""848b8948-5276-4fe2-a65c-d8985fe16dac"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
@@ -547,17 +555,33 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Left_Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a8558aa-6eed-40e7-8ac6-0a0877442b2b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Right_Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""0077a0b6-81bb-4d1b-a9d8-9957b897adcf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""77793f91-179b-4c3a-957e-176a74d16ea4"",
-                    ""path"": ""*/{PrimaryAction}"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PullTrigger"",
+                    ""action"": ""Left_PullTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -648,6 +672,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdc0c6df-c8fb-47b2-a7d1-1ac0a7636d42"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right_PullTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b076ef6-efc8-42da-b41e-9f472729b810"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left_Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e012d8e-cc64-4748-9262-0fabd98445cc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right_Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -668,9 +725,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
-        m_Character_PullTrigger = m_Character.FindAction("PullTrigger", throwIfNotFound: true);
+        m_Character_Left_PullTrigger = m_Character.FindAction("Left_PullTrigger", throwIfNotFound: true);
+        m_Character_Right_PullTrigger = m_Character.FindAction("Right_PullTrigger", throwIfNotFound: true);
         m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
         m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
+        m_Character_Left_Reload = m_Character.FindAction("Left_Reload", throwIfNotFound: true);
+        m_Character_Right_Reload = m_Character.FindAction("Right_Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -825,16 +885,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // Character
     private readonly InputActionMap m_Character;
     private ICharacterActions m_CharacterActionsCallbackInterface;
-    private readonly InputAction m_Character_PullTrigger;
+    private readonly InputAction m_Character_Left_PullTrigger;
+    private readonly InputAction m_Character_Right_PullTrigger;
     private readonly InputAction m_Character_Move;
     private readonly InputAction m_Character_Look;
+    private readonly InputAction m_Character_Left_Reload;
+    private readonly InputAction m_Character_Right_Reload;
     public struct CharacterActions
     {
         private @PlayerControls m_Wrapper;
         public CharacterActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PullTrigger => m_Wrapper.m_Character_PullTrigger;
+        public InputAction @Left_PullTrigger => m_Wrapper.m_Character_Left_PullTrigger;
+        public InputAction @Right_PullTrigger => m_Wrapper.m_Character_Right_PullTrigger;
         public InputAction @Move => m_Wrapper.m_Character_Move;
         public InputAction @Look => m_Wrapper.m_Character_Look;
+        public InputAction @Left_Reload => m_Wrapper.m_Character_Left_Reload;
+        public InputAction @Right_Reload => m_Wrapper.m_Character_Right_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -844,28 +910,46 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_CharacterActionsCallbackInterface != null)
             {
-                @PullTrigger.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPullTrigger;
-                @PullTrigger.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPullTrigger;
-                @PullTrigger.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPullTrigger;
+                @Left_PullTrigger.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLeft_PullTrigger;
+                @Left_PullTrigger.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLeft_PullTrigger;
+                @Left_PullTrigger.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLeft_PullTrigger;
+                @Right_PullTrigger.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_PullTrigger;
+                @Right_PullTrigger.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_PullTrigger;
+                @Right_PullTrigger.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_PullTrigger;
                 @Move.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
                 @Look.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLook;
+                @Left_Reload.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLeft_Reload;
+                @Left_Reload.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLeft_Reload;
+                @Left_Reload.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnLeft_Reload;
+                @Right_Reload.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
+                @Right_Reload.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
+                @Right_Reload.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @PullTrigger.started += instance.OnPullTrigger;
-                @PullTrigger.performed += instance.OnPullTrigger;
-                @PullTrigger.canceled += instance.OnPullTrigger;
+                @Left_PullTrigger.started += instance.OnLeft_PullTrigger;
+                @Left_PullTrigger.performed += instance.OnLeft_PullTrigger;
+                @Left_PullTrigger.canceled += instance.OnLeft_PullTrigger;
+                @Right_PullTrigger.started += instance.OnRight_PullTrigger;
+                @Right_PullTrigger.performed += instance.OnRight_PullTrigger;
+                @Right_PullTrigger.canceled += instance.OnRight_PullTrigger;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Left_Reload.started += instance.OnLeft_Reload;
+                @Left_Reload.performed += instance.OnLeft_Reload;
+                @Left_Reload.canceled += instance.OnLeft_Reload;
+                @Right_Reload.started += instance.OnRight_Reload;
+                @Right_Reload.performed += instance.OnRight_Reload;
+                @Right_Reload.canceled += instance.OnRight_Reload;
             }
         }
     }
@@ -885,8 +969,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     }
     public interface ICharacterActions
     {
-        void OnPullTrigger(InputAction.CallbackContext context);
+        void OnLeft_PullTrigger(InputAction.CallbackContext context);
+        void OnRight_PullTrigger(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnLeft_Reload(InputAction.CallbackContext context);
+        void OnRight_Reload(InputAction.CallbackContext context);
     }
 }

@@ -512,9 +512,17 @@
             "id": "61faabe6-26ff-4d03-8ae8-2da4cdcced92",
             "actions": [
                 {
-                    "name": "PullTrigger",
+                    "name": "Left_PullTrigger",
                     "type": "Button",
                     "id": "b9e1b5a1-6be5-4e76-8b7a-11fbd6222a3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "Right_PullTrigger",
+                    "type": "Button",
+                    "id": "848b8948-5276-4fe2-a65c-d8985fe16dac",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -534,17 +542,33 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Left_Reload",
+                    "type": "Button",
+                    "id": "5a8558aa-6eed-40e7-8ac6-0a0877442b2b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Right_Reload",
+                    "type": "Button",
+                    "id": "0077a0b6-81bb-4d1b-a9d8-9957b897adcf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "77793f91-179b-4c3a-957e-176a74d16ea4",
-                    "path": "*/{PrimaryAction}",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PullTrigger",
+                    "action": "Left_PullTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -633,6 +657,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdc0c6df-c8fb-47b2-a7d1-1ac0a7636d42",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right_PullTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b076ef6-efc8-42da-b41e-9f472729b810",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left_Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e012d8e-cc64-4748-9262-0fabd98445cc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right_Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
