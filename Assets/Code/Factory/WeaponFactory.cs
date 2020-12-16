@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class WeaponFactory : MonoBehaviour
 {
-    [SerializeField] private ProjectileAbility projectileAbilityPrefab;
-    public ProjectileAbility ProjectileAbilityPrefab { get => projectileAbilityPrefab; set => projectileAbilityPrefab = value; }
 
+    [SerializeField] private RaycastAbilityConfig raycastAbilityConfig;
+    public RaycastAbilityConfig RaycastAbilityConfig { get => raycastAbilityConfig; set => raycastAbilityConfig = value; }
 
+    [SerializeField] private ProjectileAbilityConfig projectileAbilityConfig;
+    public ProjectileAbilityConfig ProjectileAbilityConfig { get => projectileAbilityConfig; set => projectileAbilityConfig = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +21,16 @@ public class WeaponFactory : MonoBehaviour
     {
         
     }
-    public void EquipToAbilityController(AbilityController abilityController)
-    {
-        ProjectileAbility projectileAbility = GameObject.Instantiate(projectileAbilityPrefab, abilityController.transform);
-        abilityController.EquipAbility(projectileAbility);
-    }
-    public bool CreateProjectileWeapon()
-    {
 
-        return true;
+    public void EquipRaycastAbility(AbilityController abilityController)
+    {
+        //ProjectileAbility projectileAbility = GameObject.Instantiate(projectileAbilityPrefab, abilityController.transform);
+        //abilityController.EquipAbility(projectileAbility);
+    }
+
+    public void EquipProjectileAbility(AbilityController abilityController)
+    {
+        //ProjectileAbility projectileAbility = GameObject.Instantiate(projectileAbilityPrefab, abilityController.transform);
+        //abilityController.EquipAbility(projectileAbility);
     }
 }

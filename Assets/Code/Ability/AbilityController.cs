@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AbilityController : MonoBehaviour
 {
     [SerializeField] private AbilityComponent currentAbility;
     public AbilityComponent CurrentAbility { get => currentAbility; set => currentAbility = value; }
 
+    public UnityEvent<AbilityComponent> onAbilityEquipped;
     // Start is called before the first frame update
     void Start()
     {
-        
+        onAbilityEquipped = new UnityEvent<AbilityComponent>();
     }
 
     // Update is called once per frame
@@ -18,10 +20,12 @@ public class AbilityController : MonoBehaviour
     {
 
     }
-    public void EquipAbility(AbilityComponent abilityComponent)
+    public void EquipAbility(AbilityConfig abilityConfig)
     {
-        currentAbility = abilityComponent;
+        currentAbility = abilityConfig.CreateAbilityComponent(transform);
+        onAbilityEquipped.Invoke(currentAbility);
     }
+
     public void PullTrigger()
     {
         if (currentAbility)

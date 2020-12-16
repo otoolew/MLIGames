@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerControls inputActions;
     public PlayerControls InputActions { get => inputActions; set => inputActions = value; }
 
+    [SerializeField] private PlayerCamera playerCamera;
+    public PlayerCamera PlayerCamera { get => playerCamera; set => playerCamera = value; }
+
     [SerializeField] private PlayerCharacter playerCharacter;
     public PlayerCharacter PlayerCharacter { get => playerCharacter; set => playerCharacter = value; }
 
@@ -56,8 +59,12 @@ public class PlayerController : MonoBehaviour
     {
         PlayerCharacter = FindObjectOfType<PlayerCharacter>();
 
-        if(PlayerCharacter)
+        if (PlayerCharacter)
+        {
             PlayerCharacter.PossessCharacter(this);
+            PlayerCamera.FollowTarget = PlayerCharacter.transform;
+        }
+
     }
     public void ReleaseCharacter()
     {

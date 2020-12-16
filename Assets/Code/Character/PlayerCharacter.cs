@@ -19,6 +19,13 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private AbilityController rightAbilityController;
     public AbilityController RightAbilityController { get => rightAbilityController; set => rightAbilityController = value; }
 
+    [Header("Ability Configs")]
+    [SerializeField] private RaycastAbilityConfig raycastAbilityConfig;
+    public RaycastAbilityConfig RaycastAbilityConfig { get => raycastAbilityConfig; set => raycastAbilityConfig = value; }
+
+    [SerializeField] private ProjectileAbilityConfig projectileAbilityConfig;
+    public ProjectileAbilityConfig ProjectileAbilityConfig { get => projectileAbilityConfig; set => projectileAbilityConfig = value; }
+
     public UnityEvent onUseInteractable;
 
     //public UnityAction WeaponActionTrigger;
@@ -56,7 +63,10 @@ public class PlayerCharacter : MonoBehaviour
         PlayerController = playerController;
 
         SetUpPlayerInput(playerController);
-        GameAssetManager.Instance.WeaponFactory.EquipToAbilityController(RightAbilityController);
+
+
+        SetUpAbility(LeftAbilityController, raycastAbilityConfig);
+        SetUpAbility(RightAbilityController, raycastAbilityConfig);
 
         SetUpPlayerHUD(playerController);
        
@@ -87,8 +97,15 @@ public class PlayerCharacter : MonoBehaviour
     {
         playerController.PlayerHUD.gameObject.SetActive(true);
 
+        playerController.PlayerHUD.AssignLeftAbility(leftAbilityController.CurrentAbility);
         playerController.PlayerHUD.AssignRightAbility(rightAbilityController.CurrentAbility);
     }
+
+    private void SetUpAbility(AbilityController abilityController, AbilityConfig abilityConfig)
+    {
+        abilityController.EquipAbility(abilityConfig);
+    }
+
     public void Move()
     {
         if (playerController)

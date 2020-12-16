@@ -70,7 +70,7 @@ public class ProjectileAbility : AbilityComponent
     {
         if (cooldownTimer.IsFinished)
         {
-            if (munitionStorage.ComsumeAmmo())
+            if (munitionStorage.ConsumeAmmo())
             {
                 Projectile projectile = munitionResource.FetchFromPool();
 

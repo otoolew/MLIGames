@@ -571,6 +571,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7a91dc8-440b-4b72-9dc8-f747c8d67ccf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -705,6 +713,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Right_Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ca62aca-f3ce-4aca-8c14-49235f42fd45"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -731,6 +750,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
         m_Character_Left_Reload = m_Character.FindAction("Left_Reload", throwIfNotFound: true);
         m_Character_Right_Reload = m_Character.FindAction("Right_Reload", throwIfNotFound: true);
+        m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -891,6 +911,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Character_Look;
     private readonly InputAction m_Character_Left_Reload;
     private readonly InputAction m_Character_Right_Reload;
+    private readonly InputAction m_Character_Interact;
     public struct CharacterActions
     {
         private @PlayerControls m_Wrapper;
@@ -901,6 +922,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_Character_Look;
         public InputAction @Left_Reload => m_Wrapper.m_Character_Left_Reload;
         public InputAction @Right_Reload => m_Wrapper.m_Character_Right_Reload;
+        public InputAction @Interact => m_Wrapper.m_Character_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -928,6 +950,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Right_Reload.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
                 @Right_Reload.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
                 @Right_Reload.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
+                @Interact.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -950,6 +975,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Right_Reload.started += instance.OnRight_Reload;
                 @Right_Reload.performed += instance.OnRight_Reload;
                 @Right_Reload.canceled += instance.OnRight_Reload;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -975,5 +1003,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnLeft_Reload(InputAction.CallbackContext context);
         void OnRight_Reload(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

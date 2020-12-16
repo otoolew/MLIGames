@@ -40,7 +40,7 @@ public class MunitionStorage : MonoBehaviour
     //    magazineCount = munitionStorage.magazineCount;
     //}
 
-    public bool ComsumeAmmo()
+    public bool ConsumeAmmo()
     {
         if (magazineCount > 0)
         {
@@ -64,10 +64,9 @@ public class MunitionStorage : MonoBehaviour
         }
         else
         {
-            requestAmount -= ammoCount;
-
-            ammoCount -= requestAmount;
+            requestAmount -= requestAmount - ammoCount;
             magazineCount += requestAmount;
+            ammoCount = 0;
         }
         onAmmoCountChange.Invoke(magazineCount + " / " + ammoCount);
     }

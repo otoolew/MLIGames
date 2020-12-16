@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerHUD : MonoBehaviour
 {
     // TO DO HAVE SEPARATE WEAPON HUD PREFABS STORED IN GUN INFO
-    //[SerializeField] private CannonPanel leftCannonPanel;
-    //public CannonPanel LeftCannonPanel { get => leftCannonPanel; set => leftCannonPanel = value; }
+    [SerializeField] private AbilityPanel leftAbilityPanel;
+    public AbilityPanel LeftAbilityPanel { get => leftAbilityPanel; set => leftAbilityPanel = value; }
 
     [SerializeField] private AbilityPanel rightAbilityPanel;
     public AbilityPanel RightAbilityPanel { get => rightAbilityPanel; set => rightAbilityPanel = value; }
@@ -23,12 +23,16 @@ public class PlayerHUD : MonoBehaviour
     {
         
     }
-    public void AssignLeftAbilityUI(AbilityComponent ability)
+
+    public void AssignLeftAbility(AbilityComponent ability)
     {
-        
+        Debug.Log("HUD AssignLeftAbility");
+        leftAbilityPanel.AssignAbility(ability);
     }
+
     public void AssignRightAbility(AbilityComponent ability)
     {
+        Debug.Log("HUD AssignRightAbility");
         rightAbilityPanel.AssignAbility(ability);
     }
 
