@@ -14,7 +14,10 @@ public class InteractionComponent : MonoBehaviour
     #region Monobehaviour
     private void Start()
     {
-        //onInteraction = new UnityEvent();
+        if(onInteraction == null)
+        {
+            onInteraction = new UnityEvent();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

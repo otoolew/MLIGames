@@ -24,6 +24,7 @@ public class Door : MonoBehaviour
             OpenDoor();
         }
     }
+
     public void OpenDoor()
     {
         IsOpen = true;

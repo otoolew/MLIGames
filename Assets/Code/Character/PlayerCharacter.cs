@@ -13,6 +13,9 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private CharacterMovement movementComp;
     public CharacterMovement MovementComp { get => movementComp; set => movementComp = value; }
 
+    [SerializeField] private CharacterRotation rotationComp;
+    public CharacterRotation RotationComp { get => rotationComp; set => rotationComp = value; }
+
     [SerializeField] private AbilityController leftAbilityController;
     public AbilityController LeftAbilityController { get => leftAbilityController; set => leftAbilityController = value; }
 
@@ -41,12 +44,7 @@ public class PlayerCharacter : MonoBehaviour
     void Update()
     {
         Move();
-    }
-
-    private void UsedButtonPressed()
-    {
-        Debug.Log("Use Button Pressed");
-        onUseInteractable.Invoke();
+        Look();
     }
 
     private void OnDestroy()
@@ -83,6 +81,16 @@ public class PlayerCharacter : MonoBehaviour
     {
         playerController.InputActions.Character.Enable();
 
+        if (playerController.GamepadEnabled)
+        {
+            playerController.InputActions.Character.Look.Enable();
+        }     
+        else
+        {
+            playerController.InputActions.Character.Look.Disable();
+        }   
+  
+
         playerController.InputActions.Character.Left_PullTrigger.started += OnLeftPullTrigger;
         playerController.InputActions.Character.Left_PullTrigger.canceled += OnLeftPullTrigger;
 
@@ -91,6 +99,9 @@ public class PlayerCharacter : MonoBehaviour
 
         playerController.InputActions.Character.Left_Reload.started += OnLeftReload;
         playerController.InputActions.Character.Right_Reload.started += OnRightReload;
+
+        playerController.InputActions.Character.UseInteraction.started += OnUseInteraction;
+
 
     }
     private void SetUpPlayerHUD(PlayerController playerController)
@@ -114,19 +125,40 @@ public class PlayerCharacter : MonoBehaviour
             movementComp.Move(new Vector3(moveInput.x, 0.0f, moveInput.y));
         }                  
     }
+    public void Look()
+    {
+        if (playerController)
+        {
+            if (playerController.GamepadEnabled)
+            {
+                Vector2 lookInput = playerController.InputActions.Character.Look.ReadValue<Vector2>();
+                rotationComp.RotateToDirection(lookInput);
+            }
+            else
+            {
+                rotationComp.MouseLook();
+            }     
+        }
+    }
+
+    private void UseInteraction()
+    {
+        Debug.Log("Use Button Pressed");
+        onUseInteractable.Invoke();
+    }
 
     #endregion
 
     #region PlayerInput Calls
 
-    /// <summary>
-    /// Called when [Move].
-    /// </summary>
-    public void OnMove(InputAction.CallbackContext callbackContext)
-    {
-        Vector2 inputVector = callbackContext.ReadValue<Vector2>();
-        movementComp.Move(new Vector3(inputVector.x, 0.0f, inputVector.y));
-    }
+    ///// <summary>
+    ///// Called when [Move].
+    ///// </summary>
+    //public void OnMove(InputAction.CallbackContext callbackContext)
+    //{
+    //    Vector2 inputVector = callbackContext.ReadValue<Vector2>();
+    //    movementComp.Move(new Vector3(inputVector.x, 0.0f, inputVector.y));
+    //}
 
     /// <summary>
     /// Called when [Left_PullTrigger].
@@ -178,6 +210,14 @@ public class PlayerCharacter : MonoBehaviour
                 rightAbilityController.Reload();
         }
 
+    }
+
+    private void OnUseInteraction(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.started)
+        {
+            UseInteraction();
+        }
     }
     #endregion
 }

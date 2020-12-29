@@ -128,12 +128,12 @@ public class RaycastAbility : AbilityComponent
 
     private void PlayMuzzleEffect()
     {
-        Debug.Log("RayCast Ability PlayMuzzleEffect at " + FirePoint);
+        //Debug.Log("RayCast Ability PlayMuzzleEffect at " + FirePoint);
     }
 
     private void PlayImpactEffect(Vector3 position)
     {
-        Debug.Log("RayCast Ability Impact at " + position);
+        //Debug.Log("RayCast Ability Impact at " + position);
     }
 
     IEnumerator PlayLineEffect(Vector3 startPosition, Vector3 endPosition)

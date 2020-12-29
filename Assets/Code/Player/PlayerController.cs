@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerControls inputActions;
     public PlayerControls InputActions { get => inputActions; set => inputActions = value; }
 
+    [SerializeField] private bool gamepadEnabled;
+    public bool GamepadEnabled { get => gamepadEnabled; set => gamepadEnabled = value; }
+
     [SerializeField] private PlayerCamera playerCamera;
     public PlayerCamera PlayerCamera { get => playerCamera; set => playerCamera = value; }
 

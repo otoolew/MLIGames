@@ -573,7 +573,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""UseInteraction"",
                     ""type"": ""Button"",
                     ""id"": ""a7a91dc8-440b-4b72-9dc8-f747c8d67ccf"",
                     ""expectedControlType"": ""Button"",
@@ -586,6 +586,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""77793f91-179b-4c3a-957e-176a74d16ea4"",
                     ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left_PullTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b47ac9f2-740a-49ef-8580-11814bd55560"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -664,18 +675,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""id"": ""2e111562-86cb-476f-93f9-6b1726fb1dab"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a9f9fd19-a1f4-4560-8389-6aba3eb4b5b1"",
-                    ""path"": ""<Pointer>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -685,6 +685,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""bdc0c6df-c8fb-47b2-a7d1-1ac0a7636d42"",
                     ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right_PullTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32671c3a-a220-4706-8b20-f480069d3d0c"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -705,8 +716,30 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7934ad56-1e3d-48eb-a272-7ecb2aeabe14"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left_Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6e012d8e-cc64-4748-9262-0fabd98445cc"",
                     ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right_Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbe23cf0-7882-4487-86de-3e6c7c38c573"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -721,7 +754,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""UseInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94c0cf3f-ede0-4634-98b2-a8742317c34e"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseInteraction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -750,7 +794,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
         m_Character_Left_Reload = m_Character.FindAction("Left_Reload", throwIfNotFound: true);
         m_Character_Right_Reload = m_Character.FindAction("Right_Reload", throwIfNotFound: true);
-        m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
+        m_Character_UseInteraction = m_Character.FindAction("UseInteraction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -911,7 +955,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Character_Look;
     private readonly InputAction m_Character_Left_Reload;
     private readonly InputAction m_Character_Right_Reload;
-    private readonly InputAction m_Character_Interact;
+    private readonly InputAction m_Character_UseInteraction;
     public struct CharacterActions
     {
         private @PlayerControls m_Wrapper;
@@ -922,7 +966,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_Character_Look;
         public InputAction @Left_Reload => m_Wrapper.m_Character_Left_Reload;
         public InputAction @Right_Reload => m_Wrapper.m_Character_Right_Reload;
-        public InputAction @Interact => m_Wrapper.m_Character_Interact;
+        public InputAction @UseInteraction => m_Wrapper.m_Character_UseInteraction;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -950,9 +994,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Right_Reload.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
                 @Right_Reload.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
                 @Right_Reload.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnRight_Reload;
-                @Interact.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnInteract;
+                @UseInteraction.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseInteraction;
+                @UseInteraction.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseInteraction;
+                @UseInteraction.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseInteraction;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -975,9 +1019,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Right_Reload.started += instance.OnRight_Reload;
                 @Right_Reload.performed += instance.OnRight_Reload;
                 @Right_Reload.canceled += instance.OnRight_Reload;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
+                @UseInteraction.started += instance.OnUseInteraction;
+                @UseInteraction.performed += instance.OnUseInteraction;
+                @UseInteraction.canceled += instance.OnUseInteraction;
             }
         }
     }
@@ -1003,6 +1047,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnLeft_Reload(InputAction.CallbackContext context);
         void OnRight_Reload(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
+        void OnUseInteraction(InputAction.CallbackContext context);
     }
 }
