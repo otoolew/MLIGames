@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private float doorSpeed;
-    public float DoorSpeed { get => doorSpeed; set => doorSpeed = value; }
+    #region Components
+    [SerializeField] private Animator animatorComp;
+    public Animator AnimatorComp { get => animatorComp; set => animatorComp = value; }
+    #endregion
 
+    #region Variables
     [SerializeField] private bool isOpen;
     public bool IsOpen { get => isOpen; set => isOpen = value; }
 
     [SerializeField] private bool isBlocked;
     public bool IsBlocked { get => isBlocked; set => isBlocked = value; }
+    #endregion
 
     public void DoorAction()
     {
@@ -27,6 +31,7 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
+        animatorComp.SetTrigger("Open");
         IsOpen = true;
         Debug.Log("Openning Door...");
     }
@@ -39,6 +44,7 @@ public class Door : MonoBehaviour
         }
         else
         {
+            animatorComp.SetTrigger("Close");
             IsOpen = false;
             Debug.Log("Closing Door...");
         }
