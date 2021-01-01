@@ -45,8 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        if (PlayerCharacter)
-            ReleaseCharacter();
+        ReleaseCharacter();
         inputActions.UI.Disable();
     }
 
@@ -67,11 +66,11 @@ public class PlayerController : MonoBehaviour
             PlayerCharacter.PossessCharacter(this);
             PlayerCamera.FollowTarget = PlayerCharacter.transform;
         }
-
     }
     public void ReleaseCharacter()
     {
-        PlayerCharacter.ReleaseCharacter(this);
+        if(PlayerCharacter)
+            PlayerCharacter.ReleaseCharacter(this);
     }
     #endregion
 }

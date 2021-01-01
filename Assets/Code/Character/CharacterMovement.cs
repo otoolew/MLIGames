@@ -17,11 +17,20 @@ public class CharacterMovement : MonoBehaviour
     [Header("Current State Values")]
     public float CurrentSpeed;
     public float BaseMoveSpeed;
+    public float RotationSpeed;
     #endregion
 
 
     public void Move(Vector3 moveVector)
     {
         characterController.Move(moveVector * CurrentSpeed * Time.deltaTime);
+
+        if (OrientToMovement && moveVector.magnitude > 0.1)
+        {
+            Vector3 direction = (Vector3.right * moveVector.x) + (Vector3.forward * moveVector.z);
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        }
     }
+
 }

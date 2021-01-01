@@ -84,6 +84,7 @@ public class PlayerCharacter : MonoBehaviour
         if (playerController.GamepadEnabled)
         {
             playerController.InputActions.Character.Look.Enable();
+            playerController.InputActions.Character.Look.started += OnLook;
         }     
         else
         {
@@ -133,6 +134,17 @@ public class PlayerCharacter : MonoBehaviour
             {
                 Vector2 lookInput = playerController.InputActions.Character.Look.ReadValue<Vector2>();
                 rotationComp.RotateToDirection(lookInput);
+                if (movementComp)
+                {
+                    if (lookInput.magnitude > 0.1f)
+                    {
+                        movementComp.OrientToMovement = false;
+                    }
+                    else
+                    {
+                        movementComp.OrientToMovement = true;
+                    }
+                }
             }
             else
             {
@@ -159,7 +171,13 @@ public class PlayerCharacter : MonoBehaviour
     //    Vector2 inputVector = callbackContext.ReadValue<Vector2>();
     //    movementComp.Move(new Vector3(inputVector.x, 0.0f, inputVector.y));
     //}
+    /// <summary>
+    /// Called when [Left_PullTrigger].
+    /// </summary>
+    public void OnLook(InputAction.CallbackContext callbackContext)
+    {
 
+    }
     /// <summary>
     /// Called when [Left_PullTrigger].
     /// </summary>

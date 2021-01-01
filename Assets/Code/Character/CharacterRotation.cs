@@ -21,13 +21,6 @@ public class CharacterRotation : MonoBehaviour
             Vector3 direction = (Vector3.right * value.x) + (Vector3.forward * value.y);
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
-            //Debug.Log("Rot Val = " + value);
-            //Vector3 relativePos = new Vector3(value.x, 0.0f, value.y) - transform.position;
-            //relativePos.x = 0;
-            //relativePos.z = 0;
-            //Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-            //Quaternion rotation = Quaternion.FromToRotation(transform.rotation.eulerAngles, relativePos);
-           // transform.rotation = Quaternion.Lerp(transform.rotation, rotation, RotationSpeed * Time.deltaTime);
         }
     }
 

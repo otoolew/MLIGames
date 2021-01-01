@@ -313,8 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828723528b0c0ca4480b8c87323a109e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoCapacity: 10
-  ammoCount: 10
+  ammoCapacity: 1000
+  ammoCount: 1000
   magazineCapacity: 30
   magazineCount: 30
   onAmmoCountChange:
