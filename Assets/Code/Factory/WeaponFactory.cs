@@ -22,13 +22,13 @@ public class WeaponFactory : MonoBehaviour
         
     }
 
-    public void EquipRaycastAbility(AbilityController abilityController)
+    public void EquipRaycastAbility(AbilityComponent abilityController)
     {
         //ProjectileAbility projectileAbility = GameObject.Instantiate(projectileAbilityPrefab, abilityController.transform);
         //abilityController.EquipAbility(projectileAbility);
     }
 
-    public void EquipProjectileAbility(AbilityController abilityController)
+    public void EquipProjectileAbility(AbilityComponent abilityController)
     {
         //ProjectileAbility projectileAbility = GameObject.Instantiate(projectileAbilityPrefab, abilityController.transform);
         //abilityController.EquipAbility(projectileAbility);

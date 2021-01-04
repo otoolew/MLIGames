@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : Character
 {
     [SerializeField] private PlayerController playerController;
     public PlayerController PlayerController { get => playerController; set => playerController = value; }
@@ -16,11 +16,15 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private CharacterRotation rotationComp;
     public CharacterRotation RotationComp { get => rotationComp; set => rotationComp = value; }
 
-    [SerializeField] private AbilityController leftAbilityController;
-    public AbilityController LeftAbilityController { get => leftAbilityController; set => leftAbilityController = value; }
+    [SerializeField] private WeaponAbilityController leftAbilityController;
+    public WeaponAbilityController LeftAbilityController { get => leftAbilityController; set => leftAbilityController = value; }
 
-    [SerializeField] private AbilityController rightAbilityController;
-    public AbilityController RightAbilityController { get => rightAbilityController; set => rightAbilityController = value; }
+    [SerializeField] private WeaponAbilityController rightAbilityController;
+    public WeaponAbilityController RightAbilityController { get => rightAbilityController; set => rightAbilityController = value; }
+
+    [SerializeField] private DashAbilityController dashAbilityController;
+    public DashAbilityController DashAbilityController { get => dashAbilityController; set => dashAbilityController = value; }
+
 
     [Header("Ability Configs")]
     [SerializeField] private RaycastAbilityConfig raycastAbilityConfig;
@@ -65,7 +69,7 @@ public class PlayerCharacter : MonoBehaviour
 
         SetUpAbility(LeftAbilityController, raycastAbilityConfig);
         SetUpAbility(RightAbilityController, raycastAbilityConfig);
-
+        SetUpAbility(DashAbilityController);
         SetUpPlayerHUD(playerController);
        
     }
@@ -81,17 +85,6 @@ public class PlayerCharacter : MonoBehaviour
     {
         playerController.InputActions.Character.Enable();
 
-        if (playerController.GamepadEnabled)
-        {
-            playerController.InputActions.Character.Look.Enable();
-            playerController.InputActions.Character.Look.started += OnLook;
-        }     
-        else
-        {
-            playerController.InputActions.Character.Look.Disable();
-        }   
-  
-
         playerController.InputActions.Character.Left_PullTrigger.started += OnLeftPullTrigger;
         playerController.InputActions.Character.Left_PullTrigger.canceled += OnLeftPullTrigger;
 
@@ -103,6 +96,8 @@ public class PlayerCharacter : MonoBehaviour
 
         playerController.InputActions.Character.UseInteraction.started += OnUseInteraction;
 
+        playerController.InputActions.Character.Dash.started += OnDashPullTrigger;
+        playerController.InputActions.Character.Dash.canceled += OnDashPullTrigger;
 
     }
     private void SetUpPlayerHUD(PlayerController playerController)
@@ -115,15 +110,19 @@ public class PlayerCharacter : MonoBehaviour
 
     private void SetUpAbility(AbilityController abilityController, AbilityConfig abilityConfig)
     {
+        abilityController.Owner = this;
         abilityController.EquipAbility(abilityConfig);
     }
 
+    private void SetUpAbility(DashAbilityController abilityController)
+    {
+        abilityController.Owner = this;
+    }
     public void Move()
     {
         if (playerController)
         {
-            Vector2 moveInput = playerController.InputActions.Character.Move.ReadValue<Vector2>();
-            movementComp.Move(new Vector3(moveInput.x, 0.0f, moveInput.y));
+            movementComp.MoveInput = playerController.InputActions.Character.Move.ReadValue<Vector2>();
         }                  
     }
     public void Look()
@@ -171,13 +170,20 @@ public class PlayerCharacter : MonoBehaviour
     //    Vector2 inputVector = callbackContext.ReadValue<Vector2>();
     //    movementComp.Move(new Vector3(inputVector.x, 0.0f, inputVector.y));
     //}
-    /// <summary>
-    /// Called when [Left_PullTrigger].
-    /// </summary>
-    public void OnLook(InputAction.CallbackContext callbackContext)
-    {
 
+    public void OnDashPullTrigger(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.started)
+        {
+            if (MovementComp)
+                MovementComp.Dash();
+        }
+
+        if (callbackContext.canceled)
+        {
+        }
     }
+
     /// <summary>
     /// Called when [Left_PullTrigger].
     /// </summary>

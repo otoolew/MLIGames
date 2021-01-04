@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ProjectileAbility : AbilityComponent
+public class ProjectileAbility : WeaponAbilityComponent
 {
     #region Components
     //[SerializeField] private AbilityController abilityController;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class BeamAbility : AbilityComponent
+public class BeamAbility : WeaponAbilityComponent
 {
     #region Components
 

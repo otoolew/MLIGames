@@ -22,18 +22,23 @@ public class Timer
 
     public Timer()
     {
+        currentCount = startCount;
         TimerAction = DefaultTimerAction;
     }
 
     public Timer(float startCount)
     {
         this.startCount = startCount;
+        currentCount = startCount;
         TimerAction = DefaultTimerAction;
     }
 
     public void Tick()
     {
-        currentCount -= Time.deltaTime;
+        if(currentCount > 0)
+        {
+            currentCount -= Time.deltaTime;
+        }
     }
 
     public void ResetTimer()

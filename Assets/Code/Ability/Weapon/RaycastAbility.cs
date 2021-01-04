@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastAbility : AbilityComponent
+public class RaycastAbility : WeaponAbilityComponent
 {
     #region Components
     [SerializeField] private LineRenderer lineRenderer;

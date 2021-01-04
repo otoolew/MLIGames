@@ -579,6 +579,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c930fb5-885d-405d-b2ee-bd963f2b7159"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -768,6 +776,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""UseInteraction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f13c9f39-8fc2-40c9-80d6-2e942b4c0459"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e66f85c-bc5c-4de7-ac65-0673a2cc6a58"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -795,6 +825,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Character_Left_Reload = m_Character.FindAction("Left_Reload", throwIfNotFound: true);
         m_Character_Right_Reload = m_Character.FindAction("Right_Reload", throwIfNotFound: true);
         m_Character_UseInteraction = m_Character.FindAction("UseInteraction", throwIfNotFound: true);
+        m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -956,6 +987,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Character_Left_Reload;
     private readonly InputAction m_Character_Right_Reload;
     private readonly InputAction m_Character_UseInteraction;
+    private readonly InputAction m_Character_Dash;
     public struct CharacterActions
     {
         private @PlayerControls m_Wrapper;
@@ -967,6 +999,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Left_Reload => m_Wrapper.m_Character_Left_Reload;
         public InputAction @Right_Reload => m_Wrapper.m_Character_Right_Reload;
         public InputAction @UseInteraction => m_Wrapper.m_Character_UseInteraction;
+        public InputAction @Dash => m_Wrapper.m_Character_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -997,6 +1030,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @UseInteraction.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseInteraction;
                 @UseInteraction.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseInteraction;
                 @UseInteraction.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseInteraction;
+                @Dash.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -1022,6 +1058,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @UseInteraction.started += instance.OnUseInteraction;
                 @UseInteraction.performed += instance.OnUseInteraction;
                 @UseInteraction.canceled += instance.OnUseInteraction;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -1048,5 +1087,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnLeft_Reload(InputAction.CallbackContext context);
         void OnRight_Reload(InputAction.CallbackContext context);
         void OnUseInteraction(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
