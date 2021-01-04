@@ -67,7 +67,7 @@ public class PlayerCharacter : Character
         SetUpPlayerInput(playerController);
 
 
-        SetUpAbility(LeftAbilityController, raycastAbilityConfig);
+        //SetUpAbility(LeftAbilityController, raycastAbilityConfig);
         SetUpAbility(RightAbilityController, raycastAbilityConfig);
         SetUpAbility(DashAbilityController);
         SetUpPlayerHUD(playerController);

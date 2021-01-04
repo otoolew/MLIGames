@@ -23,14 +23,16 @@ public class HealthComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(OnHealthChange == null)
-        {
-            OnHealthChange = new UnityEvent<float>();
-        }
+        //if(OnHealthChange == null)
+        //{
+        //    OnHealthChange = new UnityEvent<float>();
+        //}
+        //OnHealthChange = new UnityEvent<float>();
     }
 
     public void ApplyHealthChange(float value)
     {
+        Debug.Log(transform.root.name + " Apply Health Hit");
         if (isDead)
         {
             return;
