@@ -5,9 +5,11 @@ using UnityEngine;
 public class MeleeAbilityComponent : WeaponAbilityComponent
 {
     #region Components
-
     [SerializeField] private Transform firePoint;
     public override Transform FirePoint { get => firePoint; set => firePoint = value; }
+
+    //[SerializeField] private MeleeHitBox meleeHitbox;
+    //public MeleeHitBox FirePoint { get => firePoint; set => firePoint = value; }
     #endregion
 
     #region Variables
@@ -38,7 +40,7 @@ public class MeleeAbilityComponent : WeaponAbilityComponent
     // Start is called before the first frame update
     void Start()
     {
-
+        FirePoint.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,33 +51,36 @@ public class MeleeAbilityComponent : WeaponAbilityComponent
         {
             float fracComplete = (Time.time - swingStartTime) / SwingTime;
 
-            firePoint.localRotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, -45, 0)), Quaternion.Euler(new Vector3(0, 45, 0)), fracComplete);
+            firePoint.localRotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 45, 0)), Quaternion.Euler(new Vector3(0, -45, 0)), fracComplete);
             if (fracComplete >= 1)
             {
                 StopSwing();
             }
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Melee Trigger " + other.name);
         HitCollider hitCollider = other.GetComponent<HitCollider>();
         if (hitCollider)
         {
-            //Debug.Log(string.Format("{0} Hit {1}", this.name, hitCollider.transform.root.name));
+            Debug.Log(string.Format("{0} Hit {1}", this.name, hitCollider.transform.root.name));
             hitCollider.HealthComp.ApplyHealthChange(-10);
         }
     }
+
     #endregion
     private void StartSwing()
     {
         swingStartTime = Time.time;
-        firePoint.localRotation = Quaternion.Euler(new Vector3(0, -45, 0));
+        firePoint.localRotation = Quaternion.Euler(new Vector3(0, 45, 0));
+        FirePoint.gameObject.SetActive(true);
         IsSwinging = true;
     }
     private void StopSwing()
     {
         IsSwinging = false;
+        FirePoint.gameObject.SetActive(false);
     }
     public override void Fire()
     {

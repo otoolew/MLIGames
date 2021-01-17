@@ -109,10 +109,10 @@ public class RaycastAbility : WeaponAbilityComponent
         if (Physics.Raycast(ray, out RaycastHit raycastHit, range, hitLayerMask))
         {
             hitPosition = raycastHit.point;
-            HitCollider hitObject = raycastHit.collider.GetComponent<HitCollider>();
+            HealthComponent hitObject = raycastHit.collider.GetComponent<HealthComponent>();
             if (hitObject != null)
             {
-                hitObject.HealthComp.ApplyHealthChange(modifierValue);
+                hitObject.ApplyHealthChange(modifierValue);
             }
 
             PlayImpactEffect(raycastHit.point);

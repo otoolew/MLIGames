@@ -6,9 +6,6 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class InteractionComponent : MonoBehaviour
 {
-    [SerializeField] private Collider interactionTrigger;
-    public Collider InteractionCollider { get => interactionTrigger; set => interactionTrigger = value; }
-
     public UnityEvent onInteraction;
 
     #region Monobehaviour
@@ -44,14 +41,6 @@ public class InteractionComponent : MonoBehaviour
     private void OnDestroy()
     {
         onInteraction.RemoveAllListeners();
-    }
-
-    private void OnValidate()
-    {
-        if (interactionTrigger == null)
-        {
-            Debug.Log("ASSIGN INTERACTION COLLIDER");
-        }
     }
 
     #endregion

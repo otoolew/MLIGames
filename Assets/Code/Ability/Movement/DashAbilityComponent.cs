@@ -59,7 +59,9 @@ public class DashAbilityComponent : AbilityComponent
             PlayerCharacter playerCharacter = (PlayerCharacter)abilityController.Owner;
             if (playerCharacter)
             {
-                playerCharacter.MovementComp.Dash();
+                PlayerMovement playerMovement = (PlayerMovement)playerCharacter.MovementComp;
+                if(playerMovement)
+                    playerMovement.StartDash();
             }
         }
     }

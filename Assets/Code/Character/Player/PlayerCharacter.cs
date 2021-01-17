@@ -10,9 +10,12 @@ public class PlayerCharacter : Character
     [SerializeField] private PlayerController playerController;
     public PlayerController PlayerController { get => playerController; set => playerController = value; }
 
-    [SerializeField] private CharacterMovement movementComp;
-    public CharacterMovement MovementComp { get => movementComp; set => movementComp = value; }
+    [SerializeField] private PlayerMovement movementComp;
+    public override CharacterMovement MovementComp { get => movementComp as PlayerMovement; set => movementComp = (PlayerMovement)value; }
 
+    [SerializeField] private HealthComponent healthComp;
+    public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
+    
     [SerializeField] private CharacterRotation rotationComp;
     public CharacterRotation RotationComp { get => rotationComp; set => rotationComp = value; }
 
@@ -27,6 +30,10 @@ public class PlayerCharacter : Character
 
 
     [Header("Ability Configs")]
+
+    [SerializeField] private MeleeAbilityConfig meleeAbilityConfigConfig;
+    public MeleeAbilityConfig MeleeAbilityConfigConfig { get => meleeAbilityConfigConfig; set => meleeAbilityConfigConfig = value; }
+
     [SerializeField] private RaycastAbilityConfig raycastAbilityConfig;
     public RaycastAbilityConfig RaycastAbilityConfig { get => raycastAbilityConfig; set => raycastAbilityConfig = value; }
 
@@ -47,6 +54,7 @@ public class PlayerCharacter : Character
     // Update is called once per frame
     void Update()
     {
+
         Move();
         Look();
     }
@@ -67,7 +75,7 @@ public class PlayerCharacter : Character
         SetUpPlayerInput(playerController);
 
 
-        //SetUpAbility(LeftAbilityController, raycastAbilityConfig);
+        SetUpAbility(LeftAbilityController, meleeAbilityConfigConfig);
         SetUpAbility(RightAbilityController, raycastAbilityConfig);
         SetUpAbility(DashAbilityController);
         SetUpPlayerHUD(playerController);
@@ -122,7 +130,8 @@ public class PlayerCharacter : Character
     {
         if (playerController)
         {
-            movementComp.MoveInput = playerController.InputActions.Character.Move.ReadValue<Vector2>();
+            Vector2 moveVector = playerController.InputActions.Character.Move.ReadValue<Vector2>();
+            movementComp.Move(new Vector3(moveVector.x, 0.0f, moveVector.y));
         }                  
     }
     public void Look()
@@ -175,8 +184,8 @@ public class PlayerCharacter : Character
     {
         if (callbackContext.started)
         {
-            if (MovementComp)
-                MovementComp.Dash();
+            if (movementComp)
+                movementComp.StartDash();
         }
 
         if (callbackContext.canceled)
