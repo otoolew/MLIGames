@@ -33,7 +33,6 @@ public class Door : MonoBehaviour
     {
         animatorComp.SetTrigger("Open");
         IsOpen = true;
-        Debug.Log("Openning Door...");
     }
 
     public void CloseDoor()
@@ -46,7 +45,6 @@ public class Door : MonoBehaviour
         {
             animatorComp.SetTrigger("Close");
             IsOpen = false;
-            Debug.Log("Closing Door...");
         }
     }
 }

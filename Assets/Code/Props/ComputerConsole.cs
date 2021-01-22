@@ -1,29 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ComputerConsole : MonoBehaviour
+public class ComputerConsole : InteractionComponent
 {
-    [SerializeField] private GameObject consoleScreen;
-    public GameObject ConsoleScreen { get => consoleScreen; set => consoleScreen = value; }
+    public GameObject ConsolePanel;
+    public Button SubmitButton;
+    public Button CloseButton;
 
-    private void OnTriggerEnter(Collider other)
+    protected override void Start()
     {
-        //Debug.Log(gameObject.name + " OnTriggerEnter -> " + other.gameObject.name);
-        PlayerCharacter playerCharacter = other.GetComponent<PlayerCharacter>();
-        if (playerCharacter)
-        {
-            ConsoleScreen.SetActive(true);
-        }
+        base.Start();
+        SubmitButton.onClick.AddListener(SumbitForm);
+        CloseButton.onClick.AddListener(CloseConsole);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OpenConsole()
     {
-        //Debug.Log(gameObject.name + " OnTriggerExit <- " + other.gameObject.name);
-        PlayerCharacter playerCharacter = other.GetComponent<PlayerCharacter>();
-        if (playerCharacter)
-        {
-            ConsoleScreen.SetActive(false);
-        }
+        Debug.Log("ComputerConsole -> Open Console");
+        GameManager.Instance.GameMode.PlayerController.DisableCharacterInput();
+        ConsolePanel.gameObject.SetActive(true);
+        CloseButton.Select();
+    }
+    public void CloseConsole()
+    {
+        Debug.Log("ComputerConsole -> Close Console");
+        GameManager.Instance.GameMode.PlayerController.EnableCharacterInput();
+        ConsolePanel.gameObject.SetActive(false);
+    }
+
+    public void SumbitForm()
+    {
+        Debug.Log("ComputerConsole -> Thank you for your cooperation...");
+        CloseConsole();
     }
 }

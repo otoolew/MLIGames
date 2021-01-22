@@ -45,141 +45,79 @@ public class PlayerCharacter : Character
     //public UnityAction WeaponActionTrigger;
 
     #region Monobehaviour
+    private void Awake()
+    {
+        //inputActions = new PlayerControls();
+        onUseInteractable = new UnityEvent();
+        SetUpAbility(LeftAbilityController, meleeAbilityConfigConfig);
+        SetUpAbility(RightAbilityController, raycastAbilityConfig);
+        SetUpAbility(DashAbilityController);
+    }
+
     void Start()
     {
-        onUseInteractable = new UnityEvent();
-        //WeaponActionTrigger = new UnityAction(()=>FireWeapon());
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Move();
-        Look();
     }
 
     private void OnDestroy()
     {
         onUseInteractable.RemoveAllListeners();
+        if(playerController)
+            playerController.ReleaseCharacter();
     }
     #endregion
 
     #region PlayerCharacter
-
-    public void PossessCharacter(PlayerController playerController)
+    public void SetUpPlayerUI(PlayerUI playerUI)
     {
-        Debug.Log(playerController.name + " Possessed Character " + gameObject.name);
-        PlayerController = playerController;
-
-        SetUpPlayerInput(playerController);
-
-
-        SetUpAbility(LeftAbilityController, meleeAbilityConfigConfig);
-        SetUpAbility(RightAbilityController, raycastAbilityConfig);
-        SetUpAbility(DashAbilityController);
-        SetUpPlayerHUD(playerController);
-       
+        //Debug.Log("Setup Player UI");
+        playerUI.CharacterPanel.gameObject.SetActive(true);
+        playerUI.CharacterPanel.AssignCharacterUIElements(this);
     }
-
-    public void ReleaseCharacter(PlayerController playerController)
-    {
-        Debug.Log(playerController.name + " Released Character " + gameObject.name);
-        playerController.InputActions.Character.Disable();
-        PlayerController = null;
-    }
-
-    private void SetUpPlayerInput(PlayerController playerController)
-    {
-        playerController.InputActions.Character.Enable();
-
-        playerController.InputActions.Character.Left_PullTrigger.started += OnLeftPullTrigger;
-        playerController.InputActions.Character.Left_PullTrigger.canceled += OnLeftPullTrigger;
-
-        playerController.InputActions.Character.Right_PullTrigger.started += OnRightPullTrigger;
-        playerController.InputActions.Character.Right_PullTrigger.canceled += OnRightPullTrigger;
-
-        playerController.InputActions.Character.Left_Reload.started += OnLeftReload;
-        playerController.InputActions.Character.Right_Reload.started += OnRightReload;
-
-        playerController.InputActions.Character.UseInteraction.started += OnUseInteraction;
-
-        playerController.InputActions.Character.Dash.started += OnDashPullTrigger;
-        playerController.InputActions.Character.Dash.canceled += OnDashPullTrigger;
-
-    }
-    private void SetUpPlayerHUD(PlayerController playerController)
-    {
-        playerController.PlayerHUD.gameObject.SetActive(true);
-
-        playerController.PlayerHUD.AssignLeftAbility(leftAbilityController.CurrentAbility);
-        playerController.PlayerHUD.AssignRightAbility(rightAbilityController.CurrentAbility);
-    }
-
     private void SetUpAbility(AbilityController abilityController, AbilityConfig abilityConfig)
     {
         abilityController.Owner = this;
         abilityController.EquipAbility(abilityConfig);
     }
-
     private void SetUpAbility(DashAbilityController abilityController)
     {
         abilityController.Owner = this;
     }
-    public void Move()
-    {
-        if (playerController)
-        {
-            Vector2 moveVector = playerController.InputActions.Character.Move.ReadValue<Vector2>();
-            movementComp.Move(new Vector3(moveVector.x, 0.0f, moveVector.y));
-        }                  
+    public void Move(Vector2 moveInput)
+    {     
+        movementComp.Move(new Vector3(moveInput.x, 0.0f, moveInput.y));                        
     }
-    public void Look()
+    public void Look(Vector2 lookInput)
     {
-        if (playerController)
-        {
-            if (playerController.GamepadEnabled)
+        if (GameManager.Instance.PlayerOptions.ControllerType == ControllerType.GAMEPAD)
+        {          
+            rotationComp.RotateToDirection(lookInput);
+            if (movementComp)
             {
-                Vector2 lookInput = playerController.InputActions.Character.Look.ReadValue<Vector2>();
-                rotationComp.RotateToDirection(lookInput);
-                if (movementComp)
+                if (lookInput.magnitude > 0.1f)
                 {
-                    if (lookInput.magnitude > 0.1f)
-                    {
-                        movementComp.OrientToMovement = false;
-                    }
-                    else
-                    {
-                        movementComp.OrientToMovement = true;
-                    }
+                    movementComp.OrientToMovement = false;
+                }
+                else
+                {
+                    movementComp.OrientToMovement = true;
                 }
             }
-            else
-            {
-                rotationComp.MouseLook();
-            }     
+        }
+        else
+        {
+            rotationComp.MouseLook();
         }
     }
-
-    private void UseInteraction()
-    {
-        Debug.Log("Use Button Pressed");
-        onUseInteractable.Invoke();
-    }
-
     #endregion
 
     #region PlayerInput Calls
-
-    ///// <summary>
-    ///// Called when [Move].
-    ///// </summary>
-    //public void OnMove(InputAction.CallbackContext callbackContext)
-    //{
-    //    Vector2 inputVector = callbackContext.ReadValue<Vector2>();
-    //    movementComp.Move(new Vector3(inputVector.x, 0.0f, inputVector.y));
-    //}
-
     public void OnDashPullTrigger(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
@@ -192,10 +130,6 @@ public class PlayerCharacter : Character
         {
         }
     }
-
-    /// <summary>
-    /// Called when [Left_PullTrigger].
-    /// </summary>
     public void OnLeftPullTrigger(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
@@ -218,9 +152,6 @@ public class PlayerCharacter : Character
                 leftAbilityController.Reload();
         }
     }
-    /// <summary>
-    /// Called when [Right_PullTrigger].
-    /// </summary>
     public void OnRightPullTrigger(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
@@ -244,12 +175,11 @@ public class PlayerCharacter : Character
         }
 
     }
-
-    private void OnUseInteraction(InputAction.CallbackContext callbackContext)
+    public void OnUseInteraction(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
         {
-            UseInteraction();
+            onUseInteractable.Invoke();
         }
     }
     #endregion

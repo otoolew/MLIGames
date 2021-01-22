@@ -29,6 +29,12 @@ public class PlayerCamera : MonoBehaviour
     #endregion
 
     #region Methods
+    public void AssignFollowTarget(Transform targetTransform)
+    {
+        followTarget = targetTransform;
+        transform.position = followTarget.position;
+    }
+
     public void DetachFromParent()
     {
         transform.parent = null;

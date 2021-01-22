@@ -32,7 +32,7 @@ public class HealthComponent : MonoBehaviour
 
     public void ApplyHealthChange(float value)
     {
-        Debug.Log(transform.root.name + " Apply Health Hit");
+        //Debug.Log(transform.root.name + " Apply Health Hit");
         if (isDead)
         {
             return;

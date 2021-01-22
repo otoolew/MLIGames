@@ -101,6 +101,6 @@ public class MeleeAbilityComponent : WeaponAbilityComponent
 
     public override void Reload()
     {
-        Debug.Log("Nothing to do here!");
+        //Debug.Log("Nothing to do here!");
     }
 }

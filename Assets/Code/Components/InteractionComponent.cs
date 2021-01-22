@@ -6,45 +6,60 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class InteractionComponent : MonoBehaviour
 {
-    public UnityEvent onInteraction;
+    public GameObject InteractionIcon;
 
+    public UnityEvent onInteraction;
+    public UnityEvent onLeaveConsole;
     #region Monobehaviour
-    private void Start()
+    protected virtual void Start()
     {
-        if(onInteraction == null)
+        InteractionIcon.SetActive(false);
+        if (onInteraction == null)
         {
             onInteraction = new UnityEvent();
         }
+
+        if (onLeaveConsole == null)
+        {
+            onLeaveConsole = new UnityEvent();
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
+
         //Debug.Log(gameObject.name + " OnTriggerEnter -> " + other.gameObject.name);
         PlayerCharacter playerCharacter = other.GetComponent<PlayerCharacter>();
         if (playerCharacter)
         {
             playerCharacter.onUseInteractable.AddListener(UseInteraction);
-            Debug.Log(gameObject.name + " OnTriggerEnter -> " + other.gameObject.name);
+            DisplayInteractionIcon(true);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         //Debug.Log(gameObject.name + " OnTriggerExit <- " + other.gameObject.name);
         PlayerCharacter playerCharacter = other.GetComponent<PlayerCharacter>();
         if (playerCharacter)
         {
             playerCharacter.onUseInteractable.RemoveListener(UseInteraction);
+            DisplayInteractionIcon(false);
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         onInteraction.RemoveAllListeners();
     }
 
     #endregion
-    private void UseInteraction()
+    protected void DisplayInteractionIcon(bool displayValue)
+    {
+        InteractionIcon.SetActive(displayValue);
+    }
+
+    protected void UseInteraction()
     {
         onInteraction.Invoke();
     }
