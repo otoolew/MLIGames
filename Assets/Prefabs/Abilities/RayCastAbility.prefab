@@ -269,7 +269,7 @@ MonoBehaviour:
   isTriggerHeld: 0
   hitLayerMask:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 448
   lineEffectDuration: 0.15
 --- !u!114 &7682739650694477394
 MonoBehaviour:

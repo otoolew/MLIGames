@@ -7,18 +7,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacter : Character
 {
+    #region Character
+    [SerializeField] private Rigidbody rigidbodyComp;
+    public override Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
+
     [SerializeField] private PlayerController playerController;
     public PlayerController PlayerController { get => playerController; set => playerController = value; }
 
     [SerializeField] private PlayerMovement movementComp;
     public override CharacterMovement MovementComp { get => movementComp as PlayerMovement; set => movementComp = (PlayerMovement)value; }
 
+    [SerializeField] private PlayerRotation characterRotation;
+    public override CharacterRotation CharacterRotation { get => characterRotation as PlayerRotation; set => characterRotation = (PlayerRotation)value; }
+
     [SerializeField] private HealthComponent healthComp;
     public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
-    
-    [SerializeField] private CharacterRotation rotationComp;
-    public CharacterRotation RotationComp { get => rotationComp; set => rotationComp = value; }
 
+    [SerializeField] private Transform focusPoint;
+    public override Transform FocusPoint { get => focusPoint; set => focusPoint = value; }
+    #endregion
+
+    #region Ability
+    [Header("Ability Controllers")]
     [SerializeField] private WeaponAbilityController leftAbilityController;
     public WeaponAbilityController LeftAbilityController { get => leftAbilityController; set => leftAbilityController = value; }
 
@@ -28,9 +38,7 @@ public class PlayerCharacter : Character
     [SerializeField] private DashAbilityController dashAbilityController;
     public DashAbilityController DashAbilityController { get => dashAbilityController; set => dashAbilityController = value; }
 
-
     [Header("Ability Configs")]
-
     [SerializeField] private MeleeAbilityConfig meleeAbilityConfigConfig;
     public MeleeAbilityConfig MeleeAbilityConfigConfig { get => meleeAbilityConfigConfig; set => meleeAbilityConfigConfig = value; }
 
@@ -39,15 +47,22 @@ public class PlayerCharacter : Character
 
     [SerializeField] private ProjectileAbilityConfig projectileAbilityConfig;
     public ProjectileAbilityConfig ProjectileAbilityConfig { get => projectileAbilityConfig; set => projectileAbilityConfig = value; }
+    #endregion
+
+    #region Values
+    [SerializeField] private Transform focusTarget;
+    public override Transform FocusTarget { get => focusTarget; set => focusTarget = value; }
+
+    [SerializeField] private Vector3 inputDirection;
+    public Vector3 InputDirection { get => inputDirection; set => inputDirection = value; }
+
+    #endregion
 
     public UnityEvent onUseInteractable;
-
-    //public UnityAction WeaponActionTrigger;
 
     #region Monobehaviour
     private void Awake()
     {
-        //inputActions = new PlayerControls();
         onUseInteractable = new UnityEvent();
         SetUpAbility(LeftAbilityController, meleeAbilityConfigConfig);
         SetUpAbility(RightAbilityController, raycastAbilityConfig);
@@ -89,15 +104,13 @@ public class PlayerCharacter : Character
     {
         abilityController.Owner = this;
     }
-    public void Move(Vector2 moveInput)
-    {     
-        movementComp.Move(new Vector3(moveInput.x, 0.0f, moveInput.y));                        
-    }
+
     public void Look(Vector2 lookInput)
     {
         if (GameManager.Instance.PlayerOptions.ControllerType == ControllerType.GAMEPAD)
-        {          
-            rotationComp.RotateToDirection(lookInput);
+        {
+            characterRotation.RotateTo(lookInput);
+
             if (movementComp)
             {
                 if (lookInput.magnitude > 0.1f)
@@ -112,9 +125,10 @@ public class PlayerCharacter : Character
         }
         else
         {
-            rotationComp.MouseLook();
+            characterRotation.MouseLook();
         }
     }
+
     #endregion
 
     #region PlayerInput Calls
@@ -135,13 +149,25 @@ public class PlayerCharacter : Character
         if (callbackContext.started)
         {
             if (leftAbilityController)
+            {
                 leftAbilityController.PullTrigger();
+            }
+
+        }
+        if (callbackContext.performed)
+        {
+            if (leftAbilityController)
+            {
+
+            }
         }
 
         if (callbackContext.canceled)
         {
             if (leftAbilityController)
+            {
                 leftAbilityController.ReleaseTrigger();
+            }
         }       
     }
     public void OnLeftReload(InputAction.CallbackContext callbackContext)
@@ -157,13 +183,23 @@ public class PlayerCharacter : Character
         if (callbackContext.started)
         {
             if (rightAbilityController)
+            {
                 rightAbilityController.PullTrigger();
+            }
         }
+        if (callbackContext.performed)
+        {
+            if (rightAbilityController)
+            {
 
+            }
+        }
         if (callbackContext.canceled)
         {
             if (rightAbilityController)
+            {
                 rightAbilityController.ReleaseTrigger();
+            }
         }
     }
     public void OnRightReload(InputAction.CallbackContext callbackContext)
@@ -182,5 +218,15 @@ public class PlayerCharacter : Character
             onUseInteractable.Invoke();
         }
     }
+
+    public override bool IsValid()
+    {
+        if (healthComp.IsDead)
+        {
+            return false;
+        }
+        return true;
+    }
+
     #endregion
 }

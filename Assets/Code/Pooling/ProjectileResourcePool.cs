@@ -12,7 +12,6 @@ public class ProjectileResourcePool : ResourcePool<Projectile>
 
     private void OnEnable()
     {
-        Debug.Log("ProjectileResourcePool Enabled");
         projectilePoolStack = new Stack<Projectile>();
     }
 
@@ -21,5 +20,4 @@ public class ProjectileResourcePool : ResourcePool<Projectile>
         Projectile projectile = Instantiate(projectilePrefab);
         return projectile;
     }
-
 }

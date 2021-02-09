@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-[Serializable] public class SceneChangeComplete : UnityEvent { }
 
 public class GameManager : Singleton<GameManager>
 {
@@ -22,19 +21,17 @@ public class GameManager : Singleton<GameManager>
     #region Scene Values
     [Header("Scene Management")]
     //public SceneItem[] Scenes;
+    [SerializeField] private string currentSceneName;
+    public string CurrentSceneName { get => currentSceneName; set => currentSceneName = value; }
+
     [SerializeField] private CanvasGroup fadeScreen;
     public CanvasGroup FadeScreen { get => fadeScreen; set => fadeScreen = value; }
 
     [SerializeField] private float fadeDuration;
     public float FadeDuration { get => fadeDuration; set => fadeDuration = value; }
 
-    [SerializeField] private string currentSceneName;
-    public string CurrentSceneName { get => currentSceneName; set => currentSceneName = value; }
-
     [SerializeField] private bool isFading;
     public bool IsFading { get => isFading; set => isFading = value; }
-
-    public SceneChangeComplete OnSceneChangeComplete;
 
     #endregion
 
@@ -42,8 +39,6 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         Debug.Log("[GAME MANAGER] Start");
-        //FadeScreen.gameObject.SetActive(false);
-        OnSceneChangeComplete.AddListener(SceneChangeComplete);
     }
     #endregion
 
@@ -52,32 +47,10 @@ public class GameManager : Singleton<GameManager>
     {
         GameMode = gameMode;
     }
-
-    public void StartGameLevel()
-    {
-        if(gameMode == null)
-        {
-            gameMode = FindObjectOfType<GameMode>();
-        }
-        else
-        {
-            gameMode.StartGame();
-        }
-    }
     #endregion
 
     #region Scene Management
-
-    private void SceneChangeComplete()
-    {
-        StartGameLevel();
-    }
     public void LoadScene(string sceneName)
-    {
-        FadeAndLoadScene(sceneName);
-    }
-
-    private void FadeAndLoadScene(string sceneName)
     {
         if (!isFading)
         {
@@ -87,19 +60,23 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator FadeAndSwitchScenes(string sceneName)
     {
-        yield return StartCoroutine(Fade(1f));
-        Debug.Log("[SCENE CHANGE] LoadSceneAsync");
+        yield return StartCoroutine(Fade(1));
         yield return SceneManager.LoadSceneAsync(sceneName);
-        Debug.Log("[SCENE CHANGE] Begin Fade OUT");
-        yield return StartCoroutine(Fade(0f));
-        Debug.Log("[SCENE CHANGE] FINISH");
-        OnSceneChangeComplete.Invoke();
-        //SceneChangeComplete();
-    }
+        yield return new WaitForSeconds(1);
+        yield return StartCoroutine(Fade(0));
 
+        //yield return StartCoroutine(Fade(1f));
+        //Debug.Log("[SCENE CHANGE] LoadSceneAsync");
+        //Scene current = SceneManager.GetActiveScene();
+        //yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        //SceneManager.UnloadSceneAsync(current);
+        //Debug.Log("[SCENE CHANGE] Begin Fade OUT");
+        //yield return StartCoroutine(Fade(0f));
+        //Debug.Log("[SCENE CHANGE] FINISH");
+    }
     private IEnumerator Fade(float finalAlpha)
     {
-        // TODO: SCREEN FADE COMPONENT
         isFading = true;
         FadeScreen.blocksRaycasts = true; // Blocks player Clicking on other Scene or UI GameObjects
         float fadeSpeed = Mathf.Abs(FadeScreen.alpha - finalAlpha) / fadeDuration;

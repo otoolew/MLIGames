@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     #region Input
+
+    //[SerializeField] private PlayerInput playerInput;
+    //public PlayerInput PlayerInput { get => playerInput; set => playerInput = value; }
+
     [SerializeField] private PlayerControls inputActions;
     public PlayerControls InputActions { get => inputActions; set => inputActions = value; }
     #endregion
@@ -26,15 +30,24 @@ public class PlayerController : MonoBehaviour
 
     #region Monobehaviour 
     private void Awake()
-    {
+    {   
         inputActions = new PlayerControls();
     }
 
     private void OnEnable()
     {
+        //Debug.Log(playerInput.actionEvents.ToArray().ToString());
         inputActions.UI.Enable();
         inputActions.UI.Pause.performed += OnPause;
         inputActions.Character.Enable();
+
+        // Get Control Schemes
+        InputControlScheme[] schemeList = inputActions.controlSchemes.ToArray();
+        for (int i = 0; i < schemeList.Length; i++)
+        {
+            Debug.Log("Scheme BindingGroup: " + schemeList[i].bindingGroup);
+        }
+
     }
 
     // Start is called before the first frame update
@@ -46,12 +59,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerCharacter)
-        {
-            //Vector2 moveInput = InputActions.Character.Move.ReadValue<Vector2>();
-            playerCharacter.Move(InputActions.Character.Move.ReadValue<Vector2>());
-            playerCharacter.Look(InputActions.Character.Look.ReadValue<Vector2>());
-        }
+
     }
 
     private void OnDisable()
@@ -60,6 +68,7 @@ public class PlayerController : MonoBehaviour
         inputActions.UI.Pause.performed -= OnPause;
         inputActions.UI.Disable();
         inputActions.Character.Disable();
+ 
     }
 
     private void OnDestroy()
@@ -100,12 +109,24 @@ public class PlayerController : MonoBehaviour
             character.PlayerController = this;
             playerCharacter = character;
 
+            character.GetComponent<PlayerMovement>().InputActions = inputActions;
+            character.GetComponent<PlayerRotation>().InputActions = inputActions;
+            character.GetComponent<PlayerRotation>().GamepadEnabled = gamepadEnabled;
+
             #region Character Input
+
+            inputActions.Character.Look.started += playerCharacter.CharacterRotation.OnLook;
+            inputActions.Character.Look.performed += playerCharacter.CharacterRotation.OnLook;
+            inputActions.Character.Look.canceled += playerCharacter.CharacterRotation.OnLook;
+
+
             inputActions.Character.Left_PullTrigger.started += playerCharacter.OnLeftPullTrigger;
+            inputActions.Character.Right_PullTrigger.performed += playerCharacter.OnRightPullTrigger;
             inputActions.Character.Left_PullTrigger.canceled += playerCharacter.OnLeftPullTrigger;
             inputActions.Character.Left_Reload.started += playerCharacter.OnLeftReload;
 
             inputActions.Character.Right_PullTrigger.started += playerCharacter.OnRightPullTrigger;
+            inputActions.Character.Right_PullTrigger.performed += playerCharacter.OnRightPullTrigger;
             inputActions.Character.Right_PullTrigger.canceled += playerCharacter.OnRightPullTrigger;
             inputActions.Character.Right_Reload.started += playerCharacter.OnRightReload;
 
@@ -125,6 +146,10 @@ public class PlayerController : MonoBehaviour
     {
         if (playerCharacter)
         {
+            inputActions.Character.Look.started -= playerCharacter.CharacterRotation.OnLook;
+            inputActions.Character.Look.performed -= playerCharacter.CharacterRotation.OnLook;
+            inputActions.Character.Look.canceled -= playerCharacter.CharacterRotation.OnLook;
+
             inputActions.Character.Left_PullTrigger.started -= playerCharacter.OnLeftPullTrigger;
             inputActions.Character.Left_PullTrigger.canceled -= playerCharacter.OnLeftPullTrigger;
             inputActions.Character.Left_Reload.started -= playerCharacter.OnLeftReload;
@@ -145,12 +170,10 @@ public class PlayerController : MonoBehaviour
 
     public void EnableCharacterInput()
     {
-        Debug.Log("Enable Character Input");
         inputActions.Character.Enable();
     }
     public void DisableCharacterInput()
     {
-        Debug.Log("Disable Character Input");
         inputActions.Character.Disable();
     }
     #endregion

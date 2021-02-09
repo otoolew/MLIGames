@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public abstract class CharacterMovement : MonoBehaviour
 {
     #region Components
-    public abstract Rigidbody RigidbodyComp { get; set; }
-    public abstract CharacterController CharacterController { get; set; }
+    //public abstract Rigidbody RigidbodyComp { get; set; }
+    //public abstract CharacterController CharacterController { get; set; }
     #endregion
 
     #region Values

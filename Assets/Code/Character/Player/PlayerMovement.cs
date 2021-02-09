@@ -6,11 +6,14 @@ public class PlayerMovement : CharacterMovement
 {
     #region Components
     [Header("Components")]
+    [SerializeField] private PlayerControls inputActions;
+    public PlayerControls InputActions { get => inputActions; set => inputActions = value; }
+
     [SerializeField] private Rigidbody rigidbodyComp;
-    public override Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
+    public Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
 
     [SerializeField] private CharacterController characterController;
-    public override CharacterController CharacterController { get => characterController; set => characterController = value; }
+    public CharacterController CharacterController { get => characterController; set => characterController = value; }
 
     [SerializeField] private Timer dashCooldownTimer;
     public Timer DashCooldownTimer { get => dashCooldownTimer; set => dashCooldownTimer = value; }
@@ -40,6 +43,13 @@ public class PlayerMovement : CharacterMovement
     }
     protected override void Update()
     {
+        if (InputActions != null)
+        {
+            moveInput = InputActions.Character.Move.ReadValue<Vector2>();
+        }
+
+        Move(new Vector3(moveInput.x, 0.0f, moveInput.y));
+
         if (IsDashing)
         {
             dashActiveTimer.Tick();

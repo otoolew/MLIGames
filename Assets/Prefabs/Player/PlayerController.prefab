@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d44b1be491dd34d834683200d4db7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   playerUI: {fileID: 0}
-  gamepadEnabled: 1
+  gamepadEnabled: 0
   playerCharacter: {fileID: 0}

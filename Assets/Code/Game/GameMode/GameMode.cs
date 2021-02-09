@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 [Serializable] public enum GameState { RUNNING, PAUSED, LOADING, GAME_OVER }
 [Serializable] public class GameStateChange : UnityEvent<GameState, GameState> { }
 /// <summary>
-/// GameMode Handles everything about a game. Spawn points, Enemy Count, Victory COnditions etc...
+/// GameMode Handles everything about a game. Game Time, Spawn points, Enemy Count, Victory COnditions etc...
 /// </summary>
 public class GameMode : MonoBehaviour
 {
@@ -44,34 +44,43 @@ public class GameMode : MonoBehaviour
     private void Awake()
     {
         CurrentGameState = GameState.LOADING;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         GameManager.Instance.AssignGameMode(this);
         InitGame();
     }
+    // Start is called before the first frame update
+    private void Start()
+    {
+
+    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
+    #region Level Win Lose Condition
 
+    #endregion
+
+    #region Level Enemies
+
+    #endregion
+
+    #region Game Time Start and Finish
     public void InitGame()
     {
         //Debug.Log("Init Game!");
         playerController = FindObjectOfType<PlayerController>();
         if (playerController == null)
         {
-            playerController = Instantiate(GameModeData.PlayerControllerPrefab, null);
+            playerController = Instantiate(GameModeData.CreatePlayerController(), null);
             Debug.Log("Player Camera NULL\nCreated " + playerController.name);
         }
-// Player UI
+        // Player UI
         playerUI = FindObjectOfType<PlayerUI>();
         if (playerUI == null)
         {
-            playerUI = Instantiate(GameModeData.PlayerUIPrefab, null);
+            playerUI = Instantiate(GameModeData.CreatePlayerUI(), null);
             Debug.Log("Player UI NULL\nCreated " + playerUI.name);
         }
         playerUI.PauseMenuPanel.ResumeButton.onClick.AddListener(ResumeGame);
@@ -79,24 +88,26 @@ public class GameMode : MonoBehaviour
         playerUI.PauseMenuPanel.QuitButton.onClick.AddListener(ResumeGame);
 
         playerController.PlayerUI = playerUI;
-// Camera 
+        // Camera 
         playerCamera = FindObjectOfType<PlayerCamera>();
         if (playerCamera == null)
         {
-            playerCamera = Instantiate(GameModeData.PlayerCameraPrefab, null);
+            playerCamera = Instantiate(GameModeData.CreatePlayerCamera(), null);
             Debug.Log("Player Camera NULL\nCreated " + playerCamera.name);
         }
         playerController.PlayerCamera = playerCamera;
-// Character
+        // Character
         playerCharacter = FindObjectOfType<PlayerCharacter>();
         if (playerCharacter == null)
         {
-            playerCharacter = Instantiate(GameModeData.PlayerCharacterPrefab, null);
-            Debug.Log("Player Character NULL\nCreated " + playerCharacter.name);
+            playerCharacter = Instantiate(GameModeData.CreatePlayerCharacter(), null);
         }
+
         playerController.PlayerCharacter = playerCharacter;
         PlayerController.PossessCharacter(playerCharacter);
-        playerCharacter.transform.position = playerSpawnPoint.position;
+        playerCharacter.transform.position = playerSpawnPoint.transform.position;
+
+        StartGame();
     }
 
     public void StartGame()
@@ -115,7 +126,7 @@ public class GameMode : MonoBehaviour
 
     public void ResumeGame()
     {
-        if(playerController)
+        if (playerController)
             playerController.InputActions.Character.Enable();
         CurrentGameState = GameState.RUNNING;
         Time.timeScale = 1.0f;
@@ -133,4 +144,6 @@ public class GameMode : MonoBehaviour
         Time.timeScale = 1.0f;
         GameManager.Instance.LoadScene("MainMenu");
     }
+    #endregion
+
 }

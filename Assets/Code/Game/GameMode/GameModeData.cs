@@ -18,8 +18,8 @@ public class GameModeData : ScriptableObject
     [SerializeField] private PlayerCharacter playerCharacterPrefab;
     public PlayerCharacter PlayerCharacterPrefab { get => playerCharacterPrefab; set => playerCharacterPrefab = value; }
 
-    [SerializeField] private Character enemyCharacterPrefab;
-    public Character EnemyCharacterPrefab { get => enemyCharacterPrefab; set => enemyCharacterPrefab = value; }
+    [SerializeField] private AICharacter enemyCharacterPrefab;
+    public AICharacter EnemyCharacterPrefab { get => enemyCharacterPrefab; set => enemyCharacterPrefab = value; }
     #endregion
 
     public PlayerController CreatePlayerController()
@@ -30,8 +30,18 @@ public class GameModeData : ScriptableObject
     {
         return playerUIPrefab ? Instantiate(playerUIPrefab, null) : null;
     }
+    public PlayerCamera CreatePlayerCamera()
+    {
+        return playerCameraPrefab ? Instantiate(playerCameraPrefab, null) : null;
+    }
     public PlayerCharacter CreatePlayerCharacter()
     {
         return playerCharacterPrefab ? Instantiate(playerCharacterPrefab, null) : null;
     }
+
+    public AICharacter CreateEnemyCharacter()
+    {
+        return enemyCharacterPrefab ? Instantiate(enemyCharacterPrefab, null) : null;
+    }
+
 }
