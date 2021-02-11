@@ -36,12 +36,12 @@ public class PlayerMovement : CharacterMovement
 
     #endregion
 
-    protected override void Start()
+    private void Start()
     {
         dashCooldownTimer = new Timer(DashCooldown);
         dashActiveTimer = new Timer(DashActiveTime);
     }
-    protected override void Update()
+    private void Update()
     {
         if (InputActions != null)
         {

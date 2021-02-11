@@ -65,9 +65,13 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         ReleaseCharacter();
-        inputActions.UI.Pause.performed -= OnPause;
-        inputActions.UI.Disable();
-        inputActions.Character.Disable();
+        if (inputActions != null)
+        {
+            inputActions.UI.Pause.performed -= OnPause;
+            inputActions.UI.Disable();
+            inputActions.Character.Disable();
+        }
+
  
     }
 
@@ -115,9 +119,9 @@ public class PlayerController : MonoBehaviour
 
             #region Character Input
 
-            inputActions.Character.Look.started += playerCharacter.CharacterRotation.OnLook;
-            inputActions.Character.Look.performed += playerCharacter.CharacterRotation.OnLook;
-            inputActions.Character.Look.canceled += playerCharacter.CharacterRotation.OnLook;
+            inputActions.Character.Look.started += playerCharacter.RotationComp.OnLook;
+            inputActions.Character.Look.performed += playerCharacter.RotationComp.OnLook;
+            inputActions.Character.Look.canceled += playerCharacter.RotationComp.OnLook;
 
 
             inputActions.Character.Left_PullTrigger.started += playerCharacter.OnLeftPullTrigger;
@@ -146,9 +150,9 @@ public class PlayerController : MonoBehaviour
     {
         if (playerCharacter)
         {
-            inputActions.Character.Look.started -= playerCharacter.CharacterRotation.OnLook;
-            inputActions.Character.Look.performed -= playerCharacter.CharacterRotation.OnLook;
-            inputActions.Character.Look.canceled -= playerCharacter.CharacterRotation.OnLook;
+            inputActions.Character.Look.started -= playerCharacter.RotationComp.OnLook;
+            inputActions.Character.Look.performed -= playerCharacter.RotationComp.OnLook;
+            inputActions.Character.Look.canceled -= playerCharacter.RotationComp.OnLook;
 
             inputActions.Character.Left_PullTrigger.started -= playerCharacter.OnLeftPullTrigger;
             inputActions.Character.Left_PullTrigger.canceled -= playerCharacter.OnLeftPullTrigger;

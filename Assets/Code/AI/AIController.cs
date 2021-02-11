@@ -5,57 +5,76 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+    #region Components
     [SerializeField] private AICharacter assignedCharacter;
     public AICharacter AssignedCharacter { get => assignedCharacter; set => assignedCharacter = value; }
+    #endregion
 
-    [SerializeField] private AIMovement aiMovement;
-    public AIMovement AIMovement { get => aiMovement; set => aiMovement = value; }
+    #region Values
+    [SerializeField] private WaypointCircuit waypointCircuit;
+    public WaypointCircuit WaypointCircuit { get => waypointCircuit; set => waypointCircuit = value; }
 
-    [SerializeField] private VisionPerception visionPerception;
-    public VisionPerception VisionPerception { get => visionPerception; set => visionPerception = value; }
+    [SerializeField] private int waypointIndex;
+    public int WaypointIndex { get => waypointIndex; set => waypointIndex = value; }
 
-    //[SerializeField] private PlayerSense playerSense;
-    //public PlayerSense PlayerSense { get => playerSense; set => playerSense = value; }
+    [SerializeField] private PlayerCharacter playerCharacter;
+    public PlayerCharacter PlayerCharacter { get => playerCharacter; set => playerCharacter = value; }
 
-    [SerializeField] private PatrolCircuit patrolCircuit;
-    public PatrolCircuit PatrolCircuit { get => patrolCircuit; set => patrolCircuit = value; }
 
-    [SerializeField] private int currentPatrolIndex;
-    public int CurrentPatrolIndex { get => currentPatrolIndex; set => currentPatrolIndex = value; }
+    [SerializeField] private IdleTask idleTask;
+    public IdleTask IdleTask { get => idleTask; set => idleTask = value; }
 
-    [SerializeField] private TimedSequence timedSequence;
-    public TimedSequence TimedSequence { get => timedSequence; set => timedSequence = value; }
-
-    [SerializeField] private FindLocationTask findLocationTask;
-    public FindLocationTask FindLocationTask { get => findLocationTask; set => findLocationTask = value; }
+    [SerializeField] private ScriptedDelegateStack taskStack;
+    public ScriptedDelegateStack TaskStack { get => taskStack; set => taskStack = value; }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        currentPatrolIndex = 0;
-        //MoveToLocation(playerSense.PlayerCharacter.WorldLocation);       
+        playerCharacter = FindObjectOfType<PlayerCharacter>();
+        idleTask = IdleTask.Create();
+        taskStack = ScriptedDelegateStack.Create();
+        taskStack.Clear();
+        taskStack.Push(ScriptableObject.CreateInstance<IdleTask>());
+        taskStack.Peek().Init(this);
+        taskStack.Peek().DelegateTask();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
-    public void MoveToLocation(Vector3 location)
-    {
-        aiMovement.Move(location);
-    }
-
 
     #region Character Methods
-    public void PossessCharacter(AICharacter character)
+    public bool PossessCharacter(AICharacter character)
     {
-        if (character)
+        assignedCharacter = character;
+        return assignedCharacter;
+    }
+
+    public void AddAITask(AITask task)
+    {
+        if (task)
         {
-            assignedCharacter = character;
+            taskStack.Push(task);
+            taskStack.Peek().Init(this);
+            taskStack.Peek().DelegateTask();
         }
     }
     #endregion
-   
+
+    #region Editor
+    /// <summary>
+    /// On Validate is only called in Editor. By performing checks here was can rest assured they will not be null.
+    /// Usually what is in the Components region is in here.
+    /// </summary>
+    protected virtual void OnValidate()
+    {
+        if (AssignedCharacter == null)
+        {
+            Debug.LogError("No Character assigned");
+        }
+    }
+    #endregion
 }

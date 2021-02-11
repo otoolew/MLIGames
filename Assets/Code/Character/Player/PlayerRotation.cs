@@ -16,6 +16,9 @@ public class PlayerRotation : CharacterRotation
     [SerializeField] private bool gamepadEnabled;
     public bool GamepadEnabled { get => gamepadEnabled; set => gamepadEnabled = value; }
 
+    [SerializeField] private Quaternion targetRotation;
+    public Quaternion TargetRotation { get => targetRotation; set => targetRotation = value; }
+
     [SerializeField] private Vector2 lookInput;
     public Vector2 LookInput { get => lookInput; set => lookInput = value; }
 
@@ -34,13 +37,17 @@ public class PlayerRotation : CharacterRotation
     [SerializeField] private LayerMask layerMask;
     public LayerMask LayerMask { get => layerMask; set => layerMask = value; }
 
+    private void Start()
+    {
+        targetRotation = transform.rotation;
+    }
     private void Update()
     {
         if (InputActions != null)
         {
             lookInput = InputActions.Character.Look.ReadValue<Vector2>();
         }
-
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         //if (RotationFocus)
         //{
         //    RotateTo(RotationFocus);
@@ -55,7 +62,7 @@ public class PlayerRotation : CharacterRotation
     #region PlayerInput Calls
     public override void RotateTo(Vector2 value)
     {
-        if (gamepadEnabled)
+        if (gamepadEnabled)// This is an added check until I figure out how devices activate and deactivate on input
         {
             if (Gamepad.current.enabled)
             {
@@ -68,17 +75,12 @@ public class PlayerRotation : CharacterRotation
             }
             return;
         }
-        
-        if (Mouse.current.enabled)
+        else
         {
-            Vector3 playerToMouse = MouseToWorldPoint(value) - transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(playerToMouse);
-            if (lookRotation.eulerAngles != Vector3.zero)
-            {
-                lookRotation.x = 0f;
-                lookRotation.z = 0f;
-                transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
-            }
+
+            //Debug.Log("Mouse Enabled: " + Mouse.current.enabled);
+            MouseLook();
+            //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         }
     }
 
@@ -99,72 +101,38 @@ public class PlayerRotation : CharacterRotation
     }
     #endregion
 
-    public void CastRay()
-    {
-        Ray ray = new Ray
-        {
-            origin = transform.position,
-            direction = transform.forward,
-        };
-        ray.origin += new Vector3(0, 1, 0);
-
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, visionComp.Radius, visionComp.DetectionLayer))
-        {
-            Character hitObject = raycastHit.collider.GetComponent<Character>();
-            if (hitObject != null)
-            {
-                rotationFocus = hitObject.FocusPoint;
-            }
-        }
-    }
-
-    public void Aim()
-    {
-        RotationFocus = null;
-        for (int i = 0; i < visionComp.VisableTargetList.Count; i++)
-        {
-            float bestAngle = 90;
-            Vector3 dir = visionComp.VisableTargetList[i].transform.position - transform.position;
-            float aimAngle = Vector3.Angle(transform.forward, dir);
-            if (aimAngle < bestAngle)
-            {
-                bestAngle = aimAngle;
-                Debug.Log("Aim Angle " + aimAngle + " " + visionComp.VisableTargetList[i].name);
-                RotationFocus = visionComp.VisableTargetList[i].transform;
-            }
-
-            //Vector3 forward = transform.TransformDirection(Vector3.up).normalized;
-            //float deviation = Vector3.Dot(forward, dir.normalized);
-            //Debug.Log("Input Deviation From Character Direction " + deviation);
-            //ChangeDirection(previousDeviation, deviation);
-        }
-    }
     #region Mouse
     public void MouseLook()
     {
-        Vector3 playerToMouse = MouseToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
-        Debug.Log(Mouse.current.position.ReadValue());
-        Debug.Log(MouseToWorldPoint(Mouse.current.position.ReadValue()));
-        Quaternion lookRotation = Quaternion.LookRotation(playerToMouse);
-        if (lookRotation.eulerAngles != Vector3.zero)
+        if (MouseToWorldPoint(Mouse.current.position.ReadValue(), out Vector3 mousePoint))
         {
-            lookRotation.x = 0f;
-            lookRotation.z = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
+            Vector3 playerToMouse = mousePoint - transform.position;
+
+            Quaternion lookRotation = Quaternion.LookRotation(playerToMouse);
+
+            if (lookRotation.eulerAngles != Vector3.zero) // It already shouldn't be...
+            {
+                lookRotation.x = 0f;
+                lookRotation.z = 0f;
+                lookRotation.eulerAngles += offset;
+                targetRotation = lookRotation;
+
+            }
         }
     }
 
-    private Vector3 MouseToWorldPoint(Vector2 mouseScreen)
+    private bool MouseToWorldPoint(Vector2 mouseScreen, out Vector3 mousePoint)
     {
         Ray ray = Camera.main.ScreenPointToRay(mouseScreen);
-        ray.origin += offset;
-        if (Physics.Raycast(ray, out RaycastHit rayHit, 1000.0f, layerMask))
+        //ray.origin += offset;
+        if (Physics.Raycast(ray, out RaycastHit rayHit, 1000.0f, layerMask)) // 1000 can be better
         {
-            return rayHit.point;
+            mousePoint = rayHit.point;
+            return true;
         }
-        return transform.position;
+        mousePoint = Vector3.zero;
+        return false;
     }
-
     #endregion
 
     private void OnDrawGizmos()

@@ -64,16 +64,6 @@ public class GameManager : Singleton<GameManager>
         yield return SceneManager.LoadSceneAsync(sceneName);
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(Fade(0));
-
-        //yield return StartCoroutine(Fade(1f));
-        //Debug.Log("[SCENE CHANGE] LoadSceneAsync");
-        //Scene current = SceneManager.GetActiveScene();
-        //yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-        //SceneManager.UnloadSceneAsync(current);
-        //Debug.Log("[SCENE CHANGE] Begin Fade OUT");
-        //yield return StartCoroutine(Fade(0f));
-        //Debug.Log("[SCENE CHANGE] FINISH");
     }
     private IEnumerator Fade(float finalAlpha)
     {

@@ -73,9 +73,9 @@ public class VisionPerception : MonoBehaviour
             }
         }
     }
+
     public bool IsTagIgnored(string tagValue) 
     {
-        Debug.Log("Tag: " + tagValue);
         for (int i = 0; i < ignoreTags.Length; i++)
         {
             if (tagValue.Equals(ignoreTags[i]))
@@ -83,8 +83,7 @@ public class VisionPerception : MonoBehaviour
                 return true;
             }
         }
-        return false;
-   
+        return false; 
     }
 
     public Vector3 DirectionFromAngle(float angleInDegrees, bool angleIsGlobal)
@@ -130,8 +129,8 @@ public class VisionPerception : MonoBehaviour
                 }
             }
         }
-        if(bestTarget)
-            Debug.Log("Best Target: " + bestTarget.name);
+        //if(bestTarget)
+        //    Debug.Log("Best Target: " + bestTarget.name);
     }
     private void OnValidate()
     {

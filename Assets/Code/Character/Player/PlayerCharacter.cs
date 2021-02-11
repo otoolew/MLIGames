@@ -11,14 +11,17 @@ public class PlayerCharacter : Character
     [SerializeField] private Rigidbody rigidbodyComp;
     public override Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
 
+    [SerializeField] private Animator animatorComp;
+    public override Animator AnimatorComp { get => animatorComp; set => animatorComp = value; }
+
     [SerializeField] private PlayerController playerController;
     public PlayerController PlayerController { get => playerController; set => playerController = value; }
 
     [SerializeField] private PlayerMovement movementComp;
     public override CharacterMovement MovementComp { get => movementComp as PlayerMovement; set => movementComp = (PlayerMovement)value; }
 
-    [SerializeField] private PlayerRotation characterRotation;
-    public override CharacterRotation CharacterRotation { get => characterRotation as PlayerRotation; set => characterRotation = (PlayerRotation)value; }
+    [SerializeField] private PlayerRotation rotationComp;
+    public override CharacterRotation RotationComp { get => rotationComp as PlayerRotation; set => rotationComp = (PlayerRotation)value; }
 
     [SerializeField] private HealthComponent healthComp;
     public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
@@ -52,9 +55,6 @@ public class PlayerCharacter : Character
     #region Values
     [SerializeField] private Transform focusTarget;
     public override Transform FocusTarget { get => focusTarget; set => focusTarget = value; }
-
-    [SerializeField] private Vector3 inputDirection;
-    public Vector3 InputDirection { get => inputDirection; set => inputDirection = value; }
 
     #endregion
 
@@ -105,30 +105,37 @@ public class PlayerCharacter : Character
         abilityController.Owner = this;
     }
 
-    public void Look(Vector2 lookInput)
+    //public void Look(Vector2 lookInput)
+    //{
+    //    if (GameManager.Instance.PlayerOptions.ControllerType == ControllerType.GAMEPAD)
+    //    {
+    //        rotationComp.RotateTo(lookInput);
+
+    //        if (movementComp)
+    //        {
+    //            if (lookInput.magnitude > 0.1f)
+    //            {
+    //                movementComp.OrientToMovement = false;
+    //            }
+    //            else
+    //            {
+    //                movementComp.OrientToMovement = true;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        rotationComp.MouseLook();
+    //    }
+    //}
+
+    #endregion
+
+    #region Character
+    public override void OnDeath()
     {
-        if (GameManager.Instance.PlayerOptions.ControllerType == ControllerType.GAMEPAD)
-        {
-            characterRotation.RotateTo(lookInput);
-
-            if (movementComp)
-            {
-                if (lookInput.magnitude > 0.1f)
-                {
-                    movementComp.OrientToMovement = false;
-                }
-                else
-                {
-                    movementComp.OrientToMovement = true;
-                }
-            }
-        }
-        else
-        {
-            characterRotation.MouseLook();
-        }
+        throw new NotImplementedException();
     }
-
     #endregion
 
     #region PlayerInput Calls
@@ -228,5 +235,15 @@ public class PlayerCharacter : Character
         return true;
     }
 
+
+
+    #endregion
+
+    #region Editor
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+        
+    }
     #endregion
 }

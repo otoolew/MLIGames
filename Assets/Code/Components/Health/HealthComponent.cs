@@ -5,10 +5,6 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    #region Components
-
-    #endregion
-
     [SerializeField] private float maxHealth;
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
 
@@ -23,11 +19,6 @@ public class HealthComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if(OnHealthChange == null)
-        //{
-        //    OnHealthChange = new UnityEvent<float>();
-        //}
-        //OnHealthChange = new UnityEvent<float>();
     }
 
     public void ApplyHealthChange(float value)
