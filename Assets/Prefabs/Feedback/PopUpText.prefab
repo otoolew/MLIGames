@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6701902682770722854}
   - component: {fileID: 6701902682770722853}
   - component: {fileID: 741540160396537642}
-  - component: {fileID: 6814702442876668531}
   m_Layer: 0
   m_Name: PopUpText
   m_TagString: Untagged
@@ -190,15 +189,3 @@ MonoBehaviour:
     startCount: 0
     currentCount: 0
   moveSpeed: 15
---- !u!114 &6814702442876668531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6701902682770722852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189838798d241ec4fb98458d4add376f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

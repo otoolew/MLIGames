@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class FaceCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform CameraToFace { get; set; }
+
+    private void Start()
     {
-        transform.LookAt(Camera.main.transform, Vector3.left);
-        //transform.LookAt(target, Vector3.left);
+        CameraToFace = UnityEngine.Camera.main.transform;
     }
     private void Update()
     {
-        transform.LookAt(Camera.main.transform, Vector3.forward);
+        Vector3 direction = CameraToFace.transform.forward;
+        transform.forward = -direction;
     }
+
 }

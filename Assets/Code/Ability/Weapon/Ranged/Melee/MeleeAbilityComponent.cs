@@ -65,7 +65,7 @@ public class MeleeAbilityComponent : WeaponAbilityComponent
         if (hitCollider)
         {
             Debug.Log(string.Format("{0} Hit {1}", this.name, hitCollider.transform.root.name));
-            hitCollider.HealthComp.ApplyHealthChange(-10);
+            hitCollider.HealthComp.TakeDamage(10,out HealthChangeInfo output);
         }
     }
 

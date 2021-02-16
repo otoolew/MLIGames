@@ -22,10 +22,10 @@ public class VisionPerceptionEditor : Editor
         Handles.DrawLine(visionComp.transform.position, visionComp.transform.position + viewAngleC * visionComp.Radius);
         Handles.DrawLine(visionComp.transform.position, visionComp.transform.position + viewAngleD * visionComp.Radius);
 
-        Handles.color = Color.red;
-        foreach (Character item in visionComp.VisableTargetList)
-        {
-            Handles.DrawLine(visionComp.transform.position, item.FocusPoint.position);
-        }
+        //Handles.color = Color.red;
+        //foreach (Character item in visionComp.VisableTargetList)
+        //{
+        //    Handles.DrawLine(visionComp.transform.position, item.TargetPoint.position);
+        //}
     }
 }

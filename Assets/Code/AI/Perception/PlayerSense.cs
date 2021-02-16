@@ -21,15 +21,6 @@ public class PlayerSense : MonoBehaviour
 
     [SerializeField] private LayerMask detectionLayer;
     public LayerMask DetectionLayer { get => detectionLayer; set => detectionLayer = value; }
-
-    public Vector3 DirectionFromAngle(float angleInDegrees, bool angleIsGlobal)
-    {
-        if (!angleIsGlobal)
-        {
-            angleInDegrees += transform.eulerAngles.y;
-        }
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    }
     public bool InRange
     {
         get
@@ -55,7 +46,7 @@ public class PlayerSense : MonoBehaviour
                 Ray ray = new Ray
                 {
                     origin = sightTransform.position,
-                    direction = playerCharacter.WorldLocation - sightTransform.position,
+                    direction = playerCharacter.WorldLocation + new Vector3(0,1,0) - sightTransform.position,
                 };
 
                 if (Physics.Raycast(ray, out RaycastHit hit, radius + 10.0f, detectionLayer))
@@ -73,14 +64,32 @@ public class PlayerSense : MonoBehaviour
             return false;
         }
     }
+
+    private void Start()
+    {
+        playerCharacter = FindObjectOfType<PlayerCharacter>();
+    }
+
+    public Vector3 DirectionFromAngle(float angleInDegrees, bool angleIsGlobal)
+    {
+        if (!angleIsGlobal)
+        {
+            angleInDegrees += transform.eulerAngles.y;
+        }
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
+
     public bool IsPlayerInSight()
     {
         if (playerCharacter != null && playerCharacter.IsValid())
         {
-            Vector3 directionToTarget = (playerCharacter.transform.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
+            if (InRange)
             {
-                return HasLineOfSight;
+                Vector3 directionToTarget = (playerCharacter.transform.position - transform.position).normalized;
+                if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
+                {
+                    return HasLineOfSight;
+                }
             }
         }
         return false;
@@ -93,6 +102,16 @@ public class PlayerSense : MonoBehaviour
             Gizmos.color = Color.red;
 
             Gizmos.DrawLine(transform.position + new Vector3(0, 1, 0), lastKnowPosition + new Vector3(0, 1, 0));
+
+
+            Gizmos.color = Color.green;
+            Ray ray = new Ray
+            {
+                origin = sightTransform.position,
+                direction = playerCharacter.WorldLocation + new Vector3(0, 1, 0) - sightTransform.position,
+            };
+
+            Gizmos.DrawRay(ray);
         }
     }
 }

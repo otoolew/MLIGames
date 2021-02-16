@@ -45,8 +45,26 @@ public abstract class StackCollection<T> : ScriptableObject, ISerializationCallb
     //public void CopyTo(T[] array, int arrayIndex);
     #endregion
 
+    //#region Inspector
+    //public abstract void OnBeforeSerialize();
+    //public abstract void OnAfterDeserialize();
+    //#endregion
     #region Inspector
-    public abstract void OnBeforeSerialize();
-    public abstract void OnAfterDeserialize();
+    public void OnBeforeSerialize()
+    {
+        StateList.Clear();
+
+        foreach (var kvp in StateStack)
+        {
+            StateList.Add(kvp);
+        }
+    }
+    public void OnAfterDeserialize()
+    {
+        //StateStack = new Stack<T>();
+
+        for (int i = StateList.Count; i >= 0; i--)
+            StateStack.Push(StateList[i]);
+    }
     #endregion
 }

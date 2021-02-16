@@ -43,19 +43,18 @@ public class RaycastAbility : WeaponAbilityComponent
     public float LineEffectDuration { get => lineEffectDuration; set => lineEffectDuration = value; }
     #endregion
 
-    private void Awake()
-    {
-        cooldownTimer = new Timer(fireRate);
-    }
-
     private void Start()
     {
-
+        cooldownTimer = new Timer(fireRate);
     }
 
     private void Update()
     {
         cooldownTimer.Tick();
+        //if (cooldownTimer.IsFinished)
+        //{
+        //    cooldownTimer.ResetTimer(fireRate);
+        //}
         if (isTriggerHeld && isAutoFire)
         {
             Fire();
@@ -87,10 +86,10 @@ public class RaycastAbility : WeaponAbilityComponent
         }
     }
 
-    public void ApplyModifierValue(HitCollider hitCollider)
-    {
-        hitCollider.HealthComp.ApplyHealthChange(ModifierValue);
-    }
+    //public void ApplyModifierValue(HitCollider hitCollider)
+    //{
+    //    hitCollider.HealthComp.ApplyHealthChange(ModifierValue);
+    //}
 
     public override void Reload()
     {
@@ -110,9 +109,10 @@ public class RaycastAbility : WeaponAbilityComponent
         {
             hitPosition = raycastHit.point;
             HealthComponent hitObject = raycastHit.collider.GetComponent<HealthComponent>();
+
             if (hitObject != null)
             {
-                hitObject.ApplyHealthChange(modifierValue);
+                hitObject.TakeDamage(Mathf.Abs(modifierValue), out HealthChangeInfo output);
             }
 
             PlayImpactEffect(raycastHit.point);

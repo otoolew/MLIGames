@@ -8,9 +8,6 @@ using UnityEngine.Events;
 public class Timer
 {
     [SerializeField] private float startCount;
-    /// <summary>
-    /// Start the countdown at this value is seconds. 
-    /// </summary>
     public float StartCount { get => startCount; set => startCount = value; }
 
     [SerializeField] private float currentCount;

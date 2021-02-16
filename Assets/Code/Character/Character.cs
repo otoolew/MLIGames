@@ -35,7 +35,7 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// The Transform other characters is focused on
     /// </summary>
-    public abstract Transform FocusPoint { get; set; }
+    public abstract Transform TargetPoint { get; set; }
 
     /// <summary>
     /// The Location of the Character in the world.
@@ -67,17 +67,17 @@ public abstract class Character : MonoBehaviour
 
         if (AnimatorComp == null)
         {
-            Debug.LogError("No AnimatorComp assigned");
+            //Debug.LogError("No AnimatorComp assigned");
         }
 
         if (MovementComp == null)
         {
-            Debug.LogError("No MovementComp assigned");
+            //Debug.LogError("No MovementComp assigned");
         }
 
         if (RotationComp == null)
         {
-            Debug.LogError("No RotationComp assigned");
+            Debug.LogError(gameObject.name + " has NO RotationComp assigned");
         }
 
         if (HealthComp == null)

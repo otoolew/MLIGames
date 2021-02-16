@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour, IPoolable
 
     [SerializeField] private ProjectileAbility abilityOriginComp;
     public ProjectileAbility AbilityOriginComp { get => abilityOriginComp; set => abilityOriginComp = value; }
-
+    [SerializeField] private float damage;
+    public float Damage { get => damage; set => damage = value; }
     [SerializeField] private float range;
     public float Range { get => range; set => range = value; }
 
@@ -34,8 +35,9 @@ public class Projectile : MonoBehaviour, IPoolable
         if (hitCollider)
         {
             //Debug.Log(string.Format("{0} Hit {1}", this.name, hitCollider.transform.root.name));
-            hitCollider.HealthComp.ApplyHealthChange(-10);
+            hitCollider.HealthComp.TakeDamage(damage, out HealthChangeInfo output);
         }
+
         Repool();
     }
 

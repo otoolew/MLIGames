@@ -48,15 +48,6 @@ public class PlayerRotation : CharacterRotation
             lookInput = InputActions.Character.Look.ReadValue<Vector2>();
         }
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
-        //if (RotationFocus)
-        //{
-        //    RotateTo(RotationFocus);
-        //}
-
-        //if (isAiming)
-        //{
-        //    CastRay();
-        //}
     }
 
     #region PlayerInput Calls
@@ -77,10 +68,7 @@ public class PlayerRotation : CharacterRotation
         }
         else
         {
-
-            //Debug.Log("Mouse Enabled: " + Mouse.current.enabled);
-            MouseLook();
-            //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+            MouseLook();       
         }
     }
 
@@ -135,10 +123,4 @@ public class PlayerRotation : CharacterRotation
     }
     #endregion
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Vector3 origin = transform.position + new Vector3(0, 1, 0);
-        Gizmos.DrawRay(origin, Vector3.forward * visionComp.Radius);
-    }
 }

@@ -17,6 +17,9 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
 
+    [SerializeField] private Vector3 destinationGoal;
+    public Vector3 DestinationGoal { get => destinationGoal; set => destinationGoal = value; }
+
     #endregion
     public virtual void Move()
     {
@@ -29,5 +32,9 @@ public class CharacterMovement : MonoBehaviour
     public virtual void SetDestination(Vector3 moveVector)
     {
 
+    }
+    public float DistanceToDestination(Vector3 moveVector)
+    {
+        return Vector3.Distance(transform.position, moveVector);
     }
 }

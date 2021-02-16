@@ -8,8 +8,11 @@ using UnityEngine.InputSystem;
 public class PlayerCharacter : Character
 {
     #region Character
+
+    #region RigidbodyComp
     [SerializeField] private Rigidbody rigidbodyComp;
     public override Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
+    #endregion
 
     [SerializeField] private Animator animatorComp;
     public override Animator AnimatorComp { get => animatorComp; set => animatorComp = value; }
@@ -27,7 +30,7 @@ public class PlayerCharacter : Character
     public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
 
     [SerializeField] private Transform focusPoint;
-    public override Transform FocusPoint { get => focusPoint; set => focusPoint = value; }
+    public override Transform TargetPoint { get => focusPoint; set => focusPoint = value; }
     #endregion
 
     #region Ability
@@ -105,29 +108,6 @@ public class PlayerCharacter : Character
         abilityController.Owner = this;
     }
 
-    //public void Look(Vector2 lookInput)
-    //{
-    //    if (GameManager.Instance.PlayerOptions.ControllerType == ControllerType.GAMEPAD)
-    //    {
-    //        rotationComp.RotateTo(lookInput);
-
-    //        if (movementComp)
-    //        {
-    //            if (lookInput.magnitude > 0.1f)
-    //            {
-    //                movementComp.OrientToMovement = false;
-    //            }
-    //            else
-    //            {
-    //                movementComp.OrientToMovement = true;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        rotationComp.MouseLook();
-    //    }
-    //}
 
     #endregion
 

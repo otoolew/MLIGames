@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AICharacter : Character
 {
     #region Components
+
     [SerializeField] private Rigidbody rigidbodyComp;
     public override Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
 
@@ -21,31 +23,45 @@ public class AICharacter : Character
     [SerializeField] private HealthComponent healthComp;
     public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
 
-    [SerializeField] private VisionPerception visionPerception;
-    public VisionPerception VisionPerception { get => visionPerception; set => visionPerception = value; }
+    #region Ability
+    [Header("Ability Controllers")]
+    
+    [Header("Ability Configs")]
+    [SerializeField] private RaycastAbilityConfig raycastAbilityConfig;
+    public RaycastAbilityConfig RaycastAbilityConfig { get => raycastAbilityConfig; set => raycastAbilityConfig = value; }
+
+    [SerializeField] private WeaponAbilityController abilityController;
+    public WeaponAbilityController AbilityController { get => abilityController; set => abilityController = value; }
+    #endregion
+
     #endregion
 
     #region Values
-
-    [SerializeField] private PlayerCharacter playerCharacter;
-    public PlayerCharacter PlayerCharacter { get => playerCharacter; set => playerCharacter = value; }
-
     [SerializeField] private Transform focusPoint;
-    public override Transform FocusPoint { get => focusPoint; set => focusPoint = value; }
+    public override Transform TargetPoint { get => focusPoint; set => focusPoint = value; }
 
     [SerializeField] private Transform focusTarget;
     public override Transform FocusTarget { get => focusTarget; set => focusTarget = value; }
     #endregion
+
+
     // Start is called before the first frame update
     void Start()
     {
-        healthComp.DeathAction = OnDeath;
+        SetUpAbility(abilityController, raycastAbilityConfig);
+        healthComp.DeathAction += OnDeath;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void SetUpAbility(AbilityController abilityController, AbilityConfig abilityConfig)
+    {
+        abilityController.Owner = this;
+        abilityController.EquipAbility(abilityConfig);
     }
 
     public override bool IsValid()
@@ -60,11 +76,6 @@ public class AICharacter : Character
         return true;
     }
 
-    public void FindPlayer()
-    {
-        playerCharacter = FindObjectOfType<PlayerCharacter>();
-    }
-
     #region Character
     public override void OnDeath()
     {
@@ -72,6 +83,7 @@ public class AICharacter : Character
     }
 
     #endregion
+
     #region Editor
     /// <summary>
     /// On Validate is only called in Editor. By performing checks here was can rest assured they will not be null.

@@ -12,7 +12,7 @@ public class HitboxTrigger : MonoBehaviour
         HealthComponent healthComp = other.GetComponent<HealthComponent>();
         if (healthComp)
         {
-            healthComp.ApplyHealthChange(-10);
+
         }
     }
 }

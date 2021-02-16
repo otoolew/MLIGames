@@ -19,19 +19,6 @@ public class AIMovement : CharacterMovement
 
     [SerializeField] private float stoppingDistance;
     public float StoppingDistance { get => stoppingDistance; set => stoppingDistance = value; }
-
-    [SerializeField] private Vector3 targetVector;
-    public Vector3 TargetVector { get => targetVector; set => targetVector = value; }
-
-    [SerializeField] private Vector3 destinationVector;
-    public Vector3 DestinationVector { get => destinationVector; set => destinationVector = value; }
-
-    [SerializeField] private WaypointCircuit waypointCircuit;
-    public WaypointCircuit WaypointCircuit { get => waypointCircuit; set => waypointCircuit = value; }
-
-    //[SerializeField] private int currentWaypointIndex;
-    //public int CurrentWaypointIndex { get => currentWaypointIndex; set => currentWaypointIndex = value; }
-
     #endregion
 
     // Start is called before the first frame update
@@ -57,8 +44,7 @@ public class AIMovement : CharacterMovement
     {
         if (navAgent.isActiveAndEnabled)
         {
-            Debug.Log("Moving...");
-            Debug.Log("InRangeOfDestination" + InRangeOfDestination(moveVector));
+            navAgent.destination = moveVector;
         }
         else
         {
@@ -71,10 +57,10 @@ public class AIMovement : CharacterMovement
     {
         if (navAgent.isActiveAndEnabled)
         {
-            destinationVector = moveVector;
-            navAgent.SetDestination(moveVector);
+            navAgent.destination = moveVector;
         }
     }
+
     public bool InRangeOfDestination(Vector3 location)
     {
         return Vector3.Distance(transform.position, location) < navAgent.stoppingDistance;

@@ -62,13 +62,14 @@ public class BeamAbility : WeaponAbilityComponent
     {
         if (IsTriggerDown)
         {
-            HitCollider hitObject = CastRay();
+            HealthComponent hitObject = CastRay();
 
             if (hitObject != null)
             {
                 damageTickTimer.Tick();
                 if (damageTickTimer.IsFinished)
                 {
+                    hitObject.TakeDamage(Mathf.Abs(modifierValue), out HealthChangeInfo output);
                     ApplyModifierValue(hitObject);
                     damageTickTimer.ResetTimer();
                 }
@@ -92,7 +93,7 @@ public class BeamAbility : WeaponAbilityComponent
         lineRenderer.enabled = false;
     }
 
-    public HitCollider CastRay()
+    public HealthComponent CastRay()
     {
         lineRenderer.SetPosition(0, firePoint.transform.position);
 
@@ -105,7 +106,8 @@ public class BeamAbility : WeaponAbilityComponent
         if (Physics.Raycast(ray, out RaycastHit raycastHit, range, hitLayerMask))
         {
             lineRenderer.SetPosition(1, raycastHit.point);
-            HitCollider hitObject = raycastHit.collider.GetComponent<HitCollider>();
+            HealthComponent hitObject = raycastHit.collider.GetComponent<HealthComponent>();
+
             if(hitObject != null)
             {
                 return hitObject;
@@ -124,9 +126,9 @@ public class BeamAbility : WeaponAbilityComponent
         Debug.Log("Nothing to do here...");
     }
 
-    public void ApplyModifierValue(HitCollider hitCollider)
+    public void ApplyModifierValue(HealthComponent hitObject)
     {
-        hitCollider.HealthComp.ApplyHealthChange(ModifierValue);
+        hitObject.TakeDamage(Mathf.Abs(modifierValue), out HealthChangeInfo output);
     }
 
     public override void Reload()
