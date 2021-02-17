@@ -19,6 +19,9 @@ public class BeamAbility : WeaponAbilityComponent
     #endregion
 
     #region Values
+    [SerializeField] private string ownerTag;
+    public override string OwnerTag { get => ownerTag; set => ownerTag = value; }
+
     [SerializeField] private float modifierValue;
     public float ModifierValue { get => modifierValue; set => modifierValue = value; }
 

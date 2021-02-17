@@ -68,13 +68,13 @@ public class PlayerCharacter : Character
     {
         onUseInteractable = new UnityEvent();
         SetUpAbility(LeftAbilityController, meleeAbilityConfigConfig);
-        SetUpAbility(RightAbilityController, raycastAbilityConfig);
+        SetUpAbility(RightAbilityController, projectileAbilityConfig);
         SetUpAbility(DashAbilityController);
     }
 
     void Start()
     {
-
+        healthComp.Died += OnDeath;
     }
 
     // Update is called once per frame
@@ -85,6 +85,7 @@ public class PlayerCharacter : Character
 
     private void OnDestroy()
     {
+        healthComp.Died -= OnDeath;
         onUseInteractable.RemoveAllListeners();
         if(playerController)
             playerController.ReleaseCharacter();
@@ -101,7 +102,7 @@ public class PlayerCharacter : Character
     private void SetUpAbility(AbilityController abilityController, AbilityConfig abilityConfig)
     {
         abilityController.Owner = this;
-        abilityController.EquipAbility(abilityConfig);
+        abilityController.EquipAbility(abilityConfig, gameObject.tag);
     }
     private void SetUpAbility(DashAbilityController abilityController)
     {
@@ -112,9 +113,9 @@ public class PlayerCharacter : Character
     #endregion
 
     #region Character
-    public override void OnDeath()
+    public override void OnDeath(HealthChangeInfo info)
     {
-        throw new NotImplementedException();
+        Debug.LogWarning("TODO: Implement Character Death");
     }
     #endregion
 
@@ -214,9 +215,6 @@ public class PlayerCharacter : Character
         }
         return true;
     }
-
-
-
     #endregion
 
     #region Editor

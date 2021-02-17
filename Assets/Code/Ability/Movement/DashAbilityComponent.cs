@@ -13,6 +13,9 @@ public class DashAbilityComponent : AbilityComponent
     #endregion
 
     #region Variables
+    [SerializeField] private string ownerTag;
+    public override string OwnerTag { get => ownerTag; set => ownerTag = value; }
+
     [SerializeField] private bool isTriggerHeld;
     public bool IsTriggerHeld { get => isTriggerHeld; set => isTriggerHeld = value; }
 

@@ -73,9 +73,6 @@ public class HealthVisualizer : MonoBehaviour
 		HealthComp.HealthChanged += OnHealthChanged;
 	}
 
-	/// <summary>
-	/// Turns us to face the camera
-	/// </summary>
 	protected virtual void Update()
 	{
 		Vector3 direction = CameraToFace.transform.forward;
@@ -90,7 +87,7 @@ public class HealthVisualizer : MonoBehaviour
 
 	void OnHealthChanged(HealthChangeInfo healthChangeInfo)
 	{
-		Debug.Log("OnHealthChanged " + JsonUtility.ToJson(healthChangeInfo));
+		//Debug.Log("OnHealthChanged " + JsonUtility.ToJson(healthChangeInfo));
 		UpdateHealth(HealthComp.NormalisedHealth);
 	}
 }

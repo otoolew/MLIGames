@@ -5,14 +5,14 @@ using UnityEngine;
 public class ProjectileData : ScriptableObject
 {
     #region Variables
-    [SerializeField] private float fireRate;
-    public float FireRate { get => fireRate; set => fireRate = value; }
+    [SerializeField] private float modifierValue;
+    public float ModifierValue { get => modifierValue; set => modifierValue = value; }
 
     [SerializeField] private float range;
     public float Range { get => range; set => range = value; }
 
-    [SerializeField] private float moveSpeed;
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    [SerializeField] private float maxVelocity;
+    public float MaxVelocity { get => maxVelocity; set => maxVelocity = value; }
     #endregion
 
     #region Monobehaviour
@@ -29,8 +29,9 @@ public class ProjectileData : ScriptableObject
     #region Methods
     public void InitProjectileData(Projectile projectile)
     {
-        projectile.MoveSpeed = moveSpeed;
+        projectile.ModifierValue = modifierValue;
         projectile.Range = range;
+        projectile.MaxVelocity = maxVelocity;
     }
     #endregion
 }

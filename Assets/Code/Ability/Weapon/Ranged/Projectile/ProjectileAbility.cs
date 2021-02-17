@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class ProjectileAbility : WeaponAbilityComponent
 {
     #region Components
-    //[SerializeField] private AbilityController abilityController;
-    //public override AbilityController AbilityController { get => abilityController; set => abilityController = value; }
+    [SerializeField] private string ownerTag;
+    public override string OwnerTag { get => ownerTag; set => ownerTag = value; }
 
     [SerializeField] private Transform firePoint;
     public override Transform FirePoint { get => firePoint; set => firePoint = value; }
@@ -25,18 +25,24 @@ public class ProjectileAbility : WeaponAbilityComponent
     #endregion
 
     #region Variables
+    [Header("Variables")]
     [SerializeField] private ProjectileData projectileData;
     public ProjectileData ProjectileData { get => projectileData; set => projectileData = value; }
 
-    [SerializeField] private bool isTriggerHeld;
-    public bool IsTriggerHeld { get => isTriggerHeld; set => isTriggerHeld = value; }
+    [SerializeField] private float modifierValue;
+    public float ModifierValue { get => modifierValue; set => modifierValue = value; }
 
-    [SerializeField] private bool isAutoFire;
-    public bool IsAutoFire { get => isAutoFire; set => isAutoFire = value; }
+    [SerializeField] private float range;
+    public float Range { get => range; set => range = value; }
 
     [SerializeField] private float fireRate;
     public float FireRate { get => fireRate; set => fireRate = value; }
 
+    [SerializeField] private bool isAutoFire;
+    public bool IsAutoFire { get => isAutoFire; set => isAutoFire = value; }
+
+    [SerializeField] private bool isTriggerHeld;
+    public bool IsTriggerHeld { get => isTriggerHeld; set => isTriggerHeld = value; }
     #endregion
 
     #region Monobehaviour
@@ -58,7 +64,7 @@ public class ProjectileAbility : WeaponAbilityComponent
     void Update()
     {
         cooldownTimer.Tick();
-        if(isTriggerHeld && isAutoFire)
+        if (isTriggerHeld && isAutoFire)
         {
             Fire();
         }
@@ -75,12 +81,14 @@ public class ProjectileAbility : WeaponAbilityComponent
                 Projectile projectile = munitionResource.FetchFromPool();
 
                 projectile.AbilityOriginComp = this;
+                projectile.OwnerTag = ownerTag;
                 projectileData.InitProjectileData(projectile);
-
-                //Debug.Log("Set Up Projectile Configuration");
-                projectile.gameObject.SetActive(true);
                 projectile.transform.position = FirePoint.position;
                 projectile.transform.rotation = FirePoint.rotation;
+                projectile.gameObject.SetActive(true);
+
+                //projectile.transform.position = FirePoint.position;
+                //projectile.transform.rotation = FirePoint.rotation;
                 projectile.FireOriginPoint = FirePoint.position;
             }
 

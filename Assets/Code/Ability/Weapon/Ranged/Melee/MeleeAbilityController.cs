@@ -19,9 +19,10 @@ public class MeleeAbilityController : AbilityController
         onAbilityEquipped = new UnityEvent<MeleeAbilityComponent>();
     }
 
-    public override void EquipAbility(AbilityConfig abilityConfig)
+    public override void EquipAbility(AbilityConfig abilityConfig, string ownerTag)
     {
         currentAbility = (MeleeAbilityComponent)abilityConfig.CreateAbilityComponent(transform);
+        currentAbility.OwnerTag = ownerTag;
         onAbilityEquipped.Invoke(currentAbility);
     }
 

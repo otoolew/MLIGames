@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418b40eaa4793f6478bc3033aa9740dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ownerTag: 
   firePoint: {fileID: 2256084222430002239}
   isTriggerHeld: 0
   isAutoFire: 0
@@ -62,7 +63,6 @@ GameObject:
   - component: {fileID: 2256084222352779424}
   - component: {fileID: 2256084222352779439}
   - component: {fileID: 2256084222352779438}
-  - component: {fileID: 3474238414498080075}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -146,18 +146,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3474238414498080075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2256084222352779436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 288326311e502204ea1aa036d577c21c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2256084222430002238
 GameObject:
   m_ObjectHideFlags: 0

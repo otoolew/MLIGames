@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca30fc541fa3a44790db4736e53d849, type: 3}
   m_Name: TestProjectile
   m_EditorClassIdentifier: 
-  fireRate: 0.25
-  range: 10
-  moveSpeed: 10
+  modifierValue: 10
+  range: 100
+  maxVelocity: 10

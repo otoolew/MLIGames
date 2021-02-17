@@ -21,6 +21,9 @@ public class RaycastAbility : WeaponAbilityComponent
 
 
     #region Variables
+    [SerializeField] private string ownerTag;
+    public override string OwnerTag { get => ownerTag; set => ownerTag = value; }
+
     [SerializeField] private float modifierValue;
     public float ModifierValue { get => modifierValue; set => modifierValue = value; }
 

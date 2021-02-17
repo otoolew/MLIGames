@@ -5,6 +5,9 @@ using UnityEngine;
 public class MeleeAbilityComponent : WeaponAbilityComponent
 {
     #region Components
+    [SerializeField] private string ownerTag;
+    public override string OwnerTag { get => ownerTag; set => ownerTag = value; }
+
     [SerializeField] private Transform firePoint;
     public override Transform FirePoint { get => firePoint; set => firePoint = value; }
 
@@ -61,12 +64,12 @@ public class MeleeAbilityComponent : WeaponAbilityComponent
 
     private void OnTriggerEnter(Collider other)
     {
-        HitCollider hitCollider = other.GetComponent<HitCollider>();
-        if (hitCollider)
-        {
-            Debug.Log(string.Format("{0} Hit {1}", this.name, hitCollider.transform.root.name));
-            hitCollider.HealthComp.TakeDamage(10,out HealthChangeInfo output);
-        }
+        //HitCollider hitCollider = other.GetComponent<HitCollider>();
+        //if (hitCollider)
+        //{
+        //    Debug.Log(string.Format("{0} Hit {1}", this.name, hitCollider.transform.root.name));
+        //    hitCollider.HealthComp.TakeDamage(10,out HealthChangeInfo output);
+        //}
     }
 
     #endregion

@@ -14,9 +14,10 @@ public abstract class AbilityController : MonoBehaviour
         onAbilityEquipped = new UnityEvent<AbilityComponent>();
     }
 
-    public virtual void EquipAbility(AbilityConfig abilityConfig)
+    public virtual void EquipAbility(AbilityConfig abilityConfig, string ownerTag)
     {
         CurrentAbility = abilityConfig.CreateAbilityComponent(transform);
+        CurrentAbility.OwnerTag = ownerTag;
         onAbilityEquipped.Invoke(CurrentAbility);
     }
 

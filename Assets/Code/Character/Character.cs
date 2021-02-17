@@ -51,7 +51,7 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Called when a character dies.
     /// </summary>
-    public abstract void OnDeath();
+    public abstract void OnDeath(HealthChangeInfo info);
 
     #region Editor
     /// <summary>

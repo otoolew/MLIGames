@@ -19,9 +19,10 @@ public class WeaponAbilityController : AbilityController
         onAbilityEquipped = new UnityEvent<WeaponAbilityComponent>();
     }
 
-    public override void EquipAbility(AbilityConfig abilityConfig)
+    public override void EquipAbility(AbilityConfig abilityConfig, string ownerTag)
     {
         currentAbility = (WeaponAbilityComponent)abilityConfig.CreateAbilityComponent(transform);
+        currentAbility.OwnerTag = ownerTag;
         onAbilityEquipped.Invoke(currentAbility);
     }
 

@@ -44,12 +44,14 @@ public class AICharacter : Character
     public override Transform FocusTarget { get => focusTarget; set => focusTarget = value; }
     #endregion
 
+    #region Monobehaviour
 
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
         SetUpAbility(abilityController, raycastAbilityConfig);
-        healthComp.DeathAction += OnDeath;
+        healthComp.Died += OnDeath;
     }
 
     // Update is called once per frame
@@ -57,11 +59,14 @@ public class AICharacter : Character
     {
 
     }
-
+    private void OnDestroy()
+    {
+        healthComp.Died -= OnDeath;
+    }
     private void SetUpAbility(AbilityController abilityController, AbilityConfig abilityConfig)
     {
         abilityController.Owner = this;
-        abilityController.EquipAbility(abilityConfig);
+        abilityController.EquipAbility(abilityConfig,gameObject.tag);
     }
 
     public override bool IsValid()
@@ -77,7 +82,7 @@ public class AICharacter : Character
     }
 
     #region Character
-    public override void OnDeath()
+    public override void OnDeath(HealthChangeInfo info)
     {
         Debug.LogWarning("TODO: Implement Character Death");
     }
