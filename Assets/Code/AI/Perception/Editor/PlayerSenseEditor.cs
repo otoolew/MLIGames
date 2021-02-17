@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+
 [CustomEditor(typeof(PlayerSense))]
 public class PlayerSenseEditor : Editor
 {

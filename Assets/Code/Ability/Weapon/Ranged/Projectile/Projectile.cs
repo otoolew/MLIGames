@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour, IPoolable
 
     //[SerializeField] private Rigidbody rigidbodyComp;
     //public Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
+    [SerializeField] private CharacterController controller;
+    public CharacterController Controller { get => controller; set => controller = value; }
 
     [SerializeField] private ProjectileAbility abilityOriginComp;
     public ProjectileAbility AbilityOriginComp { get => abilityOriginComp; set => abilityOriginComp = value; }
@@ -30,8 +32,9 @@ public class Projectile : MonoBehaviour, IPoolable
     // Update is called once per frame
     void Update()
     {
+        //Controller.Move(transform.forward * maxVelocity * Time.deltaTime);
         transform.position += transform.forward * maxVelocity * Time.deltaTime;
-        if (Vector3.Distance(fireOriginPoint, transform.position)>= Range)
+        if (Vector3.Distance(fireOriginPoint, transform.position) >= Range)
         {
             Repool();
         }
@@ -39,11 +42,18 @@ public class Projectile : MonoBehaviour, IPoolable
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("OnTriggerEnter " + other.name + " Tag: " + other.tag);
+        if (other.CompareTag(ownerTag))
+            return;
+
         HealthComponent hitObject = other.GetComponent<HealthComponent>();
         if (hitObject != null)
         {
+            Debug.Log("hitObject.CompareTag(ownerTag) " + hitObject.CompareTag(ownerTag));
+            Debug.Log("HealthComponent " + hitObject.name + " Tag: " + hitObject.tag);
             hitObject.TakeDamage(Mathf.Abs(modifierValue), out HealthChangeInfo output);
         }
+
         PlayImpactEffects();
         Repool();
     }

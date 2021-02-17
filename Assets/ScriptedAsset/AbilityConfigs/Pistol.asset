@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f478fe2e0582db44beb9d210ef0a1d9, type: 3}
-  m_Name: ProjectileAbilityConfig
+  m_Name: Pistol
   m_EditorClassIdentifier: 
   projectileAbilityPrefab: {fileID: 5742158974111684095, guid: 685dc0d2ecba49046a9241a473676f11, type: 3}
-  projectileData: {fileID: 11400000, guid: f568ccac552e5a14288f54fe8c1f7772, type: 2}
+  projectileData: {fileID: 11400000, guid: 6939522ae5584924fbb80894bdebdf5e, type: 2}
