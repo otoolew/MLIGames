@@ -1,3 +1,4 @@
+using MLIGames.AI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,15 +11,10 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// GameMode Handles everything about a game. Game Time, Spawn points, Enemy Count, Victory COnditions etc...
 /// </summary>
-public class GameMode : MonoBehaviour
+public class GameMode : Singleton<GameMode>
 {
-    #region Variables
-    [Header("Game State")]
-    [SerializeField] private GameState currentGameState;
-    public GameState CurrentGameState { get => currentGameState; set => currentGameState = value; }
-
+    #region Components
     [Header("Player Components")]
-
     [SerializeField] private PlayerController playerController;
     public PlayerController PlayerController { get => playerController; set => playerController = value; }
 
@@ -41,8 +37,19 @@ public class GameMode : MonoBehaviour
     public GameModeData GameModeData { get => gameModeData; set => gameModeData = value; }
     #endregion
 
-    private void Awake()
+    #region Variables
+    [Header("Game State")]
+    [SerializeField] private GameState currentGameState;
+    public GameState CurrentGameState { get => currentGameState; set => currentGameState = value; }
+
+    [Header("World States")]
+    [SerializeField] private WorldStates worldStates;
+    public WorldStates WorldStates { get => worldStates; set => worldStates = value; }
+
+    #endregion
+    protected override void Awake()
     {
+        base.Awake();
         CurrentGameState = GameState.LOADING;
         GameManager.Instance.AssignGameMode(this);
         InitGame();
@@ -69,6 +76,8 @@ public class GameMode : MonoBehaviour
     #region Game Time Start and Finish
     public void InitGame()
     {
+        // Init World States
+        worldStates = new WorldStates();
         //Debug.Log("Init Game!");
         playerController = FindObjectOfType<PlayerController>();
         if (playerController == null)

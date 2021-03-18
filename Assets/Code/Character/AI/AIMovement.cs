@@ -19,6 +19,15 @@ public class AIMovement : CharacterMovement
 
     [SerializeField] private float stoppingDistance;
     public float StoppingDistance { get => stoppingDistance; set => stoppingDistance = value; }
+
+    [SerializeField] private float straifeDistance;
+    public float StraifeDistance { get => straifeDistance; set => straifeDistance = value; }
+
+    public Vector3 StrafeLeftPosition { get => transform.right * -straifeDistance; }
+    public Vector3 StrafeRightPosition { get => transform.right * straifeDistance; }
+    public Vector3 CurrentDestination { get => NavAgent.destination; set => NavAgent.destination = value; }
+
+
     #endregion
 
     // Start is called before the first frame update
@@ -30,7 +39,6 @@ public class AIMovement : CharacterMovement
             navAgent.speed = MoveSpeed;
             navAgent.angularSpeed = RotationSpeed;
             navAgent.acceleration = accelerationSpeed;
-
         }
     }
 
@@ -53,16 +61,47 @@ public class AIMovement : CharacterMovement
         }
     }
 
+    public void ContinueMovement()
+    {
+        if (navAgent != null)
+        {
+            navAgent.isStopped = false;
+        }
+    }
+
+    public void HaltMovement()
+    {
+        if (navAgent != null)
+        {
+            navAgent.isStopped = true;
+        }
+    }
+
+    public void HardStop()
+    {
+        SetDestination(transform.position);
+    }
+
     public override void SetDestination(Vector3 moveVector)
     {
         if (navAgent.isActiveAndEnabled)
         {
-            navAgent.destination = moveVector;
+            CurrentDestination = moveVector;
         }
     }
 
-    public bool InRangeOfDestination(Vector3 location)
+    public bool InRangeOfDestination()
     {
-        return Vector3.Distance(transform.position, location) < navAgent.stoppingDistance;
+        return Vector3.Distance(transform.position, CurrentDestination) <= navAgent.stoppingDistance;
     }
+
+    #region Debug
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, StrafeLeftPosition);
+        Gizmos.DrawRay(transform.position, StrafeRightPosition);
+        Gizmos.DrawCube(CurrentDestination + new Vector3(0,0.5f,0), new Vector3(1.0f, 0.5f, 1.0f));
+    }
+    #endregion
 }

@@ -113,7 +113,7 @@ public class PlayerRotation : CharacterRotation
     {
         Ray ray = Camera.main.ScreenPointToRay(mouseScreen);
         //ray.origin += offset;
-        if (Physics.Raycast(ray, out RaycastHit rayHit, 1000.0f, layerMask)) // 1000 can be better
+        if (Physics.Raycast(ray, out RaycastHit rayHit, 500.0f, layerMask)) // 1000 can be better
         {
             mousePoint = rayHit.point;
             return true;

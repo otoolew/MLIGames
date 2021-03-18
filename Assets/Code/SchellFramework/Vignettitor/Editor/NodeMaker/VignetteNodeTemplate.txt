@@ -1,0 +1,71 @@
+﻿// ------------------------------------------------------------------------------
+//  Copyright #(c)# #YEAR# Schell Games, LLC. All Rights Reserved.
+//
+//  Contact: #CREATOR_NAME#
+//
+//  Created: #CREATION_TIME#
+// ------------------------------------------------------------------------------
+
+using SG.Vignettitor;
+using SG.Vignettitor.NodeViews;
+using SG.Vignettitor.Graph;
+using SG.Vignettitor.Graph.NodeViews;
+using SG.Vignettitor.VignetteData;
+using UnityEngine;
+
+namespace #NAMESPACE#
+{
+    /// <summary>
+    /// #SUMMARY#
+    /// </summary>
+    [NodeHelp("#SUMMARY#")]
+    [NodeMenu("#NODE_MENU_PATH#", typeof(#NODE_GRAPH#))]
+    public class #NODE_CLASS_NAME# : VignetteNode
+    {
+        public override OutputRule OutputRule { get { return #OUTPUT_RULE#; } }
+
+        public override ContentValidation Validate()
+        {
+            ContentValidation cv = base.Validate();
+            return cv;
+        }
+    }
+
+    [NodeView(typeof(#NODE_CLASS_NAME#))]
+    public class #VIEW_CLASS_NAME# : VignetteNodeView
+    {
+        protected override Color DefaultColor { get { return #VIEW_COLOR#; } }
+
+        public override void Draw(Rect rect)
+        {
+            #NODE_CLASS_NAME# n = Node as #NODE_CLASS_NAME#;
+            base.Draw(rect);
+        }
+    }
+
+    public class #RUNTIME_CLASS_NAME# : VignetteRuntimeNode
+    {
+        private #NODE_CLASS_NAME# _source;
+
+        protected #RUNTIME_CLASS_NAME#(#NODE_CLASS_NAME# node, VignetteRuntimeGraph graph)
+                : base(node, graph)
+        {
+            _source = node;
+        }
+
+        public override void Enter(object input)
+        {
+            base.Enter(input);
+
+            Log.Debug("#LOG_MESSAGE#");
+
+            Skip();
+        }
+
+        [VignetteGenerator(typeof(VignetteGeneratorDelegate), typeof(#NODE_CLASS_NAME#))]
+        private static VignetteRuntimeNode Generate(VignetteNode node, VignetteRuntimeGraph graph)
+        {
+            return new #RUNTIME_CLASS_NAME#((#NODE_CLASS_NAME#)node, graph);
+        }
+    }
+}

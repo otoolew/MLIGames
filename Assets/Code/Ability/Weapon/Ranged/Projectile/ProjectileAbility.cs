@@ -29,12 +29,6 @@ public class ProjectileAbility : WeaponAbilityComponent
     [SerializeField] private ProjectileData projectileData;
     public ProjectileData ProjectileData { get => projectileData; set => projectileData = value; }
 
-    [SerializeField] private float modifierValue;
-    public float ModifierValue { get => modifierValue; set => modifierValue = value; }
-
-    [SerializeField] private float range;
-    public float Range { get => range; set => range = value; }
-
     [SerializeField] private float fireRate;
     public float FireRate { get => fireRate; set => fireRate = value; }
 
@@ -79,17 +73,12 @@ public class ProjectileAbility : WeaponAbilityComponent
             if (munitionStorage.ConsumeAmmo())
             {
                 Projectile projectile = munitionResource.FetchFromPool();
-
-                projectile.AbilityOriginComp = this;
-                projectile.OwnerTag = ownerTag;
-                projectileData.InitProjectileData(projectile);
-                projectile.transform.position = FirePoint.position;
-                projectile.transform.rotation = FirePoint.rotation;
                 projectile.gameObject.SetActive(true);
+                projectile.PrepareForLaunch(this);
+                projectileData.InitProjectileData(projectile);
 
-                //projectile.transform.position = FirePoint.position;
-                //projectile.transform.rotation = FirePoint.rotation;
-                projectile.FireOriginPoint = FirePoint.position;
+                projectile.gameObject.SetActive(true);
+                projectile.Launch();
             }
 
             cooldownTimer.ResetTimer();
@@ -109,5 +98,11 @@ public class ProjectileAbility : WeaponAbilityComponent
     public override void Reload()
     {
         munitionStorage.FillMagazine();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(firePoint.position, firePoint.forward * 10);
     }
 }

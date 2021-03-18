@@ -17,7 +17,7 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// The Characters Movement Component
     /// </summary>
-    public abstract CharacterMovement MovementComp { get; set; }
+    //public abstract CharacterMovement MovementComp { get; set; }
     /// <summary>
     /// The Characters Movement Component
     /// </summary>
@@ -30,7 +30,7 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// The Transform a character is focused on
     /// </summary>
-    public abstract Transform FocusTarget { get; set; }
+    public abstract CharacterAim CharacterAimComp { get; set; }
 
     /// <summary>
     /// The Transform other characters is focused on
@@ -68,11 +68,6 @@ public abstract class Character : MonoBehaviour
         if (AnimatorComp == null)
         {
             //Debug.LogError("No AnimatorComp assigned");
-        }
-
-        if (MovementComp == null)
-        {
-            //Debug.LogError("No MovementComp assigned");
         }
 
         if (RotationComp == null)

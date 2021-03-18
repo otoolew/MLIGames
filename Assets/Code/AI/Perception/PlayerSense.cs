@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerSense : MonoBehaviour
 {
@@ -65,8 +66,27 @@ public class PlayerSense : MonoBehaviour
         }
     }
 
+    [SerializeField] private Timer forgetTimer;
+    public Timer ForgetTimer { get => forgetTimer; set => forgetTimer = value; }
+
+    [SerializeField] private UnityEvent<Vector3> onPlayerSighted;
+    public UnityEvent<Vector3> OnPlayerSighted { get => onPlayerSighted; set => onPlayerSighted = value; }
+
+    private void OnEnable()
+    {
+        if(onPlayerSighted != null)
+        {
+            onPlayerSighted.RemoveAllListeners();
+        }
+        else
+        {
+            onPlayerSighted = new UnityEvent<Vector3>();
+        }
+    }
+
     private void Start()
     {
+        forgetTimer = new Timer(1);
         playerCharacter = FindObjectOfType<PlayerCharacter>();
     }
 
@@ -85,12 +105,16 @@ public class PlayerSense : MonoBehaviour
         {
             if (InRange)
             {
+                forgetTimer.ResetTimer(1);
                 Vector3 directionToTarget = (playerCharacter.transform.position - transform.position).normalized;
                 if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
                 {
+                    forgetTimer.ResetTimer(1);
+                    onPlayerSighted.Invoke(playerCharacter.transform.position);
                     return HasLineOfSight;
                 }
             }
+            forgetTimer.Tick();
         }
         return false;
     }

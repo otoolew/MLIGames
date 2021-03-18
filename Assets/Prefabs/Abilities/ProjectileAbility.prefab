@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7110105713884471554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7110105714282240889}
@@ -149,8 +149,6 @@ MonoBehaviour:
   munitionStorage: {fileID: -2895200215048646157}
   munitionResource: {fileID: 11400000, guid: 877ff0ca0313c8e47a4d45a625e395de, type: 2}
   projectileData: {fileID: 0}
-  modifierValue: 0
-  range: 0
   fireRate: 0.5
   isAutoFire: 1
   isTriggerHeld: 0

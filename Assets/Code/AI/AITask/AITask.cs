@@ -3,20 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
-public abstract class AITask : ScriptedDelegate
+[Serializable] public enum AITaskStatus { STARTED, PERFORMING, FINISHED }
+public abstract class AITask : ScriptableObject
 {
-    public abstract string TaskName { get;}
-    public bool SuccessfulInit { get;}
-    public AITaskStatus TaskStatus { get; set; }
-    public UnityAction<AITask> TaskCompleteAction { get; set; }
-    public UnityEvent<AITask> OnTaskComplete { get; set; }
-    public abstract void Tick(AICharacter character);
-    //public abstract AITask Create();
-    //public abstract IEnumerator TaskCoroutine();
+    public abstract string TaskName { get; set; }
+    public abstract AITaskStatus TaskStatus { get; set; }
+    public abstract Timer TaskTimer { get; set; }
+    public abstract bool LoopTask { get; set; }
+    public abstract UnityEvent<AITask> OnTaskComplete { get; set; }
+    public abstract void StartTask(AIController character);
+    public abstract void UpdateTask(AIController character);
 
-    //public abstract AIController AIController { get; set; }
-    //public abstract SequenceStatus Status { get; set; }
-
-    //public abstract Func<bool> TaskFinished();
+    protected virtual void OnDestroy()
+    {
+        if(OnTaskComplete != null)
+        {
+            OnTaskComplete.RemoveAllListeners();
+        }
+    }
 }

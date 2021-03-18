@@ -7,7 +7,7 @@ public class PlayerSenseEditor : Editor
     private void OnSceneGUI()
     {
         PlayerSense visionComp = (PlayerSense)target;
-        Handles.color = Color.white;
+        Handles.color = Color.yellow;
         Handles.DrawWireArc(visionComp.transform.position, Vector3.up, Vector3.forward, 360, visionComp.Radius);
 
         Vector3 viewAngleA = visionComp.DirectionFromAngle(-visionComp.ViewAngle / 2, false);

@@ -15,13 +15,19 @@ public class AICharacter : Character
     public override Animator AnimatorComp { get => animatorComp; set => animatorComp = value; }
 
     [SerializeField] private AIMovement movementComp;
-    public override CharacterMovement MovementComp { get => movementComp as AIMovement; set => movementComp = (AIMovement)value; }
+    public AIMovement MovementComp { get => movementComp as AIMovement; set => movementComp = (AIMovement)value; }
 
     [SerializeField] private CharacterRotation rotationComp;
     public override CharacterRotation RotationComp { get => rotationComp; set => rotationComp = value; }
 
     [SerializeField] private HealthComponent healthComp;
     public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
+
+    [SerializeField] private CharacterAim characterAimComp;
+    public override CharacterAim CharacterAimComp { get => characterAimComp; set => characterAimComp = value; }
+
+    [SerializeField] private Transform focusPoint;
+    public override Transform TargetPoint { get => focusPoint; set => focusPoint = value; }
 
     #region Ability
     [Header("Ability Controllers")]
@@ -34,14 +40,6 @@ public class AICharacter : Character
     public WeaponAbilityController AbilityController { get => abilityController; set => abilityController = value; }
     #endregion
 
-    #endregion
-
-    #region Values
-    [SerializeField] private Transform focusPoint;
-    public override Transform TargetPoint { get => focusPoint; set => focusPoint = value; }
-
-    [SerializeField] private Transform focusTarget;
-    public override Transform FocusTarget { get => focusTarget; set => focusTarget = value; }
     #endregion
 
     #region Monobehaviour
@@ -69,23 +67,27 @@ public class AICharacter : Character
         abilityController.EquipAbility(abilityConfig,gameObject.tag);
     }
 
+    #region Character
+
     public override bool IsValid()
     {
-        if(HealthComp != null)
+        if (HealthComp != null)
         {
             if (HealthComp.IsDead)
             {
                 return false;
-            }           
+            }
         }
         return true;
     }
 
-    #region Character
+    #region Death
     public override void OnDeath(HealthChangeInfo info)
     {
         Debug.LogWarning("TODO: Implement Character Death");
+        movementComp.Stop();
     }
+    #endregion
 
     #endregion
 

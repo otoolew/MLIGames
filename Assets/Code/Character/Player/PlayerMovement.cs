@@ -25,6 +25,7 @@ public class PlayerMovement : CharacterMovement
     #region Values
 
     [Header("Player")]
+
     [SerializeField] private Vector2 moveInput;
     public Vector2 MoveInput { get => moveInput; set => moveInput = value; }
 

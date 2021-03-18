@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="Editor/Resources/UI Builder/TanksMainMenu/TanksMainMenu.uss" />
+    <ui:VisualElement name="screen" class="screen" style="height: 100%; width: 100%;">
+        <ui:VisualElement name="menu-column" class="menu-column" style="align-items: center; justify-content: flex-start; width: 50%; height: 100px; opacity: 1;">
+            <ui:VisualElement name="menu-panel" class="menu-window" style="height: 100%; width: 100%; flex-grow: initial;">
+                <ui:VisualElement name="menu-title-image" class="title-image" style="height: 50%; background-image: url(&apos;/Assets/Art/Sprites/GridBox_Default.png&apos;);" />
+                <ui:Button text="START" name="start-button" class="menu-button" />
+                <ui:Button text="EXIT" name="exit-button" class="menu-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

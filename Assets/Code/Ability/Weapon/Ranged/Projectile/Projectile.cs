@@ -5,14 +5,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour, IPoolable
 {
     public GameObject GameObject => gameObject;
+    
+    [SerializeField] private Rigidbody rigidbodyComp;
+    public Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
 
-    //[SerializeField] private Rigidbody rigidbodyComp;
-    //public Rigidbody RigidbodyComp { get => rigidbodyComp; set => rigidbodyComp = value; }
-    [SerializeField] private CharacterController controller;
-    public CharacterController Controller { get => controller; set => controller = value; }
-
-    [SerializeField] private ProjectileAbility abilityOriginComp;
-    public ProjectileAbility AbilityOriginComp { get => abilityOriginComp; set => abilityOriginComp = value; }
+    [SerializeField] private ProjectileAbility ownerAbilityComp;
+    public ProjectileAbility OwnerAbilityComp { get => ownerAbilityComp; set => ownerAbilityComp = value; }
 
     [SerializeField] private float modifierValue;
     public float ModifierValue { get => modifierValue; set => modifierValue = value; }
@@ -29,24 +27,26 @@ public class Projectile : MonoBehaviour, IPoolable
     [SerializeField] private string ownerTag;
     public string OwnerTag { get => ownerTag; set => ownerTag = value; }
 
+    private void OnEnable()
+    {
+        transform.rotation = Quaternion.identity;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        //Controller.Move(transform.forward * maxVelocity * Time.deltaTime);
-        transform.position += transform.forward * maxVelocity * Time.deltaTime;
         if (Vector3.Distance(fireOriginPoint, transform.position) >= Range)
         {
             Repool();
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("OnTriggerEnter " + other.name + " Tag: " + other.tag);
-        if (other.CompareTag(ownerTag))
+        
+        if (collision.gameObject.CompareTag(ownerTag))
             return;
 
-        HealthComponent hitObject = other.GetComponent<HealthComponent>();
+        HealthComponent hitObject = collision.collider.GetComponent<HealthComponent>();
         if (hitObject != null)
         {
             Debug.Log("hitObject.CompareTag(ownerTag) " + hitObject.CompareTag(ownerTag));
@@ -56,6 +56,35 @@ public class Projectile : MonoBehaviour, IPoolable
 
         PlayImpactEffects();
         Repool();
+    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("OnTriggerEnter " + other.name + " Tag: " + other.tag);
+    //    if (other.CompareTag(ownerTag))
+    //        return;
+
+    //    HealthComponent hitObject = other.GetComponent<HealthComponent>();
+    //    if (hitObject != null)
+    //    {
+    //        Debug.Log("hitObject.CompareTag(ownerTag) " + hitObject.CompareTag(ownerTag));
+    //        Debug.Log("HealthComponent " + hitObject.name + " Tag: " + hitObject.tag);
+    //        hitObject.TakeDamage(Mathf.Abs(modifierValue), out HealthChangeInfo output);
+    //    }
+
+    //    PlayImpactEffects();
+    //    Repool();
+    //}
+    public void PrepareForLaunch(ProjectileAbility projectileAbility)
+    {
+        ownerAbilityComp = projectileAbility;
+        ownerTag = projectileAbility.OwnerTag;
+        fireOriginPoint = projectileAbility.FirePoint.position;
+        transform.position = projectileAbility.FirePoint.position;
+        transform.rotation = projectileAbility.FirePoint.rotation;
+    }
+    public void Launch()
+    {
+        rigidbodyComp.velocity = transform.forward * maxVelocity;
     }
 
     private void PlayImpactEffects()
@@ -70,5 +99,10 @@ public class Projectile : MonoBehaviour, IPoolable
     private void OnDisable()
     {
         ownerTag = "";
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, transform.forward * 1.0f);
     }
 }

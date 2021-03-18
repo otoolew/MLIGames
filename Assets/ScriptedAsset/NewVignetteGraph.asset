@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8470621225813502588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed5337a476612b45af510f61b5c57de, type: 3}
+  m_Name: LogNode
+  m_EditorClassIdentifier: 
+  NodeID: 4
+  Children: []
+  Message: 
+--- !u!114 &-7075706219592042966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed5337a476612b45af510f61b5c57de, type: 3}
+  m_Name: LogNode
+  m_EditorClassIdentifier: 
+  NodeID: 5
+  Children:
+  - {fileID: 565296118600682648}
+  Message: cvxcvx
+--- !u!114 &-1175291336182307430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d8e5b68d616ad4191724468f123dee, type: 3}
+  m_Name: _ViewState
+  m_EditorClassIdentifier: 
+  Scroll: {x: 42.92108, y: 59.665405}
+  Zoom: 0.5500004
+  NodeViewStates:
+  - Position: {x: 449.99997, y: 244.49998}
+    ID: 1
+  - Position: {x: 899.99994, y: 244.49998}
+    ID: 2
+  - Position: {x: 1350, y: 244.49998}
+    ID: 3
+  - Position: {x: 1350, y: 504.5}
+    ID: 4
+  - Position: {x: 1350, y: -15.499998}
+    ID: 5
+  - Position: {x: 1800, y: -15.499998}
+    ID: 6
+  HeadViewState:
+    Position: {x: 0, y: 244.49998}
+    ID: -1
+  Annotations: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ae0ed391a33aa4fbf8f0cffd95b69f, type: 3}
+  m_Name: NewVignetteGraph
+  m_EditorClassIdentifier: 
+  Entry: {fileID: 8993257066584498882}
+  SaveFormatVersion: 1
+  _signature:
+    _parameters:
+    - Name: HasTarget
+      ExpectedType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      Usages: []
+  VignettePath: Assets/ScriptedAsset/NewVignetteGraph
+  VignetteGUID: 4347efecf94f2f944a243b424f333e22
+  allNodes:
+  - {fileID: 8993257066584498882}
+  - {fileID: 1125443183424485561}
+  - {fileID: -7075706219592042966}
+  - {fileID: 5695375792316314301}
+  - {fileID: -8470621225813502588}
+  - {fileID: 565296118600682648}
+--- !u!114 &565296118600682648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fb51a6ff17734998ecfd1d4247605, type: 3}
+  m_Name: JumpNode
+  m_EditorClassIdentifier: 
+  NodeID: 6
+  Children:
+  - {fileID: 1125443183424485561}
+  destinationNode: {fileID: 0}
+--- !u!114 &1125443183424485561
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a86817362e85f4ebd25f3dd813d43a, type: 3}
+  m_Name: RandomChoiceNode
+  m_EditorClassIdentifier: 
+  NodeID: 2
+  Children:
+  - {fileID: -7075706219592042966}
+  - {fileID: 5695375792316314301}
+  - {fileID: -8470621225813502588}
+--- !u!114 &5695375792316314301
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed5337a476612b45af510f61b5c57de, type: 3}
+  m_Name: LogNode
+  m_EditorClassIdentifier: 
+  NodeID: 3
+  Children: []
+  Message: 
+--- !u!114 &8993257066584498882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c15dbccae67d344494f2971b29779a1, type: 3}
+  m_Name: StartNode
+  m_EditorClassIdentifier: 
+  NodeID: 1
+  Children:
+  - {fileID: 1125443183424485561}

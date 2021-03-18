@@ -48,6 +48,36 @@ MonoBehaviour:
   onAbilityEquipped:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2197487221002941612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6263508261111808488}
+  m_Layer: 8
+  m_Name: AimTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6263508261111808488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197487221002941612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4064287071184895272}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4064287071184895278
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +94,7 @@ GameObject:
   - component: {fileID: 4064287071184895283}
   - component: {fileID: 511457653044844103}
   - component: {fileID: 4064287071184895281}
+  - component: {fileID: 5577656019346033090}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -84,6 +115,7 @@ Transform:
   m_Children:
   - {fileID: 7972668777687576450}
   - {fileID: 6587458806529276964}
+  - {fileID: 6263508261111808488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -134,7 +166,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.7
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -158,6 +190,7 @@ MonoBehaviour:
   movementComp: {fileID: 4064287071184895283}
   rotationComp: {fileID: 511457653044844103}
   healthComp: {fileID: 4064287071184895281}
+  characterAimComp: {fileID: 0}
   focusPoint: {fileID: 7972668777687576450}
   leftAbilityController: {fileID: 1133424180802000121}
   rightAbilityController: {fileID: 7972668778380213851}
@@ -165,7 +198,6 @@ MonoBehaviour:
   meleeAbilityConfigConfig: {fileID: 11400000, guid: bfbd4317472da1642bf3eee2094927fc, type: 2}
   raycastAbilityConfig: {fileID: 11400000, guid: 87d9400b38605a1439c82c4a8ea71e78, type: 2}
   projectileAbilityConfig: {fileID: 11400000, guid: a1547b02d412a9e459378e998e8df01f, type: 2}
-  focusTarget: {fileID: 0}
   onUseInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -211,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd38c6f9951e8b40b7453b443854736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 8
+  rotationSpeed: 10
   visionComp: {fileID: 6587458806529276967}
   gamepadEnabled: 0
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -240,6 +272,21 @@ MonoBehaviour:
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5577656019346033090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064287071184895278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736600478223164459d9928287aa903d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5886720481002854995}
+  aimTransform: {fileID: 6263508261111808488}
+  defaultPosition: {x: 0, y: 1, z: 1}
 --- !u!1 &6587458806529276965
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +298,7 @@ GameObject:
   - component: {fileID: 6587458806529276964}
   - component: {fileID: 6587458806529276966}
   - component: {fileID: 6587458806529276967}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VisionPerception
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7972668777687576451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7972668779107299556}

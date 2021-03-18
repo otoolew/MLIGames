@@ -64,7 +64,7 @@ public class VisionPerception : MonoBehaviour
     void Start()
     {
         frequencyTimer = new Timer(Random.Range(0.1f, 0.6f));
-        frequencyTimer.TimerAction = () => RefreshVisableTargets();
+        frequencyTimer.TimerCompleteAction = () => RefreshVisableTargets();
         onPerceptionUpdate = new UnityEvent<Character>();
         detectedList = new List<Character>();
         visableTargetList = new List<Character>();
@@ -76,7 +76,7 @@ public class VisionPerception : MonoBehaviour
         frequencyTimer.Tick();
         if (frequencyTimer.IsFinished)
         {
-            frequencyTimer.TimerAction.Invoke();
+            frequencyTimer.TimerCompleteAction.Invoke();
             frequencyTimer.ResetTimer(Random.Range(0.1f, 0.6f));
         }
     }

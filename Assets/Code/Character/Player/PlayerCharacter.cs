@@ -21,13 +21,16 @@ public class PlayerCharacter : Character
     public PlayerController PlayerController { get => playerController; set => playerController = value; }
 
     [SerializeField] private PlayerMovement movementComp;
-    public override CharacterMovement MovementComp { get => movementComp as PlayerMovement; set => movementComp = (PlayerMovement)value; }
+    public PlayerMovement MovementComp { get => movementComp as PlayerMovement; set => movementComp = (PlayerMovement)value; }
 
     [SerializeField] private PlayerRotation rotationComp;
     public override CharacterRotation RotationComp { get => rotationComp as PlayerRotation; set => rotationComp = (PlayerRotation)value; }
 
     [SerializeField] private HealthComponent healthComp;
     public override HealthComponent HealthComp { get => healthComp; set => healthComp = value; }
+
+    [SerializeField] private CharacterAim characterAimComp;
+    public override CharacterAim CharacterAimComp { get => characterAimComp; set => characterAimComp = value; }
 
     [SerializeField] private Transform focusPoint;
     public override Transform TargetPoint { get => focusPoint; set => focusPoint = value; }
@@ -53,12 +56,6 @@ public class PlayerCharacter : Character
 
     [SerializeField] private ProjectileAbilityConfig projectileAbilityConfig;
     public ProjectileAbilityConfig ProjectileAbilityConfig { get => projectileAbilityConfig; set => projectileAbilityConfig = value; }
-    #endregion
-
-    #region Values
-    [SerializeField] private Transform focusTarget;
-    public override Transform FocusTarget { get => focusTarget; set => focusTarget = value; }
-
     #endregion
 
     public UnityEvent onUseInteractable;
