@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7110105713884471554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7110105714282240889}
@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 7110105714282240884}
   - component: {fileID: 7110105714282240885}
   - component: {fileID: 7110105714282240886}
-  - component: {fileID: 7110105714282240888}
   - component: {fileID: 5742158974111684095}
   - component: {fileID: -2895200215048646157}
   m_Layer: 0
@@ -130,24 +129,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3443181570361067474, guid: 62b457c098f41a047bf4e323df42a367, type: 3}
---- !u!114 &7110105714282240888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7110105714282240890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c800e8968e8624988942a2d82e280f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAtMouse: 1
-  rotationSpeed: 90
-  offset: {x: 0, y: -1.25, z: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &5742158974111684095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,16 +141,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1c139a14fa964409dabad8fdb21ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ownerTag: 
   firePoint: {fileID: 7110105713884471553}
   cooldownTimer:
     startCount: 0
     currentCount: 0
   munitionStorage: {fileID: -2895200215048646157}
   munitionResource: {fileID: 11400000, guid: 877ff0ca0313c8e47a4d45a625e395de, type: 2}
-  projectileData: {fileID: 11400000, guid: f568ccac552e5a14288f54fe8c1f7772, type: 2}
-  isTriggerHeld: 0
+  projectileData: {fileID: 0}
+  fireRate: 0.5
   isAutoFire: 1
-  fireRate: 0.1
+  isTriggerHeld: 0
 --- !u!114 &-2895200215048646157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828723528b0c0ca4480b8c87323a109e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoCapacity: 60
-  ammoCount: 60
+  ammoCapacity: 1000
+  ammoCount: 1000
   magazineCapacity: 30
   magazineCount: 30
   onAmmoCountChange:

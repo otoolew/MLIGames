@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ProjectileAbilityConfig
   m_EditorClassIdentifier: 
   projectileAbilityPrefab: {fileID: 5742158974111684095, guid: 685dc0d2ecba49046a9241a473676f11, type: 3}
+  projectileData: {fileID: 11400000, guid: f568ccac552e5a14288f54fe8c1f7772, type: 2}

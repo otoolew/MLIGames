@@ -21,6 +21,7 @@ public class AbilityPanel : MonoBehaviour
 
     public void AssignAbility(AbilityComponent ability)
     {
+        //Debug.Log("Ability Assigned to Panel");
         if (ability.GetType() == typeof(RaycastAbility))
         {
             RaycastAbility abilityComp = (RaycastAbility)ability;

@@ -168,6 +168,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6701902682770722854}
   m_maskType: 0
+  _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
 --- !u!114 &741540160396537642
@@ -187,5 +188,4 @@ MonoBehaviour:
   timer:
     startCount: 0
     currentCount: 0
-    isFinished: 0
   moveSpeed: 15

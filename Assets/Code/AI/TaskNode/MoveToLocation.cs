@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class MoveToLocation : TaskNode
+{
+    private AIController controller;
+
+    [SerializeField] private AIBoard assignedBoard;
+    public override AIBoard AssignedBoard { get => assignedBoard; set => assignedBoard = value; }
+
+    [SerializeField] private string taskName;
+    public override string TaskName { get => taskName; set => taskName = value; }// could be object.name?
+
+    [SerializeField] private TaskStatus taskStatus;
+    public override TaskStatus TaskStatus { get => taskStatus; set => taskStatus = value; }
+
+    [SerializeField] private Timer taskTimer;
+    public override Timer TaskTimer { get => taskTimer; set => taskTimer = value; }
+
+    [SerializeField] private bool isRoot;
+    public override bool LoopTask { get => isRoot; set => isRoot = value; }
+
+    [SerializeField] private bool isComplete;
+    public override bool IsComplete { get => isComplete; set => isComplete = value; }
+
+    [SerializeField] private List<EntryVariable> variableList;
+    public override List<EntryVariable> VariableList { get => variableList; set => variableList = value; }
+
+    [SerializeField] private UnityEvent<TaskNode> onTaskComplete;
+    public override UnityEvent<TaskNode> OnTaskComplete { get => onTaskComplete; set => onTaskComplete = value; }
+
+    
+
+    public override void StartTask(AIController character)
+    {
+        this.controller = character;
+    }
+
+    public override void UpdateTask(AIController controller)
+    {
+
+        Debug.Log("PatrolTask -> Tick -> " + controller.gameObject.name);
+    }
+    public override void CompleteTask(AIController character)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public IEnumerator TaskCoroutine()
+    {
+        //float normalizedTime = 0;
+        //while (normalizedTime <= 1f)
+        //{
+        //    Debug.Log(controller.name + "Waiting...");
+        //    normalizedTime += Time.deltaTime / sequenceTime;
+        //    yield return null;
+
+
+        //}
+
+        //Debug.Log(controller.name + "Done Waiting...");
+        yield return null;
+    }
+
+
+}

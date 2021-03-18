@@ -20,6 +20,7 @@ public class PlayerCamera : MonoBehaviour
     public Transform FollowTarget { get => followTarget; set => followTarget = value; }
 
     #region Monobehaviour
+
     private void Start()
     {
         transform.parent = null;
@@ -29,6 +30,20 @@ public class PlayerCamera : MonoBehaviour
     #endregion
 
     #region Methods
+    public void ResetValues()
+    {
+        transform.parent = null;
+        cameraTransform.position = transformOffset;
+        cameraTransform.rotation = Quaternion.Euler(rotationOffset);
+        transform.position = followTarget.position;
+    }
+
+    public void AssignFollowTarget(Transform targetTransform)
+    {
+        followTarget = targetTransform;
+        transform.position = followTarget.position;
+    }
+
     public void DetachFromParent()
     {
         transform.parent = null;

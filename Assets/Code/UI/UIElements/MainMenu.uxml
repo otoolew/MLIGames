@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="TanksMainMenu" src="/Assets/Samples/UI Builder/1.0.0-preview.12/TanksMainMenu/TanksMainMenu.uxml" />
+    <ui:Instance template="TanksMainMenu" name="TanksMainMenu" />
+</ui:UXML>

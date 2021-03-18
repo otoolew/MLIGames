@@ -6,53 +6,60 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class InteractionComponent : MonoBehaviour
 {
-    [SerializeField] private Collider interactionTrigger;
-    public Collider InteractionCollider { get => interactionTrigger; set => interactionTrigger = value; }
+    public GameObject InteractionIcon;
 
     public UnityEvent onInteraction;
-
+    public UnityEvent onLeaveConsole;
     #region Monobehaviour
-    private void Start()
+    protected virtual void Start()
     {
-        //onInteraction = new UnityEvent();
+        InteractionIcon.SetActive(false);
+        if (onInteraction == null)
+        {
+            onInteraction = new UnityEvent();
+        }
+
+        if (onLeaveConsole == null)
+        {
+            onLeaveConsole = new UnityEvent();
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
+
         //Debug.Log(gameObject.name + " OnTriggerEnter -> " + other.gameObject.name);
         PlayerCharacter playerCharacter = other.GetComponent<PlayerCharacter>();
         if (playerCharacter)
         {
             playerCharacter.onUseInteractable.AddListener(UseInteraction);
-            Debug.Log(gameObject.name + " OnTriggerEnter -> " + other.gameObject.name);
+            DisplayInteractionIcon(true);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         //Debug.Log(gameObject.name + " OnTriggerExit <- " + other.gameObject.name);
         PlayerCharacter playerCharacter = other.GetComponent<PlayerCharacter>();
         if (playerCharacter)
         {
             playerCharacter.onUseInteractable.RemoveListener(UseInteraction);
+            DisplayInteractionIcon(false);
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         onInteraction.RemoveAllListeners();
     }
 
-    private void OnValidate()
+    #endregion
+    protected void DisplayInteractionIcon(bool displayValue)
     {
-        if (interactionTrigger == null)
-        {
-            Debug.Log("ASSIGN INTERACTION COLLIDER");
-        }
+        InteractionIcon.SetActive(displayValue);
     }
 
-    #endregion
-    private void UseInteraction()
+    protected void UseInteraction()
     {
         onInteraction.Invoke();
     }

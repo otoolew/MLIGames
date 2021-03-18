@@ -19,6 +19,7 @@ public class RaycastAbilityConfig : AbilityConfig
     public override AbilityComponent CreateAbilityComponent(Transform parent)
     {
         RaycastAbility raycastAbility = Instantiate(raycastAbilityPrefab, parent);
+        raycastAbility.OwnerTag = parent.tag;
         raycastAbility.ModifierValue = modifierValue;
         raycastAbility.FireRate = fireRate;
         raycastAbility.Range = range;

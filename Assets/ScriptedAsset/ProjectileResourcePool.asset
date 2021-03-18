@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8232d728ff5d084cb2cc84f9abf619a, type: 3}
   m_Name: ProjectileResourcePool
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6973109596818895830, guid: 49408e7f260665941bb2b9e10ca3c228, type: 3}
+  projectilePrefab: {fileID: 6593766292328568611, guid: 49408e7f260665941bb2b9e10ca3c228, type: 3}

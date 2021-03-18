@@ -7,56 +7,83 @@ public class CharacterRotation : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
     public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
+    public Quaternion CurrentRotation { get { return transform.rotation; } }
 
-    [SerializeField] private Vector3 offset;
-    public Vector3 Offset { get => offset; set => offset = value; }
-
-    [SerializeField] private LayerMask layerMask;
-    public LayerMask LayerMask { get => layerMask; set => layerMask = value; }
-
-    public void LookInDirection(Vector2 rotateValue)
+    public virtual void OnLook(InputAction.CallbackContext callbackContext)
     {
-        if (rotateValue.sqrMagnitude < 0.01)
-            return;
-        Debug.Log(rotateValue);
-        Vector3 lookDirection = new Vector3(rotateValue.x, 0, rotateValue.y);
-        Quaternion lookRotation =  Quaternion.FromToRotation(transform.rotation.eulerAngles, lookDirection);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
-        transform.eulerAngles = lookDirection;
+
     }
 
-    public void LookAtPosition(Vector3 lookatpoint)
+    public virtual void RotateTo(Vector2 value)
     {
-        Vector3 playerToPoint = lookatpoint - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(playerToPoint);
-        if (lookRotation.eulerAngles != Vector3.zero)
+        Vector3 direction = (Vector3.right * value.x) + (Vector3.forward * value.y);
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        if (targetRotation.eulerAngles != Vector3.zero)
         {
-            lookRotation.x = 0f;
-            lookRotation.z = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         }
     }
 
-    public void MouseLook()
+    public void RotateTo(Transform value)
     {
-        Vector3 playerToMouse = MouseToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(playerToMouse);
-        if (lookRotation.eulerAngles != Vector3.zero)
+        Vector3 direction = (Vector3.right * value.position.x) + (Vector3.forward * value.position.y);
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        if(targetRotation.eulerAngles != Vector3.zero)
         {
-            lookRotation.x = 0f;
-            lookRotation.z = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, RotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        }
+    }
+    public void RotateTo(Vector3 value)
+    {
+        Vector3 direction = (Vector3.right * value.x) + (Vector3.forward * value.y);
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        if (targetRotation.eulerAngles != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        }
+    }
+    public bool IsPerpendicular(Vector3 targetDirection, float bias = 0.01f)
+    {
+        float dot = Vector3.Dot(transform.rotation.eulerAngles.normalized, targetDirection.normalized);
+        Debug.Log("DOT PRODUCT " + dot);
+        
+        if (dot > 1f - bias)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsParallel(Vector3 targetDirection, float bias = 0.01f)
+    {
+        if (Vector3.Dot(transform.rotation.eulerAngles.normalized, targetDirection.normalized) > 1f - bias)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void IsRotationParalel(Vector2 value)
+    {
+        if (value.magnitude > 0.1)
+        {
+            Vector3 direction = (Vector3.right * value.x) + (Vector3.forward * value.y);
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         }
     }
 
-    private Vector3 MouseToWorldPoint(Vector2 mouseScreen)
+    static float Wrap180(float angle)
     {
-        Ray ray = Camera.main.ScreenPointToRay(mouseScreen);
-        ray.origin += offset;
-        if (Physics.Raycast(ray, out RaycastHit rayHit, 100.0f, layerMask))
+        angle %= 360;
+        if (angle < -180)
         {
-            return rayHit.point;
+            angle += 360;
         }
-        return transform.position;
+        else if (angle > 180)
+        {
+            angle -= 360;
+        }
+        return angle;
     }
 }

@@ -18,12 +18,21 @@ public class HealthPanel : MonoBehaviour
         healthComp = health;
         healthSlider.minValue = 0;
         healthSlider.maxValue = healthComp.MaxHealth;
+        healthSlider.value = healthComp.CurrentHealth;
         healthComp.OnHealthChange.AddListener(ApplyHealthChange);
     }
-
+    public void UnregisterHealthComponent()
+    {
+        healthSlider.minValue = 0;
+        healthSlider.maxValue = healthComp.MaxHealth;
+        healthComp.OnHealthChange.RemoveListener(ApplyHealthChange);
+    }
     private void ApplyHealthChange(float value)
     {
         healthSlider.value = healthComp.CurrentHealth;
     }
-
+    private void OnDestroy()
+    {
+        healthComp.OnHealthChange.RemoveListener(ApplyHealthChange);
+    }
 }

@@ -3,47 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AbilityController : MonoBehaviour
+public abstract class AbilityController : MonoBehaviour
 {
-    [SerializeField] private AbilityComponent currentAbility;
-    public AbilityComponent CurrentAbility { get => currentAbility; set => currentAbility = value; }
-
-    public UnityEvent<AbilityComponent> onAbilityEquipped;
+    public abstract Character Owner { get; set; }
+    public abstract AbilityComponent CurrentAbility { get; set; }
+    public UnityEvent<AbilityComponent> onAbilityEquipped { get; set; }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         onAbilityEquipped = new UnityEvent<AbilityComponent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void EquipAbility(AbilityConfig abilityConfig, string ownerTag)
     {
-
-    }
-    public void EquipAbility(AbilityConfig abilityConfig)
-    {
-        currentAbility = abilityConfig.CreateAbilityComponent(transform);
-        onAbilityEquipped.Invoke(currentAbility);
+        CurrentAbility = abilityConfig.CreateAbilityComponent(transform);
+        CurrentAbility.OwnerTag = ownerTag;
+        onAbilityEquipped.Invoke(CurrentAbility);
     }
 
-    public void PullTrigger()
+    public virtual void PullTrigger()
     {
-        if (currentAbility)
-            currentAbility.PullTrigger();
+        if (CurrentAbility)
+            CurrentAbility.PullTrigger();
     }
-    public void ReleaseTrigger()
+
+    public virtual void ReleaseTrigger()
     {
-        if (currentAbility)
-            currentAbility.ReleaseTrigger();
+        if (CurrentAbility)
+            CurrentAbility.ReleaseTrigger();
     }
-    public void Reload()
-    {
-        if (currentAbility)
-            currentAbility.Reload();
-    }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawLine(currentAbility.FirePoint.position, currentAbility.FirePoint.position + (currentAbility.FirePoint.forward * 10));
-    //}
 }

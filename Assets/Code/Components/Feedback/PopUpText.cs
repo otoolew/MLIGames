@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public class PopUpText : MonoBehaviour, IPoolable
 {
-    [SerializeField] private TMP_Text textComp;
-    protected TMP_Text TextComp { get => textComp; set => textComp = value; }
+    [SerializeField] private TextMesh textComp;
+    protected TextMesh TextComp { get => textComp; set => textComp = value; }
 
     [Header("Time Settings")]
     [SerializeField] private float playDuration;
@@ -36,6 +36,7 @@ public class PopUpText : MonoBehaviour, IPoolable
     {
         timer.ResetTimer();
         StartCoroutine(PlayRoutine());
+
     }
 
     protected virtual void Start()
@@ -46,8 +47,8 @@ public class PopUpText : MonoBehaviour, IPoolable
     {
         timer.Tick();
         transform.position += new Vector3(0.0f, MoveSpeed) * Time.deltaTime;
+        //transform.LookAt(Camera.main.transform, -Vector3.right);
     }
-
     public void ChangeText(int value)
     {
         if (value < 0)
@@ -57,7 +58,7 @@ public class PopUpText : MonoBehaviour, IPoolable
                 textComp.color = color;
             }
         }
-        else if(value > 0)
+        else if (value > 0)
         {
             if (ColorUtility.TryParseHtmlString("#3CDE46", out Color color))
             {
@@ -74,6 +75,11 @@ public class PopUpText : MonoBehaviour, IPoolable
 
         textComp.text = value.ToString();
     }
+    public void ChangeText(int value, Color color)
+    {
+        textComp.color = color;
+        textComp.text = value.ToString();
+    }
     public void ChangeText(string value)
     {
         textComp.text = value;
@@ -88,7 +94,11 @@ public class PopUpText : MonoBehaviour, IPoolable
         yield return new WaitUntil(() => timer.IsFinished);
         PlayCompleted();
     }
-
+    IEnumerator PlayRoutine2()
+    {
+        yield return new WaitUntil(() => timer.IsFinished);
+        PlayCompleted();
+    }
     public void Repool()
     {
         GameAssetManager.Instance.PopUpPool.ReturnToPool(this);
